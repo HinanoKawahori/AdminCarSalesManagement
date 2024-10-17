@@ -12,6 +12,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_widgets/table/case_tab_bar.dart';
+import '../../../../common_widgets/title_with_back_button.dart';
 import '../../../../config/enum/sales_status.dart';
 import '../../../../config/utils/style/color_style.dart';
 import '../../../../config/utils/style/custom_font_style.dart';
@@ -51,24 +52,11 @@ class CaseListView extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 isPast
-                    ? Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              context.pop();
-                            },
-                            icon: const Icon(Icons.arrow_back_ios),
-                          ),
-                          WidthMargin.small,
-                          const Text(
-                            '案件履歴',
-                            style: TextStyle(
-                              fontSize: CustomFontSize.largest,
-                              color: ColorStyle.mainBlack,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                    ? TitleWithBackButton(
+                        onPressed: () {
+                          context.pop();
+                        },
+                        title: '案件履歴',
                       )
                     : const Text(
                         '案件一覧',
