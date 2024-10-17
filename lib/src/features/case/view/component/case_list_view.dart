@@ -127,24 +127,27 @@ class CaseListView extends HookConsumerWidget {
                     ),
                     WidthMargin.small,
                     //営業結果一覧ページ遷移ボタン
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10), // 縁の丸みを設定
-                        color: ColorStyle.blue,
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          context.goNamed(AppRoute.pastCaseList.name);
-                        },
-                        icon: const Icon(
-                          Icons.history,
-                          color: ColorStyle.white,
-                        ),
-                      ),
-                    )
+                    isPast
+                        ? Container()
+                        : Container(
+                            width: 40,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(10), // 縁の丸みを設定
+                              color: ColorStyle.blue,
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                context.goNamed(AppRoute.pastCaseList.name);
+                              },
+                              icon: const Icon(
+                                Icons.history,
+                                color: ColorStyle.white,
+                              ),
+                            ),
+                          ),
                   ],
                 ),
-
                 //➕従業員新規登録ボタン
                 isPast
                     ? const SizedBox(
@@ -153,7 +156,7 @@ class CaseListView extends HookConsumerWidget {
                       )
                     : BlueGradationButton(
                         onPressed: () {
-                          context.goNamed(AppRoute.addEmployee.name);
+                          context.goNamed(AppRoute.addOrEditCase.name);
                         },
                         title: '＋案件新規追加',
                       ),

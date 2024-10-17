@@ -58,7 +58,7 @@ class EmployeeListView extends HookConsumerWidget {
                 //➕従業員新規登録ボタン
                 BlueGradationButton(
                   onPressed: () {
-                    context.goNamed(AppRoute.addEmployee.name);
+                    context.goNamed(AppRoute.addOrEditEmployee.name);
                   },
                   title: '＋従業員新規登録',
                 ),

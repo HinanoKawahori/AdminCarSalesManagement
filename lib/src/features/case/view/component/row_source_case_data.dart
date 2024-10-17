@@ -1,8 +1,11 @@
 import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
+import 'package:admin_car_sales_management/src/features/routing/router_utils.dart';
 import 'package:admin_car_sales_management/src/function/switch_data.dart';
 import 'package:admin_car_sales_management/src/function/timestamp_converter.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../config/utils/key/firebase_key.dart';
 import '../../data_model/case.dart';
 
 class RowSourceCaseData extends DataTableSource {
@@ -49,10 +52,20 @@ DataRow recentFileDataRow(
     cells: [
       //顧客名
       DataCell(
-        Text(
-          caseData.customerName,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        InkWell(
+          onTap: () {
+            context.goNamed(
+              AppRoute.addOrEditCase.name,
+              queryParameters: {
+                FirebaseCasesKey.caseId: caseData.caseId,
+              },
+            );
+          },
+          child: Text(
+            caseData.customerName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
       //ステータス

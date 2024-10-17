@@ -7,4 +7,5 @@ class PaddingStyle {
   static const EdgeInsets medium = EdgeInsets.all(32.0);
   static const EdgeInsets large = EdgeInsets.all(40.0);
   static const EdgeInsets top = EdgeInsets.only(top: 20);
+  static const EdgeInsets vertical = EdgeInsets.only(top: 4, bottom: 4);
 }

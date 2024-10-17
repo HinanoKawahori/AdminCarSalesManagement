@@ -1,9 +1,8 @@
 enum AppRoute {
   login,
   employeeList,
-  addEmployee,
+  addOrEditEmployee,
   employeeDetail,
-  employeePastDetail,
   caseList,
   pastCaseList,
   addOrEditCase,
@@ -17,18 +16,16 @@ extension AppRouterExtension on AppRoute {
         return '/login';
       case AppRoute.employeeList:
         return '/employeeList';
-      case AppRoute.addEmployee:
-        return '/addEmployee';
+      case AppRoute.addOrEditEmployee:
+        return 'addOrEditEmployee';
       case AppRoute.employeeDetail:
         return 'employeeDetail';
-      case AppRoute.employeePastDetail:
-        return 'employeePastDetail';
       case AppRoute.caseList:
         return '/caseList';
       case AppRoute.pastCaseList:
         return 'pastCaseList';
       case AppRoute.addOrEditCase:
-        return '/addOrEditCase';
+        return 'addOrEditCase';
       case AppRoute.dashBoard:
         return '/dashBoard';
     }

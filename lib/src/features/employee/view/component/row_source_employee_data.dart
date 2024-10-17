@@ -1,12 +1,15 @@
 import 'package:admin_car_sales_management/src/config/enum/sales_status.dart';
+import 'package:admin_car_sales_management/src/config/utils/key/firebase_key.dart';
 import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
 import 'package:admin_car_sales_management/src/features/employee/data_model/employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../config/utils/style/color_style.dart';
 import '../../../../common_widgets/show_toast.dart';
+import '../../../routing/router_utils.dart';
 
 class RowSourceEmployeeData extends DataTableSource {
   final BuildContext context;
@@ -52,31 +55,42 @@ DataRow recentFileDataRow(
     cells: [
       //従業員名
       DataCell(
-        Row(
-          children: [
-            SizedBox(
-              width: 80,
-              child: Text(
-                employee.employeeName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Tooltip(
-              message: 'コピー',
-              child: IconButton(
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: employee.employeeName));
-                  showToast(toastMessage: '従業員の名前をコピーしました！');
-                },
-                icon: const Icon(
-                  Icons.copy,
-                  color: ColorStyle.mainBlack,
-                  size: 16,
+        InkWell(
+          onTap: () {
+            context.goNamed(
+              AppRoute.addOrEditEmployee.name,
+              queryParameters: {
+                FirebaseEmployeesKey.employeeId: employee.employeeId,
+              },
+            );
+          },
+          child: Row(
+            children: [
+              SizedBox(
+                width: 80,
+                child: Text(
+                  employee.employeeName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-            )
-          ],
+              Tooltip(
+                message: 'コピー',
+                child: IconButton(
+                  onPressed: () {
+                    Clipboard.setData(
+                        ClipboardData(text: employee.employeeName));
+                    showToast(toastMessage: '従業員の名前をコピーしました！');
+                  },
+                  icon: const Icon(
+                    Icons.copy,
+                    color: ColorStyle.mainBlack,
+                    size: 16,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
 
