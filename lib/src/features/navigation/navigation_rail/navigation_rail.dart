@@ -101,7 +101,6 @@ import 'package:admin_car_sales_management/src/config/utils/style/height_margin.
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/features/auth/controller/auth_controller.dart';
 import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
-import 'package:admin_car_sales_management/src/features/employee/data_model/employee.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -166,7 +165,6 @@ class NavigationRailShellPage extends HookConsumerWidget {
                       labelType: NavigationRailLabelType.none,
                       destinations: [
                         NavigationRailDestination(
-                          //TODO　figmaの画像貼り付ける
                           selectedIcon: Image.asset(
                             'assets/images/employee_list_selected.png',
                             width: 160,
@@ -215,7 +213,7 @@ class NavigationRailShellPage extends HookConsumerWidget {
                     ),
                   ),
 
-                  //TODO curretnUser != null
+                  //TODO currentUser != null
 
                   ref
                       .watch(watchEmployeeDataControllerProvider(

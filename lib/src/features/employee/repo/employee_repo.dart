@@ -71,8 +71,8 @@ class EmployeeRepo extends _$EmployeeRepo {
   }
 
   //Streamで全てのemployeeを取得
-  Stream<List<Employee>> watchAllEmployee(limit) {
-    return state.limit(limit).snapshots().map(
+  Stream<List<Employee>> watchAllEmployee() {
+    return state.snapshots().map(
       (snapshot) {
         if (snapshot.docs.isEmpty) {
           return [];

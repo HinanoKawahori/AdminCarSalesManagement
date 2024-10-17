@@ -26,7 +26,7 @@ class SearchTextFormField extends HookConsumerWidget {
         cursorColor: ColorStyle.mainBlack,
         cursorHeight: 17,
         onFieldSubmitted: (value) async {
-          //userListの内容を更新する
+          //employeeListの内容を更新する
           searchEmployeeList.value =
               ref.read(employeeControllerProvider.notifier).searchEmployee(
                     employeeList: employeeList,

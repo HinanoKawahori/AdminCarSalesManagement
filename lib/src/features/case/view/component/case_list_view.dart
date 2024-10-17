@@ -1,12 +1,10 @@
-import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
-import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
 import 'package:admin_car_sales_management/src/features/employee/data_model/employee.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_widgets/table/custom_data_table.dart';
-import '../../../../common_widgets/table/row_source_employee_data.dart';
+import '../../../employee/view/component/row_source_employee_data.dart';
 import '../../../../config/utils/style/color_style.dart';
 import '../../../../config/utils/style/custom_font_style.dart';
 import '../../../../config/utils/style/height_margin.dart';
@@ -28,11 +26,7 @@ class CaseListView extends HookConsumerWidget {
     useEffect(() {
       Future(() async {
         isLoading.value = true;
-        //TODO 全caseの取得
-        // userList.value = await ref
-        // .read(caseControllerProvider.notifier)
-        // .getallcase();
-        //検索結果のemployeeListを更新
+
         searchCaseList.value = caseList.value;
 
         isLoading.value = false;

@@ -162,7 +162,7 @@ class _WatchEmployeeDataControllerProviderElement
 }
 
 String _$watchAllEmployeeDataControllerHash() =>
-    r'8524be238b8f7019436add9b5b2cbd5ba8d6d20b';
+    r'8f877472f97963cd87e5f9e2eca0d5ef03d107dc';
 
 /// See also [watchAllEmployeeDataController].
 @ProviderFor(watchAllEmployeeDataController)
@@ -196,22 +196,5 @@ final employeeControllerProvider =
 );
 
 typedef _$EmployeeController = AutoDisposeNotifier<AsyncValue>;
-String _$employeeLimitControllerHash() =>
-    r'30387dc40e3b58c57a0a79d9b37f683d72e7b7c5';
-
-/// See also [EmployeeLimitController].
-@ProviderFor(EmployeeLimitController)
-final employeeLimitControllerProvider =
-    AutoDisposeNotifierProvider<EmployeeLimitController, int>.internal(
-  EmployeeLimitController.new,
-  name: r'employeeLimitControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$employeeLimitControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$EmployeeLimitController = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

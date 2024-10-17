@@ -85,7 +85,7 @@ class EmployeeController extends _$EmployeeController {
     return employee;
   }
 
-//TODO 名前検索
+//名前検索
   List<Employee> searchEmployee({
     required List<Employee> employeeList,
     required TextEditingController searchController,
@@ -109,23 +109,9 @@ Stream<Employee?> watchEmployeeDataController(
       .watchEmployeeData(employeeId: employeeId);
 }
 
-//limit付きですべてのemployee監視
+//すべてのemployee監視
 @riverpod
 Stream<List<Employee>> watchAllEmployeeDataController(
     WatchAllEmployeeDataControllerRef ref) {
-  final limit = ref.watch(employeeLimitControllerProvider);
-  return ref.read(employeeRepoProvider.notifier).watchAllEmployee(limit);
-}
-
-//TODO 特別措置
-@riverpod
-class EmployeeLimitController extends _$EmployeeLimitController {
-  @override
-  int build() {
-    return 10;
-  }
-
-  void increment() {
-    state = state + 10;
-  }
+  return ref.read(employeeRepoProvider.notifier).watchAllEmployee();
 }
