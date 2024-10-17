@@ -1,0 +1,81 @@
+name: admin_car_sales_management
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg:
+
+
+
+  cupertino_icons: ^1.0.6
+  # firebase_core: ^2.31.0
+  #riverpod&hooks
+  hooks_riverpod:
+  riverpod_generator: ^2.2.3
+  riverpod_annotation:
+  flutter_hooks:
+  riverpod_lint:
+  #freezed
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.1
+  #goRouter
+  go_router: ^7.0.1
+  #その他
+  fl_chart: ^0.69.0
+  firebase_core: ^3.6.0
+  scroll_to_index:
+  cached_network_image: ^3.3.1
+  google_fonts: ^6.2.1
+  omni_datetime_picker: ^1.1.0
+  uuid:
+  awesome_dialog: ^3.2.1
+  intl: ^0.19.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  flutter_localization: ^0.2.2
+  lottie: ^3.1.2
+  flutter_native_splash: ^2.4.1
+  email_validator: ^3.0.0
+  data_table_2: ^2.5.15
+  fluttertoast: ^8.2.6
+
+
+  
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.4
+  freezed:
+  json_serializable: ^6.7.0
+  lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/animations/
+
+
+ 
+
+
+
