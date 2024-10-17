@@ -77,7 +77,7 @@ class CaseRepo extends _$CaseRepo {
 
 ///////////////////////全従業員のステータス別データ//////////////////////////////////
   //全従業員で、ステータス別案件監視
-  Stream<List<Case?>> watchCaseListOfThisStatus(int caseStatus) {
+  Stream<List<Case>> watchCaseListOfThisStatus(int caseStatus) {
     if (ref.read(firebaseAuthProvider).currentUser == null) {
       return Stream.value([]);
     }
@@ -100,6 +100,7 @@ class CaseRepo extends _$CaseRepo {
   Stream<List<Case>> watchCaseListOfActiveStatus() {
     return state
         .where(FirebaseCasesKey.caseStatus, whereIn: [
+          CaseStatus.assigningPerson.value,
           CaseStatus.scheduling.value,
           CaseStatus.confirmedVisit.value,
           CaseStatus.pending.value,

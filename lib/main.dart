@@ -38,6 +38,7 @@ class MyApp extends ConsumerWidget {
         Locale('ja'),
       ],
       theme: ThemeData(
+        dividerColor: ColorStyle.secondGrey,
         textSelectionTheme: const TextSelectionThemeData(
           selectionColor: ColorStyle.hoverGrey,
         ),

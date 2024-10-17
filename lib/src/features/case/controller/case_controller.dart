@@ -294,7 +294,7 @@ Stream<Case?> watchCaseDataController(
 
 //全従業員で、ステータス別案件監視
 @riverpod
-Stream<List<Case?>> watchCaseListOfThisStatusController(
+Stream<List<Case>> watchCaseListOfThisStatusController(
   WatchCaseListOfThisStatusControllerRef ref, {
   required int caseStatus,
 }) {
@@ -306,9 +306,7 @@ Stream<List<Case?>> watchCaseListOfThisStatusController(
 //全従業員で、稼働中のすべての案件監視
 @riverpod
 Stream<List<Case>> watchCaseListOfActiveStatus(
-  WatchCaseListOfActiveStatusRef ref, {
-  required int caseStatus,
-}) {
+    WatchCaseListOfActiveStatusRef ref) {
   return ref.watch(caseRepoProvider.notifier).watchCaseListOfActiveStatus();
 }
 

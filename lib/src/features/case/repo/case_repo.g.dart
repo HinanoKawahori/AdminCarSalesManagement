@@ -6,7 +6,7 @@ part of 'case_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$caseRepoHash() => r'039c51128c468a514d1e2f1fe361491779acd745';
+String _$caseRepoHash() => r'4fa02dc09aa89ec0f1858d429cc7e880519f2f15';
 
 /// See also [CaseRepo].
 @ProviderFor(CaseRepo)

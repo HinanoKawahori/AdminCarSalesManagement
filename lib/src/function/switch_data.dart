@@ -66,6 +66,8 @@ String switchTimeTextInChat(Timestamp timestamp) {
 //ステータス番号から、テキストを返す
 String getStatusText(int status) {
   switch (status) {
+    case 0:
+      return '担当者未定';
     case 10:
       return '日程調整中';
     case 20:

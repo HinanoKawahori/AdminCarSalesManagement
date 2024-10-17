@@ -104,7 +104,7 @@ class SearchTextFormField extends HookConsumerWidget {
             borderRadius: BorderRadius.circular(10),
           ),
 
-          hintText: '従業員名で探す',
+          hintText: '入力してください',
           hintStyle: const TextStyle(
             color: ColorStyle.mainGrey,
             fontSize: CustomFontSize.small,
