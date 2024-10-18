@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:admin_car_sales_management/src/features/auth/repo/auth_repo.dart';
 import 'package:admin_car_sales_management/src/features/auth/view/login_page.dart';
-import 'package:admin_car_sales_management/src/features/employee/view/add/add_employee_page.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/add/add_or_edit_employee_page.dart';
 import 'package:admin_car_sales_management/src/features/employee/view/employee_list_page.dart';
 import 'package:admin_car_sales_management/src/features/employee/view/detail/employee_detail_page.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/dash_board_page.dart';
@@ -77,9 +77,13 @@ GoRouter goRouter(GoRouterRef ref) {
                   GoRoute(
                     path: AppRoute.employeeDetail.path,
                     name: AppRoute.employeeDetail.name,
-                    pageBuilder: (context, state) => const NoTransitionPage(
-                      child: EmployeeDetailPage(),
-                    ),
+                    pageBuilder: (context, state) {
+                      final String? employeeId = state
+                          .queryParameters[FirebaseCasesKey.assignedEmployeeId];
+                      return NoTransitionPage(
+                        child: EmployeeDetailPage(employeeId: employeeId),
+                      );
+                    },
                   ),
                 ],
               ),

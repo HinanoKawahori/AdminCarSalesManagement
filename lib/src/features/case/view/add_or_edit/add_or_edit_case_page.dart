@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:admin_car_sales_management/src/common_widgets/blue_button.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form_divider.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
-import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form/form_date_field.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form/form_dropdown_field.dart';
@@ -34,22 +33,14 @@ class AddOrEditCasePage extends HookConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  caseId == null
-                      ? const Text(
-                          '案件新規作成',
-                          style: TextStyle(
-                            fontSize: CustomFontSize.header,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      : TitleWithBackButton(
-                          onPressed: () {
-                            context.pop();
-                          },
-                          title: '案件詳細'),
+                  TitleWithBackButton(
+                    onPressed: () {
+                      context.pop();
+                    },
+                    title: caseId == null ? '案件新規作成' : '案件詳細',
+                  ),
                   BlueButton(
                     onPressed: () {
-                      // TODO: 新規登録 or 編集処理
                       Navigator.pop(context);
                     },
                     title: caseId == null ? '登録' : '編集',

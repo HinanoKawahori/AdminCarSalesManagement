@@ -27,7 +27,7 @@ class EmployeeController extends _$EmployeeController {
   }) async {
     state = const AsyncLoading();
     final newEmployee = Employee(
-      employeeId: Uuid().v4(),
+      employeeId: const Uuid().v4(),
       employeeName: name,
       email: email,
       phoneNumber: phoneNumber,

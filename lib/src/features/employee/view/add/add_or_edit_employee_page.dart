@@ -2,17 +2,15 @@ import 'package:admin_car_sales_management/src/common_widgets/blue_button.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form_divider.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form_must_mark.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
-import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
-import 'package:admin_car_sales_management/src/features/routing/app_router.dart';
-import 'package:admin_car_sales_management/src/features/routing/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common_widgets/form/form_date_field.dart';
 import '../../../../common_widgets/form/form_dropdown_field.dart';
+import '../../../../common_widgets/title_with_back_button.dart';
 
 class AddOrEditEmployeePage extends HookConsumerWidget {
   const AddOrEditEmployeePage({super.key, this.employeeId});
@@ -31,11 +29,11 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                employeeId == null ? '従業員新規作成' : '従業員編集',
-                style: const TextStyle(
-                  fontSize: CustomFontSize.header,
-                ),
+              TitleWithBackButton(
+                onPressed: () {
+                  context.pop();
+                },
+                title: employeeId == null ? '従業員新規作成' : '従業員編集',
               ),
               BlueButton(
                 onPressed: () {

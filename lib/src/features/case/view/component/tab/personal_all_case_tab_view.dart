@@ -1,21 +1,20 @@
 import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
-import 'package:admin_car_sales_management/src/features/case/view/component/row_source_data/row_source_case_data.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../../common_widgets/loading_widget.dart';
-import '../../../../../common_widgets/table/custom_data_table.dart';
+import '../../../../../common_widgets/table/small_custom_data_table.dart';
 import '../../../../../config/utils/style/color_style.dart';
+import '../row_source_data/small_row_source_data.dart';
 
-class AllCaseTabView extends ConsumerWidget {
-  const AllCaseTabView({super.key});
+class PersonalAllCaseTabView extends ConsumerWidget {
+  const PersonalAllCaseTabView({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //全てのアクティブな案件を監視する
     return ref.watch(watchCaseListOfActiveStatusProvider).when(
       data: (caseList) {
-        return CustomDataTable(
+        return SmallCustomDataTable(
           columns: const [
             DataColumn2(
               label: Text(
@@ -30,44 +29,16 @@ class AllCaseTabView extends ConsumerWidget {
             ),
             DataColumn2(
               fixedWidth: 150,
-              label: Text('担当者'),
-            ),
-            DataColumn2(
-              fixedWidth: 150,
-              label: Text(
-                '買取金額',
-              ),
-              size: ColumnSize.S,
-            ),
-            DataColumn2(
-              fixedWidth: 150,
-              label: Text(
-                '顧客電話番号',
-              ),
-              size: ColumnSize.S,
-            ),
-            DataColumn2(
-              fixedWidth: 150,
               label: Text(
                 '作成日時',
-              ),
-              size: ColumnSize.S,
-            ),
-            DataColumn2(
-              fixedWidth: 150,
-              label: Text(
-                '最終更新日時',
               ),
               size: ColumnSize.S,
             ),
           ],
           onPageChanged: (value) {},
           //Rowのデータ
-          source: RowSourceCaseData(
+          source: SmallRowSourceCaseData(
             context: context,
-            // count: (searchController.text.trim().isNotEmpty)
-            //     ? caseList.length
-            //     : caseList.length,
             count: caseList.length,
             caseList: caseList,
             ref: ref,

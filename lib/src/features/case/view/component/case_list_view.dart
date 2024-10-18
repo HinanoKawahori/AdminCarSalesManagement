@@ -34,7 +34,7 @@ class CaseListView extends HookConsumerWidget {
     final TabController tabController = useTabController(initialLength: 5);
     final ValueNotifier<List<Employee>> searchEmployeeList = useState([]);
     final TextEditingController searchController = useTextEditingController();
-    final ValueNotifier<String> _selectedValue = useState('担当者');
+    final ValueNotifier<String> selectedValue = useState('担当者');
 
     return ref.watch(watchCaseListOfActiveStatusProvider).when(
       error: (error, stackTrace) {
@@ -47,7 +47,7 @@ class CaseListView extends HookConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //上の検索類
+            ///////////////////////////////////上のタイトル、検索、案件新規追加ボタン////////////////////////////////////
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -66,11 +66,11 @@ class CaseListView extends HookConsumerWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                //TODO テキストフォームフィールドのコンポーネントを作る
 
                 Row(
                   children: [
                     //検索切り替えドロップダウンぼたん
+                    //TODO component
                     Container(
                       height: 45,
                       decoration: const BoxDecoration(
@@ -79,7 +79,7 @@ class CaseListView extends HookConsumerWidget {
                       ),
                       padding: PaddingStyle.normal,
                       child: DropdownButton<String>(
-                        value: _selectedValue.value,
+                        value: selectedValue.value,
                         items: ['担当者', '顧客名'].map((String item) {
                           return DropdownMenuItem<String>(
                             value: item,
@@ -92,12 +92,12 @@ class CaseListView extends HookConsumerWidget {
                         }).toList(),
                         onChanged: (String? newValue) {
                           if (newValue != null) {
-                            _selectedValue.value = newValue;
+                            selectedValue.value = newValue;
                           }
                         },
                         underline: const SizedBox(),
                         hint: Text(
-                          _selectedValue.value,
+                          selectedValue.value,
                           style: const TextStyle(
                               color: Colors.grey,
                               fontSize: CustomFontSize.small),
@@ -109,7 +109,7 @@ class CaseListView extends HookConsumerWidget {
 
                     //🔍検索テキストフォームフィールド
                     SearchTextFormField(
-                      employeeList: [],
+                      employeeList: const [],
                       searchEmployeeList: searchEmployeeList,
                       searchController: searchController,
                     ),
@@ -151,6 +151,7 @@ class CaseListView extends HookConsumerWidget {
               ],
             ),
             HeightMargin.large,
+            //////////////////////////////////////////////案件一覧UI////////////////////////////////////////
             Expanded(
               child: Column(
                 children: [

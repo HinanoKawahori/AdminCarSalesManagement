@@ -58,7 +58,7 @@ DataRow recentFileDataRow(
         InkWell(
           onTap: () {
             context.goNamed(
-              AppRoute.addOrEditEmployee.name,
+              AppRoute.employeeDetail.name,
               queryParameters: {
                 FirebaseEmployeesKey.employeeId: employee.employeeId,
               },
