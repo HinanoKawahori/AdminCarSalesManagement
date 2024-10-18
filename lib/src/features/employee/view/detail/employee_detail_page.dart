@@ -98,7 +98,7 @@ class EmployeeDetailPage extends HookConsumerWidget {
                                   flex: 7,
                                   child: EmployeeCaseDetailCard(
                                     contentWidget: const Expanded(
-                                      child: PersonalCaseListWidget(
+                                      child: const PersonalCaseListWidget(
                                         isPast: false,
                                       ),
                                     ),

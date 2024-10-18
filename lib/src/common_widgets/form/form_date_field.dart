@@ -12,7 +12,6 @@ class FormDateField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    DateTime? selectedDate;
     return SizedBox(
       width: 600,
       child: Row(
@@ -42,12 +41,6 @@ class FormDateField extends ConsumerWidget {
               ),
               readOnly: true,
               onTap: () async {
-                final DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: selectedDate ?? DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2101),
-                );
                 // TODO: DatePickerを表示し、選択された日付を処理
               },
             ),

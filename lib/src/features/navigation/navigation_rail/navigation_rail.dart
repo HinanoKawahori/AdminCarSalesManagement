@@ -5,7 +5,6 @@ import 'package:admin_car_sales_management/src/config/utils/style/padding_style.
 import 'package:admin_car_sales_management/src/features/auth/controller/auth_controller.dart';
 import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common_widgets/confirm_dialog.dart';

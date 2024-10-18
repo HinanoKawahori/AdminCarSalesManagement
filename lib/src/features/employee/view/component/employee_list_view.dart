@@ -42,7 +42,7 @@ class EmployeeListView extends HookConsumerWidget {
                 const Text(
                   '従業員一覧',
                   style: TextStyle(
-                    fontSize: CustomFontSize.large,
+                    fontSize: CustomFontSize.largest,
                     color: ColorStyle.mainBlack,
                     fontWeight: FontWeight.bold,
                   ),

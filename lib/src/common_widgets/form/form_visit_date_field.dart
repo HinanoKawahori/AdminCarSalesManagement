@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 
 import '../../config/utils/style/color_style.dart';
 
@@ -13,7 +12,6 @@ class FormVisitDateField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    DateTime? selectedDate;
     return SizedBox(
       width: 600,
       child: Row(
@@ -47,30 +45,6 @@ class FormVisitDateField extends ConsumerWidget {
                 //   ref,
                 //   context,
                 // );
-                final DateTime? pickedDateTime = await showOmniDateTimePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                  is24HourMode: true,
-                  minutesInterval: 15,
-                  theme: ThemeData(
-                    dialogBackgroundColor: ColorStyle.white,
-                    colorScheme: const ColorScheme.light(
-                      primary: ColorStyle.blue, // 選択された日付の色
-                      onPrimary: ColorStyle.white, // 選択された日付のテキスト色
-                    ),
-                    timePickerTheme: TimePickerThemeData(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    buttonTheme: const ButtonThemeData(
-                      height: 50,
-                    ),
-                    dividerColor: ColorStyle.mainGrey,
-                  ),
-                );
               },
             ),
           ),

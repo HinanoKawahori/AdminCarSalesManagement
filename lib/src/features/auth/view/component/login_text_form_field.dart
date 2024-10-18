@@ -19,7 +19,7 @@ class LoginTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: passwordController,
-      obscureText: true,
+      obscureText: (title == 'パスワード') ? true : false,
       decoration: InputDecoration(
         labelStyle: const TextStyle(
           color: ColorStyle.mainBlack,
