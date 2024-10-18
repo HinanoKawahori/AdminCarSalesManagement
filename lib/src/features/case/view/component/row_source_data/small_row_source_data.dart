@@ -76,22 +76,6 @@ DataRow recentFileDataRow(
         ),
       ),
 
-      // //買取金額
-      // DataCell(
-      //   Text(
-      //     caseData.carPrice.toString(),
-      //     maxLines: 1,
-      //     overflow: TextOverflow.ellipsis,
-      //   ),
-      // ),
-      // //顧客電話番号
-      // DataCell(
-      //   Text(
-      //     caseData.customerPhoneNumber.toString(),
-      //     maxLines: 1,
-      //     overflow: TextOverflow.ellipsis,
-      //   ),
-      // ),
       //作成日時
       DataCell(
         Text(
@@ -100,14 +84,6 @@ DataRow recentFileDataRow(
           overflow: TextOverflow.ellipsis,
         ),
       ),
-      //最終更新日時
-      // DataCell(
-      //   Text(
-      //     createDateText(caseData.updatedAt),
-      //     maxLines: 1,
-      //     overflow: TextOverflow.ellipsis,
-      //   ),
-      // ),
     ],
   );
 }

@@ -19,7 +19,7 @@ class FormDropdownField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
-      width: 800,
+      width: 600,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -38,7 +38,7 @@ class FormDropdownField extends ConsumerWidget {
           ),
           Container(
             color: ColorStyle.white,
-            width: 400,
+            width: 300,
             child: DropdownButtonFormField<String>(
               decoration: InputDecoration(
                 labelText: label,

@@ -1,15 +1,15 @@
 import 'package:admin_car_sales_management/src/common_widgets/blue_button.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form_divider.dart';
-import 'package:admin_car_sales_management/src/common_widgets/form_must_mark.dart';
-import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
-import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common_widgets/form/form_date_field.dart';
 import '../../../../common_widgets/form/form_dropdown_field.dart';
+import '../../../../common_widgets/form/form_input_field.dart';
 import '../../../../common_widgets/title_with_back_button.dart';
 
 class AddOrEditEmployeePage extends HookConsumerWidget {
@@ -19,7 +19,10 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ここでは簡単のため、状態管理を省略しています。実際の実装では適切な状態管理を行ってください。
+    final TextEditingController nameController = useTextEditingController();
+    final TextEditingController phoneController = useTextEditingController();
+    final TextEditingController emailController = useTextEditingController();
+    final TextEditingController addressController = useTextEditingController();
 
     return Padding(
       padding: PaddingStyle.normal,
@@ -47,9 +50,19 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
 
           // BlueGradationButton(onPressed: ,t)
           const SizedBox(height: 24),
-          FormInputField('名前', isRequired: true),
+          FormInputField(
+            label: '名前',
+            isRequired: true,
+            controller: nameController,
+            isCaseForm: false,
+          ),
           const FormDivider(),
-          FormInputField('メールアドレス', isRequired: true),
+          FormInputField(
+            label: 'メールアドレス',
+            isRequired: true,
+            controller: emailController,
+            isCaseForm: false,
+          ),
           const FormDivider(),
 
           const FormDropdownField(
@@ -58,46 +71,23 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
             isRequired: true,
           ),
           const FormDivider(),
-          FormInputField('電話番号'),
+          FormInputField(
+            label: '電話番号',
+            isRequired: false,
+            controller: phoneController,
+            isCaseForm: false,
+          ),
           const FormDivider(),
           const FormDateField(label: '生年月日'),
           const FormDivider(),
-          FormInputField('住所'),
+          FormInputField(
+            label: '住所',
+            isRequired: false,
+            controller: addressController,
+            isCaseForm: false,
+            maxLine: 2,
+          ),
           const FormDivider(),
-        ],
-      ),
-    );
-  }
-
-  Widget FormInputField(String label, {bool isRequired = false}) {
-    return SizedBox(
-      width: 800,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: ColorStyle.mainBlack,
-                ),
-              ),
-              WidthMargin.normal,
-              isRequired ? const FormMustMark() : Container(),
-            ],
-          ),
-          Container(
-            width: 400,
-            color: ColorStyle.white,
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: label,
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
         ],
       ),
     );

@@ -12,8 +12,9 @@ class FormDateField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    DateTime? selectedDate;
     return SizedBox(
-      width: 800,
+      width: 600,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -32,7 +33,7 @@ class FormDateField extends ConsumerWidget {
           //テキストフォームフィールド
           Container(
             color: ColorStyle.white,
-            width: 400,
+            width: 300,
             child: TextField(
               decoration: InputDecoration(
                 labelText: label,
@@ -41,6 +42,12 @@ class FormDateField extends ConsumerWidget {
               ),
               readOnly: true,
               onTap: () async {
+                final DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: selectedDate ?? DateTime.now(),
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2101),
+                );
                 // TODO: DatePickerを表示し、選択された日付を処理
               },
             ),
