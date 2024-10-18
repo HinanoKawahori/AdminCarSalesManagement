@@ -5,11 +5,13 @@ import 'package:admin_car_sales_management/src/config/utils/style/padding_style.
 import 'package:admin_car_sales_management/src/features/auth/controller/auth_controller.dart';
 import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common_widgets/confirm_dialog.dart';
 import '../../../config/utils/style/color_style.dart';
 import '../../routing/router_utils.dart';
+import '../component/menu_list_tile.dart';
 
 class NavigationRailShellPage extends HookConsumerWidget {
   final StatefulNavigationShell navigationShell;
@@ -43,12 +45,15 @@ class NavigationRailShellPage extends HookConsumerWidget {
               padding: PaddingStyle.normal,
               child: Column(
                 children: [
+                  HeightMargin.normal,
                   // ロゴ
+
                   Image.asset(
-                    'assets/images/logo_and_text.png',
+                    'assets/images/logo_clear.png',
                     width: 80,
                     fit: BoxFit.contain,
                   ),
+
                   HeightMargin.normal,
 
                   // メニュー
@@ -66,102 +71,105 @@ class NavigationRailShellPage extends HookConsumerWidget {
                         );
                       },
                       labelType: NavigationRailLabelType.none,
-                      destinations: [
+                      destinations: const [
+                        //従業員一覧///////////////////////////////////////////////
                         NavigationRailDestination(
-                          selectedIcon: Image.asset(
-                            'assets/images/employee_list_selected.png',
-                            width: 160,
-                            height: 60,
-                            fit: BoxFit.contain,
+                          //選択中のアイコン
+                          selectedIcon: MenuListTile(
+                            isSelected: true,
+                            title: '従業員一覧',
+                            imagePath: 'assets/images/blue_people.png',
                           ),
-                          icon: Image.asset(
-                            'assets/images/employee_list_un_selected.png',
-                            width: 130,
-                            height: 60,
-                            fit: BoxFit.contain,
+                          icon: MenuListTile(
+                            isSelected: false,
+                            title: '従業員一覧',
+                            imagePath: 'assets/images/white_people.png',
                           ),
-                          label: const Text('従業員一覧'),
+
+                          label: Text('従業員一覧'),
                         ),
+                        //ダッシュボード///////////////////////////////////////////////
+
                         NavigationRailDestination(
-                          selectedIcon: Image.asset(
-                            'assets/images/dash_board_selected.png',
-                            width: 160,
-                            height: 60,
-                            fit: BoxFit.contain,
+                          selectedIcon: MenuListTile(
+                            isSelected: true,
+                            title: 'ダッシュボード',
+                            imagePath: 'assets/images/blue_dash_board.png',
                           ),
-                          icon: Image.asset(
-                            'assets/images/dash_board_un_selected.png',
-                            width: 130,
-                            height: 60,
-                            fit: BoxFit.contain,
+                          icon: MenuListTile(
+                            isSelected: false,
+                            title: 'ダッシュボード',
+                            imagePath: 'assets/images/white_dash_board.png',
                           ),
-                          label: const Text('ダッシュボード'),
+                          label: Text('ダッシュボード'),
                         ),
+
+                        //案件一覧///////////////////////////////////////////////
                         NavigationRailDestination(
-                          selectedIcon: Image.asset(
-                            'assets/images/case_list_selected.png',
-                            width: 160,
-                            height: 60,
-                            fit: BoxFit.contain,
+                          selectedIcon: MenuListTile(
+                            isSelected: true,
+                            title: '案件一覧',
+                            imagePath: 'assets/images/blue_car.png',
                           ),
-                          icon: Image.asset(
-                            'assets/images/case_list_un_selected.png',
-                            width: 130,
-                            height: 60,
-                            fit: BoxFit.contain,
+                          icon: MenuListTile(
+                            isSelected: false,
+                            title: '案件一覧',
+                            imagePath: 'assets/images/white_car.png',
                           ),
-                          label: const Text('案件一覧'),
+                          label: Text('案件一覧'),
                         ),
                       ],
                     ),
                   ),
 
-                  //TODO currentUser != null
+                  //ログイン中の従業員情報
+                  (ref.read(firebaseAuthProvider).currentUser == null)
+                      ? Container()
+                      : ref
+                          .watch(watchEmployeeDataControllerProvider(
+                              employeeId: ref
+                                  .read(firebaseAuthProvider)
+                                  .currentUser!
+                                  .uid))
+                          .when(
+                          error: (error, stackTrace) {
+                            return ErrorWidget('ユーザーが見つかりません');
+                          },
+                          loading: () {
+                            return const LoadingWidget(color: ColorStyle.blue);
+                          },
+                          data: (employee) {
+                            if (employee == null) {
+                              return ErrorWidget('ユーザーが見つかりません');
+                            }
+                            return
 
-                  ref
-                      .watch(watchEmployeeDataControllerProvider(
-                          employeeId:
-                              ref.read(firebaseAuthProvider).currentUser!.uid))
-                      .when(
-                    error: (error, stackTrace) {
-                      return ErrorWidget('ユーザーが見つかりません');
-                    },
-                    loading: () {
-                      return const LoadingWidget(color: ColorStyle.blue);
-                    },
-                    data: (employee) {
-                      if (employee == null) {
-                        return ErrorWidget('ユーザーが見つかりません');
-                      }
-                      return
-
-                          // ログイン者の名前
-                          SizedBox(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              employee.employeeName,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                                // ログイン者の名前
+                                SizedBox(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    employee.employeeName,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    employee.email,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Text(
-                              employee.email,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
 
                   HeightMargin.normal,
-
                   // ログアウト
                   InkWell(
                     onTap: () {
@@ -194,6 +202,7 @@ class NavigationRailShellPage extends HookConsumerWidget {
                       ],
                     ),
                   ),
+                  HeightMargin.normal,
                 ],
               ),
             ),
