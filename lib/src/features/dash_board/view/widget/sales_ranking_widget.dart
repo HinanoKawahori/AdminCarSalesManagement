@@ -1,4 +1,5 @@
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
+import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
 import 'package:flutter/material.dart';
 
 class SalesRankingWidget extends StatelessWidget {
@@ -8,53 +9,119 @@ class SalesRankingWidget extends StatelessWidget {
     {"rank": 3, "name": "香川真司", "amount": 20443289},
     {"rank": 4, "name": "鈴木さり", "amount": 19443289},
     {"rank": 5, "name": "前川けいし", "amount": 19342289},
+    {"rank": 6, "name": "近藤雅史", "amount": 29442289},
+    {"rank": 7, "name": "田中正敏", "amount": 27443289},
+    {"rank": 8, "name": "香川真司", "amount": 20443289},
+    {"rank": 9, "name": "鈴木さり", "amount": 19443289},
+    {"rank": 10, "name": "前川けいし", "amount": 19342289},
+    {"rank": 11, "name": "近藤雅史", "amount": 29442289},
+    {"rank": 12, "name": "田中正敏", "amount": 27443289},
+    {"rank": 13, "name": "香川真司", "amount": 20443289},
+    {"rank": 14, "name": "鈴木さり", "amount": 19443289},
+    {"rank": 15, "name": "前川けいし", "amount": 19342289},
   ];
+
+  SalesRankingWidget({super.key, required this.isDialog});
+  final bool isDialog;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SizedBox(
-          height: 200,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('従業員名', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text('金額', style: TextStyle(fontWeight: FontWeight.bold)),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(width: 20),
+            SizedBox(
+              width: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    '従業員名',
+                    style: TextStyle(
+                      fontSize: CustomFontSize.normal,
+                    ),
+                  ),
                 ],
               ),
-              const Divider(color: ColorStyle.secondGrey),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: rankingData.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+            ),
+            SizedBox(
+              width: 80,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    '金額',
+                    style: TextStyle(
+                      fontSize: CustomFontSize.normal,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const Divider(color: ColorStyle.secondGrey),
+        Expanded(
+          child: ListView.builder(
+            physics: isDialog
+                ? const AlwaysScrollableScrollPhysics()
+                : const NeverScrollableScrollPhysics(), // 三項演算子で切り替え
+            itemCount: rankingData.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 20,
+                      child: Center(
+                        child: Text(
+                          '${rankingData[index]["rank"]}',
+                          style: const TextStyle(
+                            fontSize: CustomFontSize.normal,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 100,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            '${rankingData[index]["rank"]}. ${rankingData[index]["name"]}',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            '${rankingData[index]["amount"].toStringAsFixed(0)}円',
-                            style: TextStyle(fontSize: 16),
+                            '${rankingData[index]["name"]}',
+                            style: const TextStyle(
+                              fontSize: CustomFontSize.normal,
+                            ),
                           ),
                         ],
                       ),
-                    );
-                  },
+                    ),
+                    SizedBox(
+                      width: 80,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${rankingData[index]["amount"].toStringAsFixed(0)}円',
+                            style: const TextStyle(
+                              fontSize: CustomFontSize.normal,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
-      ),
+      ],
     );
   }
 }

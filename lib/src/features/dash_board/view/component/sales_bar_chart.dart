@@ -141,6 +141,7 @@ class SalesBarChart extends HookConsumerWidget {
   }) {
     List<double?> data = salesSumList.reversed.toList();
     List<String> months = getLastTwelveMonths();
+    final successRate = 20;
     // 月のリストを適切な順序に並び替える
     months = months.reversed.toList();
     final formatter = NumberFormat('#,###');
@@ -165,11 +166,11 @@ class SalesBarChart extends HookConsumerWidget {
             final month = months[groupIndex];
             return BarTooltipItem(
               value != null
-                  ? '$month月：${formatter.format(value.round())}円'
-                  : '$month月：0円',
+                  ? '$month月：${formatter.format(value.round())}円\n成約率：${successRate}%'
+                  : '$month月：0円\n成約率：0%',
               const TextStyle(
-                color: ColorStyle.mainWhite,
-                fontSize: CustomFontSize.normal,
+                color: ColorStyle.white,
+                fontSize: CustomFontSize.small,
               ),
             );
           },

@@ -7,9 +7,7 @@ class ManufacturerPieChartWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
-      body: SizedBox(
-        child: ManufacturerPieChart(),
-      ),
+      body: ManufacturerPieChart(),
     );
   }
 }

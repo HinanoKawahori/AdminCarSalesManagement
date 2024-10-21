@@ -1,5 +1,6 @@
 import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/component/pie_chart/indicator.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -121,74 +122,26 @@ class CasePieChart extends HookConsumerWidget {
               Indicator(
                 color: ColorStyle.pieChartDarkBlue,
                 text: '担当者未定',
-                isSquare: true,
               ),
               HeightMargin.small,
               Indicator(
                 color: ColorStyle.pieChartMediumBlue,
                 text: '日程調整中',
-                isSquare: true,
               ),
               HeightMargin.small,
               Indicator(
                 color: ColorStyle.pieChartLightBlue,
                 text: '訪問日確定',
-                isSquare: true,
               ),
               HeightMargin.small,
               Indicator(
                 color: ColorStyle.pieChartPowderBlue,
                 text: '検討待ち',
-                isSquare: true,
               ),
             ],
           ),
         ],
       ),
-    );
-  }
-}
-
-class Indicator extends StatelessWidget {
-  final Color color;
-  final String text;
-  final bool isSquare;
-  final double size;
-  final Color textColor;
-
-  const Indicator({
-    Key? key,
-    required this.color,
-    required this.text,
-    required this.isSquare,
-    this.size = 16,
-    this.textColor = const Color(0xff505050),
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(
-          width: size,
-          height: size,
-          decoration: BoxDecoration(
-            shape: isSquare ? BoxShape.rectangle : BoxShape.circle,
-            color: color,
-          ),
-        ),
-        const SizedBox(
-          width: 4,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: textColor,
-          ),
-        )
-      ],
     );
   }
 }

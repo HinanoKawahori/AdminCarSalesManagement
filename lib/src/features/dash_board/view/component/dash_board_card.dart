@@ -1,7 +1,11 @@
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
+import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/component/year_drop_button.dart';
 import 'package:flutter/material.dart';
+
+import 'year_and_month_drop_button.dart';
 
 class DashBoardCard extends StatelessWidget {
   const DashBoardCard({
@@ -31,8 +35,10 @@ class DashBoardCard extends StatelessWidget {
                     fontSize: CustomFontSize.large,
                   ),
                 ),
+                (title == '買取総額の推移') ? YearDropButton() : Container(),
               ],
             ),
+            HeightMargin.normal,
             //メインウィジェット
             contentWidget,
           ],

@@ -1,5 +1,6 @@
 import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
 import 'package:admin_car_sales_management/src/features/routing/router_utils.dart';
+import 'package:admin_car_sales_management/src/function/format_data.dart';
 import 'package:admin_car_sales_management/src/function/switch_data.dart';
 import 'package:admin_car_sales_management/src/function/timestamp_converter.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ DataRow recentFileDataRow(
       //買取金額
       DataCell(
         Text(
-          caseData.carPrice.toString(),
+          formatCurrency(caseData.carPrice),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -112,7 +113,9 @@ DataRow recentFileDataRow(
       //顧客電話番号
       DataCell(
         Text(
-          caseData.customerPhoneNumber.toString(),
+          (caseData.customerPhoneNumber == null)
+              ? '未登録'
+              : formatPhoneNumber(caseData.customerPhoneNumber!),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

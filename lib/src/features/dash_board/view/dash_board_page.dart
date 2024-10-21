@@ -2,6 +2,8 @@ import 'package:admin_car_sales_management/src/config/utils/style/height_margin.
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/component/dash_board_card.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/component/year_and_month_drop_button.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/component/sales_ranking_dialog.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/widget/case_pie_chart_widget.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/widget/case_result_bar_chart_widget.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/widget/manufacturer_pie_chart_widget.dart';
@@ -21,7 +23,6 @@ class DashBoardPage extends HookConsumerWidget {
       backgroundColor: ColorStyle.paleBlue,
       body: Padding(
         padding: PaddingStyle.normal,
-        //TOOD
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,70 +51,78 @@ class DashBoardPage extends HookConsumerWidget {
                             title: '稼働中の案件状況',
                           ),
                         ),
-                        const SizedBox(height: 16),
                         //買取総額の推移
                         Expanded(
                           child: DashBoardCard(
-                            contentWidget: Expanded(
-                              child: CaseResultBarChartWidget(),
-                            ),
+                            contentWidget:
+                                Expanded(child: CaseResultBarChartWidget()),
                             title: '買取総額の推移',
                           ),
                         ),
                       ],
                     ),
                   ),
-                  WidthMargin.smallNormal,
-                  // 右側のカラム（1つのカード）
+                  WidthMargin.small,
+                  // 右側のカラム（3つのカード）
                   Expanded(
                     child: Card(
                       color: ColorStyle.lightBlue2,
                       child: Padding(
-                        padding: PaddingStyle.medium,
+                        padding: PaddingStyle.normal,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            const SizedBox(
-                              height: 40,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Card(
-                                    child: Text('dropdown'),
-                                    color: ColorStyle.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-
+                            //ドロップダウンボタン
+                            YearAndMonthDropButton(),
+                            HeightMargin.normal,
                             //8月の買取総額
-                            const Expanded(
-                              flex: 2,
-                              child: DashBoardCard(
-                                contentWidget: Expanded(
-                                  child: SalesSumWidget(),
-                                ),
-                                title: '8月の買取総額',
-                              ),
+                            const SizedBox(
+                              height: 80,
+                              child: SalesSumWidget(),
                             ),
 
                             //8月の人気買取メーカー
-                            const Expanded(
-                              flex: 4,
+                            const SizedBox(
+                              height: 260,
                               child: DashBoardCard(
                                 contentWidget: Expanded(
-                                    child: ManufacturerPieChartWidget()),
+                                  child: ManufacturerPieChartWidget(),
+                                ),
                                 title: '8月の人気買取メーカー',
                               ),
                             ),
 
                             //8月の買取総額ランキング
                             Expanded(
-                              flex: 4,
-                              child: DashBoardCard(
-                                contentWidget: Expanded(
-                                  child: SalesRankingWidget(),
+                              child: InkWell(
+                                child: Stack(
+                                  alignment: Alignment.topRight,
+                                  children: [
+                                    //
+                                    DashBoardCard(
+                                      contentWidget: Expanded(
+                                        child:
+                                            SalesRankingWidget(isDialog: false),
+                                      ),
+                                      title: '8月の買取総額ランキング',
+                                    ),
+                                    //ランキングダイアログ表示ボタン
+                                    Padding(
+                                      padding: PaddingStyle.normal,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          showRankingDialog(
+                                            context: context,
+                                          ); //ランキングダイアログの表示
+                                        },
+                                        icon: const Icon(
+                                          Icons.open_in_new_rounded,
+                                          color: ColorStyle.mainGrey,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                title: '8月の買取総額ランキング',
                               ),
                             ),
                           ],
