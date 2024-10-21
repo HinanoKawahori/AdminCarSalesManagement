@@ -172,7 +172,32 @@ class CaseController extends _$CaseController {
         .getCaseData(caseId: caseId);
   }
 
-//////////////////////////////////////////
+  ///////////////////////個別のステータス別データ//////////////////////////////////
+
+  //ケース取得
+  Future<List<Case>> getEmployeeCaseListByStatus({
+    required String employeeId,
+    required int caseStatus,
+  }) async {
+    return await ref
+        .read(caseRepoProvider.notifier)
+        .getEmployeeCaseListByStatus(
+          employeeId: employeeId,
+          caseStatus: caseStatus,
+        );
+  }
+
+  Future<List<Case>> getEmployeeCaseListOfActiveStatus({
+    required String employeeId,
+  }) async {
+    return await ref
+        .read(caseRepoProvider.notifier)
+        .getEmployeeCaseListOfActiveStatus(
+          employeeId: employeeId,
+        );
+  }
+
+//////////////////計算系////////////////////////
 
   //ひと月の全ての案件リスト
   Future<List<Case?>> getSalesResultOfTheMonth({DateTime? targetDate}) async {

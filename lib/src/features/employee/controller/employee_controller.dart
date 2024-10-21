@@ -96,6 +96,17 @@ class EmployeeController extends _$EmployeeController {
       },
     ).toList();
   }
+
+  List<Employee> searchEmployeeBySearchWord({
+    required List<Employee> employeeList,
+    required String searchWord,
+  }) {
+    return employeeList.where(
+      (employee) {
+        return employee.employeeName.contains(searchWord);
+      },
+    ).toList();
+  }
 }
 
 //employee1件監視

@@ -4,6 +4,7 @@ import 'package:admin_car_sales_management/src/config/utils/style/padding_style.
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
 import 'package:admin_car_sales_management/src/features/case/view/component/case_search_text_form_field.dart';
+import 'package:admin_car_sales_management/src/features/case/view/component/tab/all_case_tab_view_search_type_employee_name.dart';
 import 'package:admin_car_sales_management/src/features/case/view/component/tab/case_tab_view.dart';
 import 'package:admin_car_sales_management/src/features/case/view/component/tab_title.dart';
 import 'package:admin_car_sales_management/src/features/routing/router_utils.dart';
@@ -20,6 +21,7 @@ import '../../../../config/utils/style/height_margin.dart';
 import '../../data_model/case.dart';
 import 'search_type_drop_down_button.dart';
 import 'tab/all_case_tab_view.dart';
+import 'tab/case_tab_search_type_employee_name.dart';
 
 class CaseListView extends HookConsumerWidget {
   const CaseListView({
@@ -151,48 +153,83 @@ class CaseListView extends HookConsumerWidget {
                   Expanded(
                     child: Padding(
                       padding: PaddingStyle.top,
-                      child:
-
-                          //TODO
-
-                          isPast
-                              ? TabBarView(
-                                  controller: tabController,
-                                  children: <Widget>[
-                                    CaseTabView(
-                                      caseStatus: CaseStatus.success,
-                                      searchWord: searchWord,
-                                    ),
-                                    CaseTabView(
-                                      caseStatus: CaseStatus.lost,
-                                      searchWord: searchWord,
-                                    ),
-                                  ],
-                                )
-                              : TabBarView(
-                                  controller: tabController,
-                                  children: <Widget>[
-                                    AllCaseTabView(
-                                      searchWord: searchWord,
-                                    ),
-                                    CaseTabView(
-                                      caseStatus: CaseStatus.assigningPerson,
-                                      searchWord: searchWord,
-                                    ),
-                                    CaseTabView(
-                                      caseStatus: CaseStatus.scheduling,
-                                      searchWord: searchWord,
-                                    ),
-                                    CaseTabView(
-                                      caseStatus: CaseStatus.confirmedVisit,
-                                      searchWord: searchWord,
-                                    ),
-                                    CaseTabView(
-                                      caseStatus: CaseStatus.pending,
-                                      searchWord: searchWord,
-                                    ),
-                                  ],
-                                ),
+                      //案件履歴ページの場合
+                      child: isPast
+                          ? TabBarView(
+                              controller: tabController,
+                              children: (searchType.value == '担当者')
+                                  //検索種別が担当者の場合
+                                  ? <Widget>[
+                                      CaseTabViewSearchTypeEmployeeName(
+                                        caseStatus: CaseStatus.success,
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabViewSearchTypeEmployeeName(
+                                        caseStatus: CaseStatus.lost,
+                                        searchWord: searchWord,
+                                      ),
+                                    ]
+                                  //検索種別が顧客名の場合
+                                  : <Widget>[
+                                      CaseTabView(
+                                        caseStatus: CaseStatus.success,
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabView(
+                                        caseStatus: CaseStatus.lost,
+                                        searchWord: searchWord,
+                                      ),
+                                    ],
+                            )
+                          //案件一覧ページの場合
+                          : TabBarView(
+                              controller: tabController,
+                              children: (searchType.value == '担当者')
+                                  //検索種別が担当者の場合
+                                  ? <Widget>[
+                                      AllCaseTabViewSearchTypeEmployeeName(
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabViewSearchTypeEmployeeName(
+                                        caseStatus: CaseStatus.assigningPerson,
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabViewSearchTypeEmployeeName(
+                                        caseStatus: CaseStatus.scheduling,
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabViewSearchTypeEmployeeName(
+                                        caseStatus: CaseStatus.confirmedVisit,
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabViewSearchTypeEmployeeName(
+                                        caseStatus: CaseStatus.pending,
+                                        searchWord: searchWord,
+                                      ),
+                                    ]
+                                  //検索種別が顧客名の場合
+                                  : <Widget>[
+                                      AllCaseTabView(
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabView(
+                                        caseStatus: CaseStatus.assigningPerson,
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabView(
+                                        caseStatus: CaseStatus.scheduling,
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabView(
+                                        caseStatus: CaseStatus.confirmedVisit,
+                                        searchWord: searchWord,
+                                      ),
+                                      CaseTabView(
+                                        caseStatus: CaseStatus.pending,
+                                        searchWord: searchWord,
+                                      ),
+                                    ],
+                            ),
                     ),
                   ),
                 ],

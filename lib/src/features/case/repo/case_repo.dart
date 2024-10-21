@@ -167,7 +167,25 @@ class CaseRepo extends _$CaseRepo {
         );
   }
 
-//////////////////////////////////////////
+  Future<List<Case>> getEmployeeCaseListOfActiveStatus({
+    required String employeeId,
+  }) async {
+    final query = await state
+        .where(FirebaseCasesKey.caseStatus, whereIn: [
+          CaseStatus.scheduling.value,
+          CaseStatus.confirmedVisit.value,
+          CaseStatus.pending.value,
+        ])
+        .where(FirebaseCasesKey.assignedEmployeeId, isEqualTo: employeeId)
+        .orderBy(FirebaseCasesKey.updatedAt, descending: true)
+        .get();
+    if (query.docs.isEmpty) {
+      return [];
+    }
+    return query.docs.map((doc) => doc.data()).toList();
+  }
+
+////////////////////////////////////////////////////////////////////////////////////
   //1ヶ月での成約率取得
   Future<List<Case?>> getSalesResultOfTheMonth({
     required Timestamp startOfMonth,

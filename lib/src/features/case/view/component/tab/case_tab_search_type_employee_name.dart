@@ -1,3 +1,4 @@
+import 'package:admin_car_sales_management/src/config/enum/sales_status.dart';
 import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
 import 'package:admin_car_sales_management/src/features/case/view/component/row_source_data/row_source_case_data.dart';
 import 'package:admin_car_sales_management/src/features/case/view/component/tab/all_case_tab_view.dart';
@@ -9,12 +10,14 @@ import '../../../../../common_widgets/table/custom_data_table.dart';
 import '../../../../employee/data_model/employee.dart';
 import '../../../data_model/case.dart';
 
-class AllCaseTabViewSearchTypeEmployeeName extends HookConsumerWidget {
-  const AllCaseTabViewSearchTypeEmployeeName({
+class CaseTabViewSearchTypeEmployeeName extends HookConsumerWidget {
+  const CaseTabViewSearchTypeEmployeeName({
     super.key,
     required this.searchWord,
+    required this.caseStatus,
   });
   final ValueNotifier<String> searchWord;
+  final CaseStatus caseStatus;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,8 +47,9 @@ class AllCaseTabViewSearchTypeEmployeeName extends HookConsumerWidget {
           for (Employee employee in searchEmployeeList.value) {
             final employeeCaseList = await ref
                 .read(caseControllerProvider.notifier)
-                .getEmployeeCaseListOfActiveStatus(
+                .getEmployeeCaseListByStatus(
                   employeeId: employee.employeeId,
+                  caseStatus: caseStatus.value,
                 );
             allCases.addAll(employeeCaseList);
           }
