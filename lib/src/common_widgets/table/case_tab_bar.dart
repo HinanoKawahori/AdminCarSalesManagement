@@ -15,31 +15,39 @@ class CaseTabBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: TabBar(
-        controller: tabController,
-        dividerColor: ColorStyle.secondGrey, // Remove any divider
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicator: const UnderlineTabIndicator(
-          borderSide: BorderSide(
-            color: ColorStyle.blue,
-            width: 2,
+    return Column(
+      children: [
+        PreferredSize(
+          preferredSize: const Size.fromHeight(10),
+          child: TabBar(
+            controller: tabController,
+            dividerHeight: 0,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicator: const UnderlineTabIndicator(
+              borderSide: BorderSide(
+                color: ColorStyle.blue,
+                width: 3,
+              ),
+              insets: EdgeInsets.symmetric(horizontal: 20.0), // タブの横幅に合わせて調整
+            ),
+            labelColor: ColorStyle.blue, // アクティブタブのテキスト色
+            labelStyle: const TextStyle(
+              fontSize: CustomFontSize.normal,
+              fontWeight: FontWeight.bold, // アクティブタブの太字
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontSize: CustomFontSize.normal,
+              fontWeight: FontWeight.normal,
+            ),
+            tabs: tabs,
           ),
-          insets: EdgeInsets.symmetric(horizontal: 20.0), // Adjust as needed
         ),
-        labelColor: ColorStyle.blue, // Active tab text color
-        unselectedLabelColor: ColorStyle.mainGrey, // Inactive tab text color
-        labelStyle: const TextStyle(
-          fontSize: CustomFontSize.normal,
-          fontWeight: FontWeight.bold, // Bold for active label
+        const Divider(
+          color: ColorStyle.secondGrey, // Dividerの色
+          // thickness: 2,
+          height: 1,
         ),
-        unselectedLabelStyle: const TextStyle(
-          fontSize: CustomFontSize.normal,
-          fontWeight: FontWeight.normal,
-        ),
-        tabs: tabs,
-      ),
+      ],
     );
   }
 }

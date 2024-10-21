@@ -19,6 +19,7 @@ import '../../../../config/utils/style/custom_font_style.dart';
 import '../../../../config/utils/style/height_margin.dart';
 import '../../../employee/view/component/detail_screen/search_text_form_field.dart';
 import '../../data_model/case.dart';
+import 'search_type_drop_down_button.dart';
 import 'tab/all_case_tab_view.dart';
 
 class CaseListView extends HookConsumerWidget {
@@ -71,40 +72,7 @@ class CaseListView extends HookConsumerWidget {
                   children: [
                     //検索切り替えドロップダウンぼたん
                     //TODO component
-                    Container(
-                      height: 45,
-                      decoration: const BoxDecoration(
-                        color: ColorStyle.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      padding: PaddingStyle.normal,
-                      child: DropdownButton<String>(
-                        value: selectedValue.value,
-                        items: ['担当者', '顧客名'].map((String item) {
-                          return DropdownMenuItem<String>(
-                            value: item,
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: Text(item),
-                            ),
-                            // child: Text(item),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          if (newValue != null) {
-                            selectedValue.value = newValue;
-                          }
-                        },
-                        underline: const SizedBox(),
-                        hint: Text(
-                          selectedValue.value,
-                          style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: CustomFontSize.small),
-                        ),
-                        icon: const Icon(Icons.arrow_drop_down),
-                      ),
-                    ),
+                    SearchTypeDropDownButton(selectedValue: selectedValue),
                     WidthMargin.small,
 
                     //🔍検索テキストフォームフィールド

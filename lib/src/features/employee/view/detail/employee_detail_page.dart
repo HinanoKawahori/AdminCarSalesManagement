@@ -29,7 +29,7 @@ class EmployeeDetailPage extends HookConsumerWidget {
         backgroundColor: ColorStyle.paleBlue,
         body: Column(
           children: [
-            // タイトル
+            //タイトル/////////////////////////////////
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -48,7 +48,6 @@ class EmployeeDetailPage extends HookConsumerWidget {
                 child: Column(
                   children: [
                     WidthMargin.normal,
-                    //
                     SizedBox(
                       height: 750,
                       child: Row(
@@ -58,6 +57,7 @@ class EmployeeDetailPage extends HookConsumerWidget {
                             flex: 4,
                             child: Column(
                               children: [
+                                //従業員情報/////////////////////////////////
                                 Expanded(
                                   flex: 3,
                                   child: EmployeeCaseDetailCard(
@@ -67,6 +67,7 @@ class EmployeeDetailPage extends HookConsumerWidget {
                                   ),
                                 ),
                                 HeightMargin.normal,
+                                //営業成績/////////////////////////////////
                                 Expanded(
                                   flex: 7,
                                   child: EmployeeCaseDetailCard(
@@ -84,6 +85,7 @@ class EmployeeDetailPage extends HookConsumerWidget {
                             flex: 6,
                             child: Column(
                               children: [
+                                //稼働中案件/////////////////////////////////
                                 Expanded(
                                   flex: 3,
                                   child: EmployeeCaseDetailCard(
@@ -94,11 +96,12 @@ class EmployeeDetailPage extends HookConsumerWidget {
                                   ),
                                 ),
                                 HeightMargin.normal,
+                                //稼働中案件一覧/////////////////////////////////
                                 Expanded(
                                   flex: 7,
                                   child: EmployeeCaseDetailCard(
                                     contentWidget: const Expanded(
-                                      child: const PersonalCaseListWidget(
+                                      child: PersonalCaseListWidget(
                                         isPast: false,
                                       ),
                                     ),
@@ -113,7 +116,7 @@ class EmployeeDetailPage extends HookConsumerWidget {
                       ),
                     ),
                     HeightMargin.normal,
-                    //営業履歴/////////////////////////////////////////////
+                    //成約率////////////////////////////////////////////////
                     SizedBox(
                       height: 220,
                       child: EmployeeCaseDetailCard(

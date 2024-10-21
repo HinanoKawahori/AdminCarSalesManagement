@@ -28,8 +28,6 @@ class PersonalCaseResultWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        HeightMargin.normal,
-        //買取総額の推移//////////////////////////////////////////////
         //買取金額の推移
         const EmployeeInfoRow(
           fieldName: '買取金額の推移',
@@ -55,7 +53,7 @@ class PersonalCaseResultWidget extends HookConsumerWidget {
           fieldName: '年間の買取総額',
           fieldData: '92,000,000円',
         ),
-        HeightMargin.small,
+        HeightMargin.normal,
         //成約率///////////////////////////////////////////////////
         Row(
           children: [

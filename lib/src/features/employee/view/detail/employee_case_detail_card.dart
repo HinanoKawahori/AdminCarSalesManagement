@@ -1,6 +1,7 @@
 import 'package:admin_car_sales_management/src/config/utils/key/firebase_key.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
+import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:admin_car_sales_management/src/features/routing/router_utils.dart';
@@ -39,22 +40,23 @@ class EmployeeCaseDetailCard extends StatelessWidget {
                 ),
                 WidthMargin.normal,
                 (title == '従業員情報')
-                    ? InkWell(
-                        child: SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                context.goNamed(
-                                  AppRoute.addOrEditEmployee.name,
-                                  queryParameters: {
-                                    FirebaseEmployeesKey.employeeId: employeeId,
-                                  },
-                                );
-                              },
-                              icon:
-                                  const Icon(Icons.edit_note_rounded, size: 20),
+                    ? SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              context.goNamed(
+                                AppRoute.addOrEditEmployee.name,
+                                queryParameters: {
+                                  FirebaseEmployeesKey.employeeId: employeeId,
+                                },
+                              );
+                            },
+                            child: const Icon(
+                              Icons.edit,
+                              size: 24,
+                              color: ColorStyle.mainGrey,
                             ),
                           ),
                         ),
@@ -69,6 +71,7 @@ class EmployeeCaseDetailCard extends StatelessWidget {
                         : const SizedBox(width: 20, height: 20),
               ],
             ),
+            HeightMargin.normal,
             //メインウィジェット
             contentWidget,
           ],
