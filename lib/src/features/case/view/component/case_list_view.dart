@@ -71,9 +71,10 @@ class CaseListView extends HookConsumerWidget {
                 Row(
                   children: [
                     //検索切り替えドロップダウンぼたん
-                    //TODO component
-                    SearchTypeDropDownButton(selectedValue: selectedValue),
-                    WidthMargin.small,
+                    SearchTypeDropDownButton(
+                      selectedValue: selectedValue,
+                    ),
+                    WidthMargin.minimum,
 
                     //🔍検索テキストフォームフィールド
                     SearchTextFormField(

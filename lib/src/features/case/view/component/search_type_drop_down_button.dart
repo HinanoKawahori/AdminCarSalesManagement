@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../config/utils/style/color_style.dart';
-import '../../../../config/utils/style/custom_font_style.dart';
-import '../../../../config/utils/style/padding_style.dart';
 
 class SearchTypeDropDownButton extends HookConsumerWidget {
   const SearchTypeDropDownButton({
@@ -19,12 +17,11 @@ class SearchTypeDropDownButton extends HookConsumerWidget {
       height: 45,
       decoration: const BoxDecoration(
         color: ColorStyle.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          bottomLeft: Radius.circular(10),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
         ),
       ),
-      padding: PaddingStyle.normal,
+      padding: const EdgeInsets.all(12),
       child: DropdownButton<String>(
         value: selectedValue.value,
         items: ['担当者', '顧客名'].map((String item) {
@@ -45,9 +42,12 @@ class SearchTypeDropDownButton extends HookConsumerWidget {
         hint: Text(
           selectedValue.value,
           style: const TextStyle(
-              color: Colors.grey, fontSize: CustomFontSize.small),
+            color: ColorStyle.secondGrey,
+          ),
         ),
-        icon: const Icon(Icons.keyboard_arrow_down_rounded),
+        icon: const Icon(
+          Icons.keyboard_arrow_down_rounded,
+        ),
       ),
     );
   }
