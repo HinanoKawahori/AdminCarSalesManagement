@@ -1,6 +1,8 @@
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
+import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SalesRankingWidget extends StatelessWidget {
   final List<Map<String, dynamic>> rankingData = [
@@ -20,6 +22,9 @@ class SalesRankingWidget extends StatelessWidget {
     {"rank": 14, "name": "鈴木さり", "amount": 19443289},
     {"rank": 15, "name": "前川けいし", "amount": 19342289},
   ];
+
+  //数字にカンマを入れるフォーマッターを作成
+  final formatter = NumberFormat('#,##0');
 
   SalesRankingWidget({super.key, required this.isDialog});
   final bool isDialog;
@@ -48,10 +53,11 @@ class SalesRankingWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 80,
+              width: 100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  WidthMargin.small,
                   Text(
                     '金額',
                     style: TextStyle(
@@ -102,12 +108,12 @@ class SalesRankingWidget extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 80,
+                      width: 100,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            '${rankingData[index]["amount"].toStringAsFixed(0)}円',
+                            '${formatter.format(rankingData[index]["amount"])}円',
                             style: const TextStyle(
                               fontSize: CustomFontSize.normal,
                             ),

@@ -69,8 +69,8 @@ class SalesBarChart extends HookConsumerWidget {
           toY: y,
           gradient: const LinearGradient(
             colors: ColorStyle.blueGradation,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            begin: Alignment.centerRight,
+            end: Alignment.centerRight,
           ),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(3),

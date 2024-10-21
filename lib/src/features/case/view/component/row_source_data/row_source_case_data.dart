@@ -113,7 +113,8 @@ DataRow recentFileDataRow(
       //顧客電話番号
       DataCell(
         Text(
-          (caseData.customerPhoneNumber == null)
+          (caseData.customerPhoneNumber == null ||
+                  caseData.customerPhoneNumber!.isEmpty)
               ? '未登録'
               : formatPhoneNumber(caseData.customerPhoneNumber!),
           maxLines: 1,

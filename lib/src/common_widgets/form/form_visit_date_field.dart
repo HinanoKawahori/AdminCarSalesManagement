@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 
 import '../../config/utils/style/color_style.dart';
 
@@ -37,14 +38,17 @@ class FormVisitDateField extends ConsumerWidget {
               decoration: InputDecoration(
                 labelText: label,
                 border: const OutlineInputBorder(),
-                suffixIcon: const Icon(Icons.calendar_today),
+                suffixIcon: const Icon(
+                  Icons.calendar_today,
+                  color: ColorStyle.mainGrey,
+                ),
               ),
               readOnly: true,
               onTap: () async {
-                // await _selectDateTimeFromDialog(
-                //   ref,
-                //   context,
-                // );
+                await _selectDateTimeFromDialog(
+                  ref,
+                  context,
+                );
               },
             ),
           ),
@@ -54,41 +58,36 @@ class FormVisitDateField extends ConsumerWidget {
   }
 
 //日付時間選択
-  // Future<void> _selectDateTimeFromDialog(
-  //   WidgetRef ref,
-  //   BuildContext context,
-  // ) async {
-  //   final DateTime? pickedDateTime = await showOmniDateTimePicker(
-  //     context: context,
-  //     initialDate: ref.read(visitDateControllerProvider) != null
-  //         ? ref.read(visitDateControllerProvider)!.toDate()
-  //         : DateTime.now(),
-  //     firstDate: DateTime(2000),
-  //     lastDate: DateTime(2100),
-  //     is24HourMode: true,
-  //     minutesInterval: 15,
-  //     theme: ThemeData(
-  //       dialogBackgroundColor: ColorStyle.white,
-  //       colorScheme: const ColorScheme.light(
-  //         primary: ColorStyle.blue, // 選択された日付の色
-  //         onPrimary: ColorStyle.white, // 選択された日付のテキスト色
-  //       ),
-  //       timePickerTheme: TimePickerThemeData(
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(16),
-  //         ),
-  //       ),
-  //       buttonTheme: const ButtonThemeData(
-  //         height: 50,
-  //       ),
-  //       dividerColor: ColorStyle.mainGrey,
-  //     ),
-  //   );
+  Future<void> _selectDateTimeFromDialog(
+    WidgetRef ref,
+    BuildContext context,
+  ) async {
+    final DateTime? pickedDateTime = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: SizedBox(
+            width: 400,
+            height: 600,
+            child: OmniDateTimePicker(
+              initialDate: DateTime.now(),
+              firstDate: DateTime(2000),
+              lastDate: DateTime(2100),
+              is24HourMode: true,
+              minutesInterval: 15,
+              isShowSeconds: false,
+              type: OmniDateTimePickerType.dateAndTime,
+              onDateTimeChanged: (DateTime value) {
+                //TODO
+              },
+            ),
+          ),
+        );
+      },
+    );
 
-  //   if (pickedDateTime != null) {
-  //     ref
-  //         .read(visitDateControllerProvider.notifier)
-  //         .stateChange(Timestamp.fromDate(pickedDateTime));
-  //   }
-  // }
+    if (pickedDateTime != null) {
+      // Handle the selected date and time
+    }
+  }
 }

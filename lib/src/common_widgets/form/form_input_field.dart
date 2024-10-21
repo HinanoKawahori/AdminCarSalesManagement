@@ -44,10 +44,15 @@ class FormInputField extends StatelessWidget {
             width: isCaseForm ? 300 : 300,
             color: ColorStyle.white,
             child: TextField(
+              style: const TextStyle(color: ColorStyle.mainBlack),
               maxLines: maxLine,
               decoration: InputDecoration(
                 labelText: label,
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: ColorStyle.mainGrey,
+                  ),
+                ),
               ),
             ),
           ),

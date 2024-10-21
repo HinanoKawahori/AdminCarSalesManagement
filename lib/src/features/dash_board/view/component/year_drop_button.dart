@@ -20,7 +20,7 @@ class YearDropButton extends HookConsumerWidget {
       decoration: BoxDecoration(
         color: ColorStyle.white,
         border: Border.all(
-          color: ColorStyle.secondGrey,
+          color: ColorStyle.mainGrey,
         ),
         borderRadius: BorderRadius.circular(5),
       ),
@@ -29,10 +29,10 @@ class YearDropButton extends HookConsumerWidget {
           value: dropdownValue.value,
           icon: const Icon(
             Icons.keyboard_arrow_down_rounded,
-            color: ColorStyle.secondGrey,
+            color: ColorStyle.mainGrey,
           ), // アイコンの色
           style: const TextStyle(
-            color: Colors.grey, // テキストの色
+            color: ColorStyle.mainGrey,
             fontSize: CustomFontSize.normal, // テキストのサイズ
           ),
           onChanged: (String? newValue) {

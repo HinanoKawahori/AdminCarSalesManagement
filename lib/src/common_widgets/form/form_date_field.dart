@@ -37,11 +37,19 @@ class FormDateField extends ConsumerWidget {
               decoration: InputDecoration(
                 labelText: label,
                 border: const OutlineInputBorder(),
-                suffixIcon: const Icon(Icons.calendar_today),
+                suffixIcon: const Icon(
+                  Icons.calendar_today,
+                  color: ColorStyle.mainGrey,
+                ),
               ),
               readOnly: true,
               onTap: () async {
-                // TODO: DatePickerを表示し、選択された日付を処理
+                // TODO: DatePicker
+                await showDatePicker(
+                  context: context,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                );
               },
             ),
           ),

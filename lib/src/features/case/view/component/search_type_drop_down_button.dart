@@ -29,7 +29,12 @@ class SearchTypeDropDownButton extends HookConsumerWidget {
             value: item,
             child: FittedBox(
               fit: BoxFit.scaleDown,
-              child: Text(item),
+              child: Text(
+                item,
+                style: const TextStyle(
+                  color: ColorStyle.mainBlack,
+                ),
+              ),
             ),
           );
         }).toList(),

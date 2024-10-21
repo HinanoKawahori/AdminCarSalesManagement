@@ -1,3 +1,4 @@
+import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,6 @@ class TabTitle extends ConsumerWidget {
         : ref.watch(watchCaseListOfActiveStatusProvider);
 
     //ステータス別の案件を取得
-
     return caseProvider.when(
       error: (error, stackTrace) {
         return const ErrorTextWidget(text: '!');
@@ -48,12 +48,17 @@ class TabTitle extends ConsumerWidget {
                 ),
               ),
               WidthMargin.small,
-              Text(
-                caseList.length.toString(),
-                style: const TextStyle(
-                  fontSize: CustomFontSize.small,
-                  fontWeight: FontWeight.bold,
-                  color: ColorStyle.mainBlack,
+              Padding(
+                padding: PaddingStyle.tabNumber,
+                child: Center(
+                  child: Text(
+                    caseList.length.toString(),
+                    style: const TextStyle(
+                      fontSize: CustomFontSize.small,
+                      fontWeight: FontWeight.bold,
+                      color: ColorStyle.mainBlack,
+                    ),
+                  ),
                 ),
               ),
               //件数表示

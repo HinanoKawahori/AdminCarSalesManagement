@@ -1,4 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+String formatNumber(double value) {
+  return NumberFormat('#,###').format(value);
+}
 
 int switchGenderToInt(String gender) {
   return switch (gender) {
