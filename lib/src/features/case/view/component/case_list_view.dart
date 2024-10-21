@@ -3,9 +3,9 @@ import 'package:admin_car_sales_management/src/common_widgets/loading_widget.dar
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
+import 'package:admin_car_sales_management/src/features/case/view/component/case_search_text_form_field.dart';
 import 'package:admin_car_sales_management/src/features/case/view/component/tab/case_tab_view.dart';
 import 'package:admin_car_sales_management/src/features/case/view/component/tab_title.dart';
-import 'package:admin_car_sales_management/src/features/employee/data_model/employee.dart';
 import 'package:admin_car_sales_management/src/features/routing/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -17,7 +17,6 @@ import '../../../../config/enum/sales_status.dart';
 import '../../../../config/utils/style/color_style.dart';
 import '../../../../config/utils/style/custom_font_style.dart';
 import '../../../../config/utils/style/height_margin.dart';
-import '../../../employee/view/component/detail_screen/search_text_form_field.dart';
 import '../../data_model/case.dart';
 import 'search_type_drop_down_button.dart';
 import 'tab/all_case_tab_view.dart';
@@ -33,9 +32,8 @@ class CaseListView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //タブコントローラー
     final TabController tabController = useTabController(initialLength: 5);
-    final ValueNotifier<List<Employee>> searchEmployeeList = useState([]);
-    final TextEditingController searchController = useTextEditingController();
-    final ValueNotifier<String> selectedValue = useState('担当者');
+    final ValueNotifier<String> searchWord = useState('');
+    final ValueNotifier<String> searchType = useState('担当者');
 
     return ref.watch(watchCaseListOfActiveStatusProvider).when(
       error: (error, stackTrace) {
@@ -44,7 +42,7 @@ class CaseListView extends HookConsumerWidget {
       loading: () {
         return const LoadingWidget(color: ColorStyle.blue);
       },
-      data: (List<Case> allActiveCaseList) {
+      data: (List<Case> caseList) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,17 +68,17 @@ class CaseListView extends HookConsumerWidget {
 
                 Row(
                   children: [
-                    //検索切り替えドロップダウンぼたん
+                    //検索切り替えドロップダウンボタン
                     SearchTypeDropDownButton(
-                      selectedValue: selectedValue,
+                      searchType: searchType,
                     ),
                     WidthMargin.minimum,
 
                     //🔍検索テキストフォームフィールド
-                    SearchTextFormField(
-                      employeeList: const [],
-                      searchEmployeeList: searchEmployeeList,
-                      searchController: searchController,
+                    CaseSearchTextFormField(
+                      caseList: const [],
+                      searchWord: searchWord,
+                      searchType: searchType,
                     ),
                     WidthMargin.small,
                     //営業結果一覧ページ遷移ボタン
@@ -153,36 +151,48 @@ class CaseListView extends HookConsumerWidget {
                   Expanded(
                     child: Padding(
                       padding: PaddingStyle.top,
-                      child: isPast
-                          ? TabBarView(
-                              controller: tabController,
-                              children: const <Widget>[
-                                CaseTabView(
-                                  caseStatus: CaseStatus.success,
+                      child:
+
+                          //TODO
+
+                          isPast
+                              ? TabBarView(
+                                  controller: tabController,
+                                  children: <Widget>[
+                                    CaseTabView(
+                                      caseStatus: CaseStatus.success,
+                                      searchWord: searchWord,
+                                    ),
+                                    CaseTabView(
+                                      caseStatus: CaseStatus.lost,
+                                      searchWord: searchWord,
+                                    ),
+                                  ],
+                                )
+                              : TabBarView(
+                                  controller: tabController,
+                                  children: <Widget>[
+                                    AllCaseTabView(
+                                      searchWord: searchWord,
+                                    ),
+                                    CaseTabView(
+                                      caseStatus: CaseStatus.assigningPerson,
+                                      searchWord: searchWord,
+                                    ),
+                                    CaseTabView(
+                                      caseStatus: CaseStatus.scheduling,
+                                      searchWord: searchWord,
+                                    ),
+                                    CaseTabView(
+                                      caseStatus: CaseStatus.confirmedVisit,
+                                      searchWord: searchWord,
+                                    ),
+                                    CaseTabView(
+                                      caseStatus: CaseStatus.pending,
+                                      searchWord: searchWord,
+                                    ),
+                                  ],
                                 ),
-                                CaseTabView(
-                                  caseStatus: CaseStatus.lost,
-                                ), //日程調整中
-                              ],
-                            )
-                          : TabBarView(
-                              controller: tabController,
-                              children: const <Widget>[
-                                AllCaseTabView(), //すべて
-                                CaseTabView(
-                                  caseStatus: CaseStatus.assigningPerson,
-                                ),
-                                CaseTabView(
-                                  caseStatus: CaseStatus.scheduling,
-                                ), //日程調整中
-                                CaseTabView(
-                                  caseStatus: CaseStatus.confirmedVisit,
-                                ),
-                                CaseTabView(
-                                  caseStatus: CaseStatus.pending,
-                                ),
-                              ],
-                            ),
                     ),
                   ),
                 ],

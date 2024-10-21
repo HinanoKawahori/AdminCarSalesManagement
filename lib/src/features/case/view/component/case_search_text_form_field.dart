@@ -1,38 +1,31 @@
-import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
-import 'package:admin_car_sales_management/src/features/employee/data_model/employee.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../config/utils/style/color_style.dart';
-import '../../../../../config/utils/style/custom_font_style.dart';
+import '../../../../config/utils/style/color_style.dart';
+import '../../../../config/utils/style/custom_font_style.dart';
+import '../../data_model/case.dart';
 
-class SearchTextFormField extends HookConsumerWidget {
-  final List<Employee> employeeList;
-  final ValueNotifier<List<Employee>> searchEmployeeList;
-  final TextEditingController searchController;
+class CaseSearchTextFormField extends HookConsumerWidget {
+  final List<Case> caseList;
+  final ValueNotifier<String> searchWord;
+  final ValueNotifier<String> searchType;
 
-  const SearchTextFormField({
+  const CaseSearchTextFormField({
     super.key,
-    required this.employeeList,
-    required this.searchEmployeeList,
-    required this.searchController,
+    required this.caseList,
+    required this.searchWord,
+    required this.searchType,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController searchController = useTextEditingController();
     return SizedBox(
       width: 350,
       child: TextFormField(
         controller: searchController,
         cursorColor: ColorStyle.mainBlack,
         cursorHeight: 17,
-        onFieldSubmitted: (value) async {
-          //employeeListの内容を更新する
-          searchEmployeeList.value =
-              ref.read(employeeControllerProvider.notifier).searchEmployee(
-                    employeeList: employeeList,
-                    searchController: searchController,
-                  );
-        },
         decoration: InputDecoration(
           fillColor: ColorStyle.white,
           filled: true,
@@ -50,12 +43,9 @@ class SearchTextFormField extends HookConsumerWidget {
                     color: ColorStyle.mainBlack,
                   ),
                   onPressed: () {
-                    searchEmployeeList.value = ref
-                        .read(employeeControllerProvider.notifier)
-                        .searchEmployee(
-                          employeeList: employeeList,
-                          searchController: searchController,
-                        );
+                    //検索したい言葉を、更新する
+                    searchWord.value = searchController.text;
+                    print(searchWord.value);
                   },
                 ),
                 IconButton(
@@ -66,7 +56,8 @@ class SearchTextFormField extends HookConsumerWidget {
                   ),
                   onPressed: () {
                     searchController.clear();
-                    searchEmployeeList.value = employeeList;
+                    searchWord.value = '';
+                    print(searchWord.value);
                   },
                 ),
               ],

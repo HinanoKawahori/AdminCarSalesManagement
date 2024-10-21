@@ -44,7 +44,6 @@ class FormDateField extends ConsumerWidget {
               ),
               readOnly: true,
               onTap: () async {
-                // TODO: DatePicker
                 await showDatePicker(
                   context: context,
                   firstDate: DateTime(2000),

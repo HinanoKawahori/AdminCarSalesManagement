@@ -13,7 +13,7 @@ import 'row_source_employee_data.dart';
 import '../../../../config/utils/style/color_style.dart';
 import '../../../../config/utils/style/custom_font_style.dart';
 import '../../../../config/utils/style/height_margin.dart';
-import 'detail_screen/search_text_form_field.dart';
+import 'employee_search_text_form_field.dart';
 
 class EmployeeListView extends HookConsumerWidget {
   const EmployeeListView({
@@ -49,7 +49,7 @@ class EmployeeListView extends HookConsumerWidget {
                 ),
 
                 //🔍検索テキストフォームフィールド
-                SearchTextFormField(
+                EmployeeSearchTextFormField(
                   employeeList: employeeList,
                   searchEmployeeList: searchEmployeeList,
                   searchController: searchController,
@@ -114,6 +114,7 @@ class EmployeeListView extends HookConsumerWidget {
                 ],
                 onPageChanged: (value) {},
                 //Rowのデータ
+                //valueが更新されるタイミングで再描画されてRowDataも変わる。
                 source: RowSourceEmployeeData(
                   context: context,
                   count: (searchController.text.trim().isNotEmpty)

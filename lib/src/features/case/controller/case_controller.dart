@@ -279,6 +279,19 @@ class CaseController extends _$CaseController {
     }
     return words;
   }
+
+  //検索
+  List<Case> searchCase({
+    required List<Case> caseList,
+    required String searchWord,
+  }) {
+    return caseList.where(
+      (caseData) {
+        return caseData.customerName.contains(searchWord);
+      },
+    ).toList();
+  }
+
   ////////////////////名前のフィールド生成///////////////////////////////////////
 }
 

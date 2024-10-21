@@ -6,10 +6,10 @@ import '../../../../config/utils/style/color_style.dart';
 class SearchTypeDropDownButton extends HookConsumerWidget {
   const SearchTypeDropDownButton({
     super.key,
-    required this.selectedValue,
+    required this.searchType,
   });
 
-  final ValueNotifier<String> selectedValue;
+  final ValueNotifier<String> searchType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +23,7 @@ class SearchTypeDropDownButton extends HookConsumerWidget {
       ),
       padding: const EdgeInsets.all(12),
       child: DropdownButton<String>(
-        value: selectedValue.value,
+        value: searchType.value,
         items: ['担当者', '顧客名'].map((String item) {
           return DropdownMenuItem<String>(
             value: item,
@@ -40,12 +40,13 @@ class SearchTypeDropDownButton extends HookConsumerWidget {
         }).toList(),
         onChanged: (String? newValue) {
           if (newValue != null) {
-            selectedValue.value = newValue;
+            searchType.value = newValue;
+            print(searchType.value);
           }
         },
         underline: const SizedBox(),
         hint: Text(
-          selectedValue.value,
+          searchType.value,
           style: const TextStyle(
             color: ColorStyle.secondGrey,
           ),

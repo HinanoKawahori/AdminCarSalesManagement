@@ -8,7 +8,10 @@ import '../../../../config/utils/style/custom_font_style.dart';
 import '../../../../function/get_last_twelve_months.dart';
 
 class SalesBarChart extends HookConsumerWidget {
-  const SalesBarChart({super.key, required this.salesSumList});
+  const SalesBarChart({
+    super.key,
+    required this.salesSumList,
+  });
   final List<double?> salesSumList;
 
   final Color barBackgroundColor = ColorStyle.mainGrey;
@@ -70,7 +73,7 @@ class SalesBarChart extends HookConsumerWidget {
           gradient: const LinearGradient(
             colors: ColorStyle.blueGradation,
             begin: Alignment.centerRight,
-            end: Alignment.centerRight,
+            end: Alignment.centerLeft,
           ),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(3),
@@ -141,7 +144,7 @@ class SalesBarChart extends HookConsumerWidget {
   }) {
     List<double?> data = salesSumList.reversed.toList();
     List<String> months = getLastTwelveMonths();
-    final successRate = 20;
+    const successRate = 20;
     // 月のリストを適切な順序に並び替える
     months = months.reversed.toList();
     final formatter = NumberFormat('#,###');

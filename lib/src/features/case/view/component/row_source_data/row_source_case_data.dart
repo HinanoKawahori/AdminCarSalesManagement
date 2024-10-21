@@ -72,7 +72,6 @@ DataRow recentFileDataRow(
       //ステータス
       DataCell(
         Text(
-          //TODO
           getStatusText(caseData.caseStatus!),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
