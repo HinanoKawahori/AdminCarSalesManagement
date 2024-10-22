@@ -10,6 +10,7 @@ Future<void> errorDialog({
   required String desc,
 }) async {
   await AwesomeDialog(
+    width: 600,
     title: title,
     btnOkColor: ColorStyle.blue,
     btnOkText: '閉じる',

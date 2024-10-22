@@ -1,16 +1,18 @@
+import 'package:admin_car_sales_management/src/features/employee/view/add_or_edit/add_employee_page.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/add_or_edit/edit_employee_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:admin_car_sales_management/src/features/auth/repo/auth_repo.dart';
 import 'package:admin_car_sales_management/src/features/auth/view/login_page.dart';
-import 'package:admin_car_sales_management/src/features/employee/view/add/add_employee_page.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/add_or_edit/add_or_edit_employee_page.dart';
 import 'package:admin_car_sales_management/src/features/employee/view/employee_list_page.dart';
 import 'package:admin_car_sales_management/src/features/employee/view/detail/employee_detail_page.dart';
-import 'package:admin_car_sales_management/src/features/employee/view/detail/employee_past_detail_page.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/dash_board_page.dart';
 import 'package:admin_car_sales_management/src/features/case/view/case_list_page.dart';
 import 'package:admin_car_sales_management/src/features/case/view/past_case_list_page.dart';
 import 'package:admin_car_sales_management/src/features/case/view/add_or_edit/add_or_edit_case_page.dart';
+import '../../config/utils/key/firebase_key.dart';
 import '../navigation/navigation_rail/navigation_rail.dart';
 import 'go_router_refresh_stream.dart';
 import 'router_utils.dart';
@@ -38,24 +40,13 @@ GoRouter goRouter(GoRouterRef ref) {
       return null;
     },
     routes: [
+      //ログインページ
       GoRoute(
         path: AppRoute.login.path,
         name: AppRoute.login.name,
         builder: (context, state) => const LoginPage(),
       ),
-      GoRoute(
-        path: AppRoute.addOrEditCase.path,
-        name: AppRoute.addOrEditCase.name,
-        pageBuilder: (context, state) =>
-            const NoTransitionPage(child: AddOrEditCasePage()),
-      ),
-      GoRoute(
-        path: AppRoute.addEmployee.path,
-        name: AppRoute.addEmployee.name,
-        pageBuilder: (context, state) =>
-            const NoTransitionPage(child: AddEmployeePage()),
-      ),
-      //
+
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return NavigationRailShellPage(navigationShell: navigationShell);
@@ -63,6 +54,7 @@ GoRouter goRouter(GoRouterRef ref) {
         branches: [
           //従業員一覧ページ
           StatefulShellBranch(
+            navigatorKey: sectionNavigatorKey,
             routes: [
               GoRoute(
                 path: AppRoute.employeeList.path,
@@ -70,20 +62,42 @@ GoRouter goRouter(GoRouterRef ref) {
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: EmployeeListPage()),
                 routes: [
+                  //従業員作成画面
                   GoRoute(
-                    path: AppRoute.employeeDetail.path,
-                    name: AppRoute.employeeDetail.name,
-                    pageBuilder: (context, state) =>
-                        const NoTransitionPage(child: EmployeeDetailPage()),
-                    routes: [
-                      GoRoute(
-                        path: AppRoute.employeePastDetail.path,
-                        name: AppRoute.employeePastDetail.name,
-                        pageBuilder: (context, state) => const NoTransitionPage(
-                            child: EmployeePastDetailPage()),
-                      ),
-                    ],
+                    path: AppRoute.addEmployee.path,
+                    name: AppRoute.addEmployee.name,
+                    pageBuilder: (context, state) {
+                      return const NoTransitionPage(
+                        child: AddEmployeePage(),
+                      );
+                    },
                   ),
+                  //従業員詳細ページ
+                  GoRoute(
+                      path: AppRoute.employeeDetail.path,
+                      name: AppRoute.employeeDetail.name,
+                      pageBuilder: (context, state) {
+                        final String? employeeId = state.queryParameters[
+                            FirebaseCasesKey.assignedEmployeeId];
+                        return NoTransitionPage(
+                          child: EmployeeDetailPage(employeeId: employeeId),
+                        );
+                      },
+                      routes: [
+                        //従業員編集ページ
+                        GoRoute(
+                          path: AppRoute.editEmployee.path,
+                          name: AppRoute.editEmployee.name,
+                          pageBuilder: (context, state) {
+                            final String? employeeId = state.queryParameters[
+                                FirebaseCasesKey.assignedEmployeeId];
+
+                            return NoTransitionPage(
+                              child: EditEmployeePage(employeeId: employeeId),
+                            );
+                          },
+                        ),
+                      ]),
                 ],
               ),
             ],
@@ -108,11 +122,25 @@ GoRouter goRouter(GoRouterRef ref) {
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: CaseListPage()),
                 routes: [
+                  //過去の案件一覧ページ
                   GoRoute(
                     path: AppRoute.pastCaseList.path,
                     name: AppRoute.pastCaseList.name,
                     pageBuilder: (context, state) =>
                         const NoTransitionPage(child: PastCaseListPage()),
+                  ),
+                  //案件作成編集画面
+                  GoRoute(
+                    path: AppRoute.addOrEditCase.path,
+                    name: AppRoute.addOrEditCase.name,
+                    pageBuilder: (context, state) {
+                      final String? caseId =
+                          state.queryParameters[FirebaseCasesKey.caseId];
+
+                      return NoTransitionPage(
+                        child: AddOrEditCasePage(caseId: caseId),
+                      );
+                    },
                   ),
                 ],
               ),

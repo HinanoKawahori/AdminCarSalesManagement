@@ -27,7 +27,7 @@ class EmployeeController extends _$EmployeeController {
   }) async {
     state = const AsyncLoading();
     final newEmployee = Employee(
-      employeeId: Uuid().v4(),
+      employeeId: const Uuid().v4(),
       employeeName: name,
       email: email,
       phoneNumber: phoneNumber,
@@ -85,7 +85,7 @@ class EmployeeController extends _$EmployeeController {
     return employee;
   }
 
-//TODO 名前検索
+//名前検索
   List<Employee> searchEmployee({
     required List<Employee> employeeList,
     required TextEditingController searchController,
@@ -93,6 +93,17 @@ class EmployeeController extends _$EmployeeController {
     return employeeList.where(
       (employee) {
         return employee.employeeName.contains(searchController.text);
+      },
+    ).toList();
+  }
+
+  List<Employee> searchEmployeeBySearchWord({
+    required List<Employee> employeeList,
+    required String searchWord,
+  }) {
+    return employeeList.where(
+      (employee) {
+        return employee.employeeName.contains(searchWord);
       },
     ).toList();
   }
@@ -109,23 +120,9 @@ Stream<Employee?> watchEmployeeDataController(
       .watchEmployeeData(employeeId: employeeId);
 }
 
-//limit付きですべてのemployee監視
+//すべてのemployee監視
 @riverpod
 Stream<List<Employee>> watchAllEmployeeDataController(
     WatchAllEmployeeDataControllerRef ref) {
-  final limit = ref.watch(employeeLimitControllerProvider);
-  return ref.read(employeeRepoProvider.notifier).watchAllEmployee(limit);
-}
-
-//TODO 特別措置
-@riverpod
-class EmployeeLimitController extends _$EmployeeLimitController {
-  @override
-  int build() {
-    return 10;
-  }
-
-  void increment() {
-    state = state + 10;
-  }
+  return ref.read(employeeRepoProvider.notifier).watchAllEmployee();
 }

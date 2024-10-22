@@ -1,4 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+String formatNumber(double value) {
+  return NumberFormat('#,###').format(value);
+}
 
 int switchGenderToInt(String gender) {
   return switch (gender) {
@@ -66,6 +71,8 @@ String switchTimeTextInChat(Timestamp timestamp) {
 //ステータス番号から、テキストを返す
 String getStatusText(int status) {
   switch (status) {
+    case 0:
+      return '担当者未定';
     case 10:
       return '日程調整中';
     case 20:

@@ -15,23 +15,23 @@ class SideMenu extends ConsumerWidget {
       child: ListView(
         children: [
           ListTile(
-            leading: Icon(Icons.dashboard),
-            title: Text('ダッシュボード'),
+            leading: const Icon(Icons.dashboard),
+            title: const Text('ダッシュボード'),
             onTap: () {
               // ダッシュボード画面に遷移
             },
           ),
           ListTile(
-            leading: Icon(Icons.people),
-            title: Text('従業員'),
+            leading: const Icon(Icons.people),
+            title: const Text('従業員'),
             onTap: () {
               // 現在の画面なので何もしない
             },
             selected: true,
           ),
           ListTile(
-            leading: Icon(Icons.car_rental),
-            title: Text('車両'),
+            leading: const Icon(Icons.car_rental),
+            title: const Text('車両'),
             onTap: () {
               // 車両管理画面に遷移
             },

@@ -170,7 +170,7 @@ class _WatchCaseDataControllerProviderElement
 }
 
 String _$watchCaseListOfThisStatusControllerHash() =>
-    r'a5f9ac4d02a1774a98e3b018ed00be3f6734fc3f';
+    r'9686d5ecf26b595bc741781e1b0629a2d5ecde30';
 
 /// See also [watchCaseListOfThisStatusController].
 @ProviderFor(watchCaseListOfThisStatusController)
@@ -179,7 +179,7 @@ const watchCaseListOfThisStatusControllerProvider =
 
 /// See also [watchCaseListOfThisStatusController].
 class WatchCaseListOfThisStatusControllerFamily
-    extends Family<AsyncValue<List<Case?>>> {
+    extends Family<AsyncValue<List<Case>>> {
   /// See also [watchCaseListOfThisStatusController].
   const WatchCaseListOfThisStatusControllerFamily();
 
@@ -218,7 +218,7 @@ class WatchCaseListOfThisStatusControllerFamily
 
 /// See also [watchCaseListOfThisStatusController].
 class WatchCaseListOfThisStatusControllerProvider
-    extends AutoDisposeStreamProvider<List<Case?>> {
+    extends AutoDisposeStreamProvider<List<Case>> {
   /// See also [watchCaseListOfThisStatusController].
   WatchCaseListOfThisStatusControllerProvider({
     required int caseStatus,
@@ -253,8 +253,7 @@ class WatchCaseListOfThisStatusControllerProvider
 
   @override
   Override overrideWith(
-    Stream<List<Case?>> Function(
-            WatchCaseListOfThisStatusControllerRef provider)
+    Stream<List<Case>> Function(WatchCaseListOfThisStatusControllerRef provider)
         create,
   ) {
     return ProviderOverride(
@@ -272,7 +271,7 @@ class WatchCaseListOfThisStatusControllerProvider
   }
 
   @override
-  AutoDisposeStreamProviderElement<List<Case?>> createElement() {
+  AutoDisposeStreamProviderElement<List<Case>> createElement() {
     return _WatchCaseListOfThisStatusControllerProviderElement(this);
   }
 
@@ -292,13 +291,13 @@ class WatchCaseListOfThisStatusControllerProvider
 }
 
 mixin WatchCaseListOfThisStatusControllerRef
-    on AutoDisposeStreamProviderRef<List<Case?>> {
+    on AutoDisposeStreamProviderRef<List<Case>> {
   /// The parameter `caseStatus` of this provider.
   int get caseStatus;
 }
 
 class _WatchCaseListOfThisStatusControllerProviderElement
-    extends AutoDisposeStreamProviderElement<List<Case?>>
+    extends AutoDisposeStreamProviderElement<List<Case>>
     with WatchCaseListOfThisStatusControllerRef {
   _WatchCaseListOfThisStatusControllerProviderElement(super.provider);
 
@@ -308,139 +307,23 @@ class _WatchCaseListOfThisStatusControllerProviderElement
 }
 
 String _$watchCaseListOfActiveStatusHash() =>
-    r'2b2b29433e46baac8b9e448f526fa020677a6b07';
+    r'bcd062dc0ed96816ac08d6b6dd66aa1324606454';
 
 /// See also [watchCaseListOfActiveStatus].
 @ProviderFor(watchCaseListOfActiveStatus)
-const watchCaseListOfActiveStatusProvider = WatchCaseListOfActiveStatusFamily();
+final watchCaseListOfActiveStatusProvider =
+    AutoDisposeStreamProvider<List<Case>>.internal(
+  watchCaseListOfActiveStatus,
+  name: r'watchCaseListOfActiveStatusProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$watchCaseListOfActiveStatusHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-/// See also [watchCaseListOfActiveStatus].
-class WatchCaseListOfActiveStatusFamily extends Family<AsyncValue<List<Case>>> {
-  /// See also [watchCaseListOfActiveStatus].
-  const WatchCaseListOfActiveStatusFamily();
-
-  /// See also [watchCaseListOfActiveStatus].
-  WatchCaseListOfActiveStatusProvider call({
-    required int caseStatus,
-  }) {
-    return WatchCaseListOfActiveStatusProvider(
-      caseStatus: caseStatus,
-    );
-  }
-
-  @override
-  WatchCaseListOfActiveStatusProvider getProviderOverride(
-    covariant WatchCaseListOfActiveStatusProvider provider,
-  ) {
-    return call(
-      caseStatus: provider.caseStatus,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'watchCaseListOfActiveStatusProvider';
-}
-
-/// See also [watchCaseListOfActiveStatus].
-class WatchCaseListOfActiveStatusProvider
-    extends AutoDisposeStreamProvider<List<Case>> {
-  /// See also [watchCaseListOfActiveStatus].
-  WatchCaseListOfActiveStatusProvider({
-    required int caseStatus,
-  }) : this._internal(
-          (ref) => watchCaseListOfActiveStatus(
-            ref as WatchCaseListOfActiveStatusRef,
-            caseStatus: caseStatus,
-          ),
-          from: watchCaseListOfActiveStatusProvider,
-          name: r'watchCaseListOfActiveStatusProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$watchCaseListOfActiveStatusHash,
-          dependencies: WatchCaseListOfActiveStatusFamily._dependencies,
-          allTransitiveDependencies:
-              WatchCaseListOfActiveStatusFamily._allTransitiveDependencies,
-          caseStatus: caseStatus,
-        );
-
-  WatchCaseListOfActiveStatusProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.caseStatus,
-  }) : super.internal();
-
-  final int caseStatus;
-
-  @override
-  Override overrideWith(
-    Stream<List<Case>> Function(WatchCaseListOfActiveStatusRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: WatchCaseListOfActiveStatusProvider._internal(
-        (ref) => create(ref as WatchCaseListOfActiveStatusRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        caseStatus: caseStatus,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeStreamProviderElement<List<Case>> createElement() {
-    return _WatchCaseListOfActiveStatusProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is WatchCaseListOfActiveStatusProvider &&
-        other.caseStatus == caseStatus;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, caseStatus.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-mixin WatchCaseListOfActiveStatusRef
-    on AutoDisposeStreamProviderRef<List<Case>> {
-  /// The parameter `caseStatus` of this provider.
-  int get caseStatus;
-}
-
-class _WatchCaseListOfActiveStatusProviderElement
-    extends AutoDisposeStreamProviderElement<List<Case>>
-    with WatchCaseListOfActiveStatusRef {
-  _WatchCaseListOfActiveStatusProviderElement(super.provider);
-
-  @override
-  int get caseStatus =>
-      (origin as WatchCaseListOfActiveStatusProvider).caseStatus;
-}
-
+typedef WatchCaseListOfActiveStatusRef
+    = AutoDisposeStreamProviderRef<List<Case>>;
 String _$watchEmployeeCaseListByStatusControllerHash() =>
     r'112a42844cd1bb52567523950a91c0923b9256c8';
 

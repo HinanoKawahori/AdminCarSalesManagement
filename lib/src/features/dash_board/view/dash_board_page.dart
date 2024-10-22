@@ -1,83 +1,138 @@
 import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/component/dash_board_card.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/component/year_and_month_drop_button.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/component/sales_ranking_dialog.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/widget/case_pie_chart_widget.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/widget/case_result_bar_chart_widget.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/widget/manufacturer_pie_chart_widget.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/widget/sales_ranking_widget.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/widget/sales_sum_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../config/utils/style/color_style.dart';
-import '../../employee/view/component/employee_list_view.dart';
+import '../../../config/utils/style/custom_font_style.dart';
 
 class DashBoardPage extends HookConsumerWidget {
   const DashBoardPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: ColorStyle.paleBlue,
       body: Padding(
         padding: PaddingStyle.normal,
-        child: Row(
-          children: [
-            Column(
-              children: [
-                //TODO
-                DataCard(
-                  titleText: '稼働中の案件数',
-                  dataWidget: Container(),
-                ),
-                HeightMargin.normal,
-                DataCard(
-                  titleText: '稼働中の案件数',
-                  dataWidget: Container(),
-                ),
-              ],
-            ),
-            WidthMargin.normal,
-            Column(
-              children: [
-                //TODO
-                DataCard(
-                  titleText: '稼働中の案件数',
-                  dataWidget: Container(),
-                ),
-                HeightMargin.normal,
-                DataCard(
-                  titleText: '稼働中の案件数',
-                  dataWidget: Container(),
-                ),
-                HeightMargin.normal,
-                DataCard(
-                  titleText: '稼働中の案件数',
-                  dataWidget: Container(),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DataCard extends StatelessWidget {
-  const DataCard({
-    super.key,
-    required this.titleText,
-    required this.dataWidget,
-  });
-
-  final String titleText;
-  final Widget dataWidget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: PaddingStyle.normal,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(titleText),
-            dataWidget,
+            const Text(
+              'ダッシュボード',
+              style: TextStyle(
+                fontSize: CustomFontSize.largest,
+                color: ColorStyle.mainBlack,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            HeightMargin.normal,
+            Expanded(
+              child: Row(
+                children: [
+                  // 左側のカラム（2つのカード）
+                  const Expanded(
+                    child: Column(
+                      children: [
+                        //稼働中の案件状況
+                        Expanded(
+                          child: DashBoardCard(
+                            contentWidget: Expanded(
+                              child: CasePieChartWidget(),
+                            ),
+                            title: '稼働中の案件状況',
+                          ),
+                        ),
+                        //買取総額の推移
+                        Expanded(
+                          child: DashBoardCard(
+                            contentWidget:
+                                Expanded(child: CaseResultBarChartWidget()),
+                            title: '買取総額の推移',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  WidthMargin.small,
+                  // 右側のカラム（3つのカード）
+                  Expanded(
+                    child: Card(
+                      color: ColorStyle.lightBlue2,
+                      child: Padding(
+                        padding: PaddingStyle.normal,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            //ドロップダウンボタン
+                            YearAndMonthDropButton(),
+                            HeightMargin.normal,
+                            //8月の買取総額
+                            const SizedBox(
+                              height: 80,
+                              child: SalesSumWidget(),
+                            ),
+
+                            //8月の人気買取メーカー
+                            const SizedBox(
+                              height: 260,
+                              child: DashBoardCard(
+                                contentWidget: Expanded(
+                                  child: ManufacturerPieChartWidget(),
+                                ),
+                                title: '8月の人気買取メーカー',
+                              ),
+                            ),
+
+                            //8月の買取総額ランキング
+                            Expanded(
+                              child: InkWell(
+                                child: Stack(
+                                  alignment: Alignment.topRight,
+                                  children: [
+                                    //
+                                    DashBoardCard(
+                                      contentWidget: Expanded(
+                                        child:
+                                            SalesRankingWidget(isDialog: false),
+                                      ),
+                                      title: '8月の買取総額ランキング',
+                                    ),
+                                    //ランキングダイアログ表示ボタン
+                                    Padding(
+                                      padding: PaddingStyle.normal,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          showRankingDialog(
+                                            context: context,
+                                          ); //ランキングダイアログの表示
+                                        },
+                                        icon: const Icon(
+                                          Icons.open_in_new_rounded,
+                                          color: ColorStyle.mainGrey,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

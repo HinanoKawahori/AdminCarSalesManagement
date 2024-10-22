@@ -172,7 +172,32 @@ class CaseController extends _$CaseController {
         .getCaseData(caseId: caseId);
   }
 
-//////////////////////////////////////////
+  ///////////////////////個別のステータス別データ//////////////////////////////////
+
+  //ケース取得
+  Future<List<Case>> getEmployeeCaseListByStatus({
+    required String employeeId,
+    required int caseStatus,
+  }) async {
+    return await ref
+        .read(caseRepoProvider.notifier)
+        .getEmployeeCaseListByStatus(
+          employeeId: employeeId,
+          caseStatus: caseStatus,
+        );
+  }
+
+  Future<List<Case>> getEmployeeCaseListOfActiveStatus({
+    required String employeeId,
+  }) async {
+    return await ref
+        .read(caseRepoProvider.notifier)
+        .getEmployeeCaseListOfActiveStatus(
+          employeeId: employeeId,
+        );
+  }
+
+//////////////////計算系////////////////////////
 
   //ひと月の全ての案件リスト
   Future<List<Case?>> getSalesResultOfTheMonth({DateTime? targetDate}) async {
@@ -279,6 +304,19 @@ class CaseController extends _$CaseController {
     }
     return words;
   }
+
+  //検索
+  List<Case> searchCase({
+    required List<Case> caseList,
+    required String searchWord,
+  }) {
+    return caseList.where(
+      (caseData) {
+        return caseData.customerName.contains(searchWord);
+      },
+    ).toList();
+  }
+
   ////////////////////名前のフィールド生成///////////////////////////////////////
 }
 
@@ -294,7 +332,7 @@ Stream<Case?> watchCaseDataController(
 
 //全従業員で、ステータス別案件監視
 @riverpod
-Stream<List<Case?>> watchCaseListOfThisStatusController(
+Stream<List<Case>> watchCaseListOfThisStatusController(
   WatchCaseListOfThisStatusControllerRef ref, {
   required int caseStatus,
 }) {
@@ -306,9 +344,7 @@ Stream<List<Case?>> watchCaseListOfThisStatusController(
 //全従業員で、稼働中のすべての案件監視
 @riverpod
 Stream<List<Case>> watchCaseListOfActiveStatus(
-  WatchCaseListOfActiveStatusRef ref, {
-  required int caseStatus,
-}) {
+    WatchCaseListOfActiveStatusRef ref) {
   return ref.watch(caseRepoProvider.notifier).watchCaseListOfActiveStatus();
 }
 

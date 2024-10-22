@@ -20,6 +20,8 @@ class ColorStyle {
 
   static const lightBlue = Color.fromARGB(255, 115, 161, 255);
 
+  static const lightBlue2 = Color.fromARGB(255, 184, 208, 255);
+
   static const darkBlue = Color(0xFF586DAA);
 
   static const paleBlue = Color.fromARGB(255, 247, 248, 255);
@@ -28,22 +30,23 @@ class ColorStyle {
 
   static const validationRed = Color.fromARGB(255, 206, 53, 53);
 
-  // static const confirmedVisitButton = [
-  //   Color.fromARGB(255, 48, 218, 208),
-  //   Color.fromARGB(255, 60, 220, 210),
-  //   Color.fromARGB(255, 55, 225, 215)
-  // ];
+  ///円グラフの色
+  static const pieChartDarkBlue = ColorStyle.blue;
+  static const pieChartLightBlue =
+      Color.fromARGB(255, 102, 179, 255); // #66B3FF
+  static const pieChartMediumBlue =
+      Color.fromARGB(255, 111, 171, 255); // #4A90E2
+  static const pieChartPowderBlue =
+      Color.fromARGB(255, 179, 212, 255); // #B3D4FF
+
+  ///
+
   static const confirmedVisitButton = [
     Color.fromARGB(255, 30, 200, 190), // ダークターコイズ
     Color.fromARGB(255, 80, 230, 220), // 明るめのアクア
     Color.fromARGB(255, 148, 238, 232) // 明るめのアクア
   ];
 
-  // static const pendingButton = [
-  //   Color.fromARGB(255, 90, 120, 215),
-  //   Color.fromARGB(255, 105, 150, 240),
-  //   Color.fromARGB(255, 70, 180, 250)
-  // ];
   static const pendingButton = [
     Color.fromARGB(255, 140, 110, 230), // 柔らかい紫
     Color.fromARGB(255, 160, 130, 240), // 優しい紫
