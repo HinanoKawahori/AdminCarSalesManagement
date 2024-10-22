@@ -1,3 +1,4 @@
+import 'package:admin_car_sales_management/src/common_widgets/blud_gradation_button.dart';
 import 'package:admin_car_sales_management/src/common_widgets/custom_text_form_field.dart';
 import 'package:admin_car_sales_management/src/common_widgets/error_dialog.dart';
 import 'package:admin_car_sales_management/src/common_widgets/ok_dialog.dart';
@@ -32,6 +33,7 @@ class PassResetDialog extends HookConsumerWidget {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Dialog(
       child: Container(
+        width: 400,
         decoration: BoxDecoration(
           color: ColorStyle.mainWhite,
           borderRadius: BorderRadius.circular(16),
@@ -45,90 +47,69 @@ class PassResetDialog extends HookConsumerWidget {
           ),
           child: Form(
             key: formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    icon: const Icon(
-                      Icons.close,
-                      color: ColorStyle.mainGrey,
-                    ),
-                  ),
-                ),
-                Image.asset(
-                  'assets/images/logo_blue.png',
-                  width: 80,
-                  fit: BoxFit.contain,
-                ),
-                HeightMargin.medium,
-                const Text(
-                  'メールアドレスを入力してください。\nパスワード再設定メールを送信します。',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: CustomFontSize.normal,
-                    color: ColorStyle.mainBlack,
-                  ),
-                ),
-                HeightMargin.medium,
-                CustomTextFormField(
-                  controller: emailController,
-                  hight: 65,
-                  hintText: 'メールアドレス',
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'メールアドレスを入力してください';
-                    }
-                    if (!EmailValidator.validate(value)) {
-                      return '有効なメールアドレスを入力してください';
-                    }
-                    return null;
-                  },
-                ),
-                HeightMargin.large,
-                Container(
-                  width: 150,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: ColorStyle.blueGradation,
-                    ),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await _sendEmail(
-                        ref,
-                        formKey,
-                        emailController,
-                        context,
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          ColorStyle.transparent, // ボタン自体の背景色を透明にする
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      shadowColor: ColorStyle.transparent, // 影も透明にして影響をなくす
-                    ),
-                    child: const Text(
-                      '送信',
-                      style: TextStyle(
-                        fontSize: CustomFontSize.normal,
-                        color: ColorStyle.mainWhite,
+            child: SizedBox(
+              width: 300,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      onPressed: () {
+                        context.pop();
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        color: ColorStyle.mainGrey,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  Image.asset(
+                    'assets/images/logo_blue.png',
+                    width: 80,
+                    fit: BoxFit.contain,
+                  ),
+                  HeightMargin.medium,
+                  const Text(
+                    'メールアドレスを入力してください。\nパスワード再設定メールを送信します。',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: CustomFontSize.normal,
+                      color: ColorStyle.mainBlack,
+                    ),
+                  ),
+                  HeightMargin.medium,
+                  CustomTextFormField(
+                    controller: emailController,
+                    hight: 65,
+                    hintText: 'メールアドレス',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'メールアドレスを入力してください';
+                      }
+                      if (!EmailValidator.validate(value)) {
+                        return '有効なメールアドレスを入力してください';
+                      }
+                      return null;
+                    },
+                  ),
+                  HeightMargin.normal,
+                  SizedBox(
+                    width: double.infinity,
+                    child: BlueGradationButton(
+                      onPressed: () async {
+                        await _sendEmail(
+                          ref,
+                          formKey,
+                          emailController,
+                          context,
+                        );
+                      },
+                      title: '送信',
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

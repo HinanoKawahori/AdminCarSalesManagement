@@ -41,7 +41,6 @@ class SearchTypeDropDownButton extends HookConsumerWidget {
         onChanged: (String? newValue) {
           if (newValue != null) {
             searchType.value = newValue;
-            print(searchType.value);
           }
         },
         underline: const SizedBox(),

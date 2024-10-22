@@ -1,5 +1,6 @@
 import 'package:admin_car_sales_management/src/config/enum/sales_status.dart';
 import 'package:admin_car_sales_management/src/config/utils/key/firebase_key.dart';
+import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
 import 'package:admin_car_sales_management/src/features/employee/data_model/employee.dart';
 import 'package:flutter/material.dart';
@@ -66,13 +67,10 @@ DataRow recentFileDataRow(
           },
           child: Row(
             children: [
-              SizedBox(
-                width: 80,
-                child: Text(
-                  employee.employeeName,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+              Text(
+                employee.employeeName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               Tooltip(
                 message: 'コピー',
@@ -110,7 +108,19 @@ DataRow recentFileDataRow(
           return const DataCell(Text(''));
         },
         data: (List schedulingCaseList) {
-          return DataCell(Text(schedulingCaseList.length.toString()));
+          return DataCell(
+            SizedBox(
+              width: 150,
+              child: Row(
+                children: [
+                  WidthMargin.minimum,
+                  Text(
+                    schedulingCaseList.length.toString(),
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
       //訪問待ち
@@ -129,7 +139,19 @@ DataRow recentFileDataRow(
           return const DataCell(Text(''));
         },
         data: (List confirmedVisitCaseList) {
-          return DataCell(Text(confirmedVisitCaseList.length.toString()));
+          return DataCell(
+            SizedBox(
+              width: 150,
+              child: Row(
+                children: [
+                  WidthMargin.minimum,
+                  Text(
+                    confirmedVisitCaseList.length.toString(),
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
       //検討中
@@ -148,7 +170,19 @@ DataRow recentFileDataRow(
           return const DataCell(Text(''));
         },
         data: (List pending) {
-          return DataCell(Text(pending.length.toString()));
+          return DataCell(
+            SizedBox(
+              width: 150,
+              child: Row(
+                children: [
+                  WidthMargin.minimum,
+                  Text(
+                    pending.length.toString(),
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
       //成約
@@ -167,7 +201,19 @@ DataRow recentFileDataRow(
           return const DataCell(Text(''));
         },
         data: (List successCaseList) {
-          return DataCell(Text(successCaseList.length.toString()));
+          return DataCell(
+            SizedBox(
+              width: 150,
+              child: Row(
+                children: [
+                  WidthMargin.minimum,
+                  Text(
+                    successCaseList.length.toString(),
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
       //失注
@@ -186,7 +232,19 @@ DataRow recentFileDataRow(
           return const DataCell(Text(''));
         },
         data: (List lostCaseList) {
-          return DataCell(Text(lostCaseList.length.toString()));
+          return DataCell(
+            SizedBox(
+              width: 150,
+              child: Row(
+                children: [
+                  WidthMargin.minimum,
+                  Text(
+                    lostCaseList.length.toString(),
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
       //成約率
@@ -225,7 +283,18 @@ DataRow recentFileDataRow(
                   ? (successCaseList.length / totalCases * 100)
                       .toStringAsFixed(1)
                   : '0.0';
-              return DataCell(Text('$successRate%'));
+
+              return DataCell(
+                SizedBox(
+                  width: 150,
+                  child: Row(
+                    children: [
+                      WidthMargin.minimum,
+                      Text('$successRate%'),
+                    ],
+                  ),
+                ),
+              );
             },
           );
         },

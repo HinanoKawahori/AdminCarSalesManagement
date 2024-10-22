@@ -124,16 +124,18 @@ class CaseListView extends HookConsumerWidget {
             Expanded(
               child: Column(
                 children: [
-                  //ステータス切り替えのタブ
+                  //タブ
                   CaseTabBar(
                     tabController: tabController,
                     tabs: isPast
+                        //案件履歴ページの場合
                         ? [
                             // タブ1「成約」
                             TabTitle(caseStatus: CaseStatus.success.value),
                             // タブ2「失注」
                             TabTitle(caseStatus: CaseStatus.lost.value),
                           ]
+                        //案件一覧ページの場合
                         : [
                             // タブ1「すべて」
                             const TabTitle(caseStatus: 1),
@@ -149,7 +151,7 @@ class CaseListView extends HookConsumerWidget {
                             TabTitle(caseStatus: CaseStatus.pending.value),
                           ],
                   ),
-                  //タブ別のウィジェット表示
+                  //タブ別のウィジェット
                   Expanded(
                     child: Padding(
                       padding: PaddingStyle.top,

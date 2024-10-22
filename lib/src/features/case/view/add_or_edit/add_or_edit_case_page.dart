@@ -51,12 +51,14 @@ class AddOrEditCasePage extends HookConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  //タイトル
                   TitleWithBackButton(
                     onPressed: () {
                       context.pop();
                     },
                     title: caseId == null ? '案件新規作成' : '案件詳細',
                   ),
+                  //登録or編集ボタン
                   BlueButton(
                     onPressed: () {
                       Navigator.pop(context);
@@ -66,10 +68,12 @@ class AddOrEditCasePage extends HookConsumerWidget {
                 ],
               ),
               HeightMargin.large,
+              //フォーム
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
+                    //案件情報フォーム
                     child: _buildCaseInfoForm(
                       caseIdController,
                       customerNameController,
@@ -80,6 +84,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
                     ),
                   ),
                   WidthMargin.large,
+                  //査定情報フォーム
                   Expanded(
                     child: _buildAssessmentInfoForm(
                       manufacturerController,

@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../common_widgets/loading_widget.dart';
 import '../../../../../common_widgets/table/small_custom_data_table.dart';
 import '../../../../../config/utils/style/color_style.dart';
-import '../row_source_data/small_row_source_data.dart';
+import '../row_source_data/personal_row_source_data.dart';
 
 class PersonalAllCaseTabView extends ConsumerWidget {
   const PersonalAllCaseTabView({super.key});
@@ -37,7 +37,7 @@ class PersonalAllCaseTabView extends ConsumerWidget {
           ],
           onPageChanged: (value) {},
           //Rowのデータ
-          source: SmallRowSourceCaseData(
+          source: PersonalRowSourceCaseData(
             context: context,
             count: caseList.length,
             caseList: caseList,

@@ -1,7 +1,7 @@
 import 'package:admin_car_sales_management/src/common_widgets/table/small_custom_data_table.dart';
 import 'package:admin_car_sales_management/src/config/enum/sales_status.dart';
 import 'package:admin_car_sales_management/src/features/case/controller/case_controller.dart';
-import 'package:admin_car_sales_management/src/features/case/view/component/row_source_data/small_row_source_data.dart';
+import 'package:admin_car_sales_management/src/features/case/view/component/row_source_data/personal_row_source_data.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -44,7 +44,7 @@ class PersonalCaseTabView extends ConsumerWidget {
           ],
           onPageChanged: (value) {},
           //Rowのデータ
-          source: SmallRowSourceCaseData(
+          source: PersonalRowSourceCaseData(
             context: context,
             count: caseList.length,
             caseList: caseList,

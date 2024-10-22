@@ -13,6 +13,7 @@ Future<void> okDialog({
   bool? dismissOnTouchOutside,
 }) async {
   await AwesomeDialog(
+    width: 600,
     dismissOnTouchOutside: dismissOnTouchOutside ?? true,
     btnOkColor: ColorStyle.blue,
     btnOkText: '閉じる',

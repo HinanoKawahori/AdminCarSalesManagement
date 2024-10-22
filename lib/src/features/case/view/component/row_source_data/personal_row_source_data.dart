@@ -7,12 +7,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../config/utils/key/firebase_key.dart';
 import '../../../data_model/case.dart';
 
-class SmallRowSourceCaseData extends DataTableSource {
+class PersonalRowSourceCaseData extends DataTableSource {
   final BuildContext context;
   final List<Case> caseList;
   final int count;
   final WidgetRef ref;
-  SmallRowSourceCaseData({
+  PersonalRowSourceCaseData({
     required this.context,
     required this.caseList,
     required this.count,
