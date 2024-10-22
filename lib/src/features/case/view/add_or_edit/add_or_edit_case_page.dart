@@ -75,6 +75,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
                   Expanded(
                     //案件情報フォーム
                     child: _buildCaseInfoForm(
+                      ref,
                       caseIdController,
                       customerNameController,
                       emailController,
@@ -87,6 +88,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
                   //査定情報フォーム
                   Expanded(
                     child: _buildAssessmentInfoForm(
+                      ref,
                       manufacturerController,
                       modelController,
                       yearController,
@@ -105,6 +107,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
   }
 
   Widget _buildCaseInfoForm(
+    WidgetRef ref,
     TextEditingController caseIdController,
     TextEditingController customerNameController,
     TextEditingController emailController,
@@ -143,11 +146,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
           isCaseForm: true,
         ),
         const FormDivider(),
-        const FormDropdownField(
-          label: '性別',
-          items: ['男性', '女性', 'その他'],
-          isRequired: false,
-        ),
+        _buildGenderRadio(ref),
         const FormDivider(),
         FormInputField(
           label: '電話番号',
@@ -176,7 +175,72 @@ class AddOrEditCasePage extends HookConsumerWidget {
     );
   }
 
+  Widget _buildGenderRadio(WidgetRef ref) {
+    String _selectedGender = '女性';
+    return SizedBox(
+      width: 600,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Row(
+            children: [
+              Text(
+                '性別',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: ColorStyle.mainBlack,
+                ),
+              ),
+              WidthMargin.normal,
+            ],
+          ),
+          SizedBox(
+            width: 300,
+            child: Row(
+              children: [
+                Radio<String>(
+                  value: '女性',
+                  groupValue: _selectedGender,
+                  onChanged: (String? value) {
+                    _selectedGender = value!;
+                  },
+                  fillColor: WidgetStateProperty.resolveWith<Color>(
+                    (Set<WidgetState> states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return Colors.blue; // 選択された状態の色
+                      }
+                      return Colors.blue; // 選択されていない状態の色
+                    },
+                  ),
+                ),
+                const Text('女性'),
+                const SizedBox(width: 20),
+                Radio<String>(
+                  fillColor: WidgetStateProperty.resolveWith<Color>(
+                    (Set<WidgetState> states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return Colors.blue; // 選択された状態の色
+                      }
+                      return Colors.blue; // 選択されていない状態の色
+                    },
+                  ),
+                  value: '男性',
+                  groupValue: _selectedGender,
+                  onChanged: (String? value) {
+                    _selectedGender = value!;
+                  },
+                ),
+                const Text('男性'),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildAssessmentInfoForm(
+    WidgetRef ref,
     TextEditingController manufacturerController,
     TextEditingController modelController,
     TextEditingController yearController,
