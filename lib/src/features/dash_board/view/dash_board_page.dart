@@ -44,6 +44,7 @@ class DashBoardPage extends HookConsumerWidget {
                       children: [
                         //稼働中の案件状況
                         Expanded(
+                          // flex: 4,
                           child: DashBoardCard(
                             contentWidget: Expanded(
                               child: CasePieChartWidget(),
@@ -53,6 +54,7 @@ class DashBoardPage extends HookConsumerWidget {
                         ),
                         //買取総額の推移
                         Expanded(
+                          // flex: 6,
                           child: DashBoardCard(
                             contentWidget:
                                 Expanded(child: CaseResultBarChartWidget()),
@@ -66,7 +68,7 @@ class DashBoardPage extends HookConsumerWidget {
                   // 右側のカラム（3つのカード）
                   Expanded(
                     child: Card(
-                      color: ColorStyle.lightBlue2,
+                      color: const Color.fromARGB(255, 213, 233, 255),
                       child: Padding(
                         padding: PaddingStyle.normal,
                         child: Column(

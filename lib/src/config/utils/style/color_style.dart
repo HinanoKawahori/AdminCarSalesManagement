@@ -37,10 +37,28 @@ class ColorStyle {
   static const pieChartConfirmedVisit = Color(0xFF80E6E0);
   static const pieChartPending = Color(0xFFB099FF);
 //円グラフの色（メーカー）
-  static const pieChartFirst = Color(0xFFF48FB1);
-  static const pieChartSecond = Color(0xFFFFB74D);
-  static const pieChartThird = Color(0xFFFF8A65);
-  static const pieChartForth = Colors.yellow;
+
+  static const pieChartFirst = [
+    Color.fromARGB(255, 0, 152, 241),
+    Color.fromARGB(255, 75, 190, 250),
+  ];
+
+  static const pieChartSecond = [
+    Color.fromARGB(255, 130, 97, 226), // 柔らかい紫
+    Color.fromARGB(255, 160, 130, 240), // 優しい紫
+  ];
+
+  static const pieChartThird = [
+    Color.fromARGB(255, 255, 136, 188),
+    Color.fromARGB(255, 254, 126, 190),
+  ];
+
+  static const pieChartForth = [
+    Color.fromARGB(255, 62, 201, 192),
+    Color.fromARGB(255, 80, 230, 220),
+  ];
+
+  ///ボタンの色////////////////////////////////////////////
 
   static const confirmedVisitButton = [
     Color.fromARGB(255, 30, 200, 190), // ダークターコイズ

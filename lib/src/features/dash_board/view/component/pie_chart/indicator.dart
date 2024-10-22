@@ -4,13 +4,14 @@ import 'package:admin_car_sales_management/src/config/utils/style/width_margin.d
 import 'package:flutter/material.dart';
 
 class Indicator extends StatelessWidget {
-  final Color color;
+  // final Color color;
+  final List<Color> colors;
   final String text;
   final Color textColor;
 
   const Indicator({
     super.key,
-    required this.color,
+    required this.colors,
     required this.text,
     this.textColor = ColorStyle.mainBlack,
   });
@@ -23,8 +24,9 @@ class Indicator extends StatelessWidget {
           width: 20,
           height: 20,
           decoration: BoxDecoration(
+            gradient: LinearGradient(colors: colors),
             borderRadius: BorderRadius.circular(5),
-            color: color,
+            // color: color,
           ),
         ),
         WidthMargin.small,

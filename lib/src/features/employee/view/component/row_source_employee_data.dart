@@ -58,6 +58,10 @@ DataRow recentFileDataRow(
         Row(
           children: [
             TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: ColorStyle.blue,
+                overlayColor: Colors.transparent,
+              ),
               onPressed: () {
                 context.goNamed(
                   AppRoute.employeeDetail.name,

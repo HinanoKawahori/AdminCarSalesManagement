@@ -55,6 +55,10 @@ DataRow recentFileDataRow(
       //顧客名
       DataCell(
         TextButton(
+          style: TextButton.styleFrom(
+            foregroundColor: ColorStyle.blue,
+            overlayColor: Colors.transparent,
+          ),
           onPressed: () {
             context.goNamed(
               AppRoute.addOrEditCase.name,
