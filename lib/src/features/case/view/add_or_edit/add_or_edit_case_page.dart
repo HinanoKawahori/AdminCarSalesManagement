@@ -160,8 +160,8 @@ class AddOrEditCasePage extends HookConsumerWidget {
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
-                              Clipboard.setData(
-                                  ClipboardData(text: '1231413321AED123'));
+                              Clipboard.setData(const ClipboardData(
+                                  text: '1231413321AED123'));
                               showToast(toastMessage: '案件IDをコピーしました！');
                             },
                             child: const Icon(

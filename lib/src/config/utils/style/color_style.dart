@@ -99,5 +99,6 @@ class ColorStyle {
     Color(0xFFE7EBF8),
   ];
 
+  // ignore: prefer_typing_uninitialized_variables
   static var pieChartDarkBlue;
 }

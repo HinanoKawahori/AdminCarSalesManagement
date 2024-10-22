@@ -20,7 +20,6 @@ class ManufacturerPieChart extends HookConsumerWidget {
         final isTouched = i == touchedIndex.value;
         final fontSize = isTouched ? 20.0 : 16.0;
         final radius = isTouched ? 48.0 : 42.0;
-        const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
         switch (i) {
           case 0:
             return PieChartSectionData(
