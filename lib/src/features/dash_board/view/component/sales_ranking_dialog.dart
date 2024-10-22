@@ -1,6 +1,7 @@
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../config/utils/style/color_style.dart';
@@ -33,44 +34,59 @@ class RankingDialog extends HookConsumerWidget {
       child: SizedBox(
         width: 400,
         height: 600,
-        child: Card(
-          child: Padding(
-            padding: PaddingStyle.normal,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/ranking_icon.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                    WidthMargin.small,
-                    const Text(
-                      '8月の買取総額ランキング',
-                      style: TextStyle(
-                        fontSize: CustomFontSize.large,
-                        fontWeight: FontWeight.bold,
-                        color: ColorStyle.mainBlack,
-                      ),
-                    ),
-                    WidthMargin.small,
-                    Image.asset(
-                      'assets/images/ranking_icon.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                  ],
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            //クローズボタン
+            Padding(
+              padding: PaddingStyle.small,
+              child: IconButton(
+                onPressed: () {
+                  context.pop();
+                },
+                icon: const Icon(
+                  Icons.close,
+                  color: ColorStyle.mainGrey,
                 ),
-                HeightMargin.normal,
-                Expanded(
-                  child: SalesRankingWidget(isDialog: true),
-                ),
-              ],
+              ),
             ),
-          ),
+            Padding(
+              padding: PaddingStyle.normal,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/ranking_icon.png',
+                        width: 20,
+                        height: 20,
+                      ),
+                      WidthMargin.small,
+                      const Text(
+                        '8月の買取総額ランキング',
+                        style: TextStyle(
+                          fontSize: CustomFontSize.large,
+                          fontWeight: FontWeight.bold,
+                          color: ColorStyle.mainBlack,
+                        ),
+                      ),
+                      WidthMargin.small,
+                      Image.asset(
+                        'assets/images/ranking_icon.png',
+                        width: 20,
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                  HeightMargin.normal,
+                  Expanded(
+                    child: SalesRankingWidget(isDialog: true),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

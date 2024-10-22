@@ -24,7 +24,7 @@ class ManufacturerPieChart extends HookConsumerWidget {
         switch (i) {
           case 0:
             return PieChartSectionData(
-              color: ColorStyle.pieChartDarkBlue,
+              color: ColorStyle.pieChartFirst,
               value: 40,
               title: '40%',
               radius: radius,
@@ -37,7 +37,7 @@ class ManufacturerPieChart extends HookConsumerWidget {
             );
           case 1:
             return PieChartSectionData(
-              color: ColorStyle.pieChartMediumBlue,
+              color: ColorStyle.pieChartSecond,
               value: 30,
               title: '30%',
               radius: radius,
@@ -50,7 +50,7 @@ class ManufacturerPieChart extends HookConsumerWidget {
             );
           case 2:
             return PieChartSectionData(
-              color: ColorStyle.pieChartLightBlue,
+              color: ColorStyle.pieChartThird,
               value: 15,
               title: '15%',
               radius: radius,
@@ -63,7 +63,7 @@ class ManufacturerPieChart extends HookConsumerWidget {
             );
           case 3:
             return PieChartSectionData(
-              color: ColorStyle.pieChartPowderBlue,
+              color: ColorStyle.pieChartForth,
               value: 15,
               title: '15%',
               radius: radius,
@@ -120,24 +120,25 @@ class ManufacturerPieChart extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Indicator(
-                color: ColorStyle.pieChartDarkBlue,
+                color: ColorStyle.pieChartFirst,
                 text: 'トヨタ',
               ),
               HeightMargin.small,
               Indicator(
-                color: ColorStyle.pieChartMediumBlue,
+                color: ColorStyle.pieChartSecond,
                 text: '日産',
               ),
               HeightMargin.small,
               Indicator(
-                color: ColorStyle.pieChartLightBlue,
+                color: ColorStyle.pieChartThird,
                 text: 'マツダ',
               ),
               HeightMargin.small,
               Indicator(
-                color: ColorStyle.pieChartPowderBlue,
+                color: ColorStyle.pieChartForth,
                 text: 'ホンダ',
               ),
+              HeightMargin.small,
             ],
           ),
         ],

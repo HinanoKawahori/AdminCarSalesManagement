@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class ColorStyle {
@@ -30,16 +31,17 @@ class ColorStyle {
 
   static const validationRed = Color.fromARGB(255, 206, 53, 53);
 
-  ///円グラフの色
-  static const pieChartDarkBlue = ColorStyle.blue;
-  static const pieChartLightBlue =
-      Color.fromARGB(255, 102, 179, 255); // #66B3FF
-  static const pieChartMediumBlue =
-      Color.fromARGB(255, 111, 171, 255); // #4A90E2
-  static const pieChartPowderBlue =
-      Color.fromARGB(255, 179, 212, 255); // #B3D4FF
+  ///円グラフの色（案件）
 
-  ///
+  static const pieChartAssigningPerson = Color.fromARGB(255, 150, 150, 150);
+  static const pieChartScheduling = Color(0xFF82CFFD);
+  static const pieChartConfirmedVisit = Color(0xFF80E6E0);
+  static const pieChartPending = Color(0xFFB099FF);
+//円グラフの色（メーカー）
+  static const pieChartFirst = Color(0xFFF48FB1);
+  static const pieChartSecond = Color(0xFFFFB74D);
+  static const pieChartThird = Color(0xFFFF8A65);
+  static const pieChartForth = Colors.yellow;
 
   static const confirmedVisitButton = [
     Color.fromARGB(255, 30, 200, 190), // ダークターコイズ
@@ -79,4 +81,6 @@ class ColorStyle {
     Color(0xFFF7F9FF),
     Color(0xFFE7EBF8),
   ];
+
+  static var pieChartDarkBlue;
 }

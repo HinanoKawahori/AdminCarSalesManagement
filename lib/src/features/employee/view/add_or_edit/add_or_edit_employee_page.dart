@@ -73,7 +73,7 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
 
             const FormDropdownField(
               label: '役割',
-              items: ['スタッフ', 'マネージャー', '管理者'],
+              items: ['スタッフ', '責任者'],
               isRequired: true,
             ),
             const FormDivider(),

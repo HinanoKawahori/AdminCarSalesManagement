@@ -74,6 +74,7 @@ GoRouter goRouter(GoRouterRef ref) {
                   ),
                   //従業員詳細ページ
                   GoRoute(
+                      parentNavigatorKey: rootNavigatorKey,
                       path: AppRoute.employeeDetail.path,
                       name: AppRoute.employeeDetail.name,
                       pageBuilder: (context, state) {
@@ -124,6 +125,7 @@ GoRouter goRouter(GoRouterRef ref) {
                 routes: [
                   //過去の案件一覧ページ
                   GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
                     path: AppRoute.pastCaseList.path,
                     name: AppRoute.pastCaseList.name,
                     pageBuilder: (context, state) =>

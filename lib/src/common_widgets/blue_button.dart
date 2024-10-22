@@ -8,6 +8,7 @@ class BlueButton extends StatelessWidget {
     required this.onPressed,
     required this.title,
   });
+
   final VoidCallback onPressed;
   final String title;
 
@@ -17,16 +18,31 @@ class BlueButton extends StatelessWidget {
       height: 40,
       width: 100,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
         color: ColorStyle.blue,
-        borderRadius: BorderRadius.circular(10), // 縁の丸みを設定
       ),
-      child: TextButton(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          shadowColor: Colors.transparent,
+        ),
         onPressed: onPressed,
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: ColorStyle.white,
-            fontWeight: FontWeight.bold,
+        child: Ink(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.transparent,
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: const TextStyle(
+                color: ColorStyle.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
+import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -52,19 +53,22 @@ class SalesRankingWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              width: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  WidthMargin.small,
-                  Text(
-                    '金額',
-                    style: TextStyle(
-                      fontSize: CustomFontSize.normal,
+            Padding(
+              padding: PaddingStyle.right,
+              child: SizedBox(
+                width: 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    WidthMargin.small,
+                    Text(
+                      '金額',
+                      style: TextStyle(
+                        fontSize: CustomFontSize.normal,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -107,18 +111,21 @@ class SalesRankingWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: 100,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            '${formatter.format(rankingData[index]["amount"])}円',
-                            style: const TextStyle(
-                              fontSize: CustomFontSize.normal,
+                    Padding(
+                      padding: PaddingStyle.right,
+                      child: SizedBox(
+                        width: 100,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              '${formatter.format(rankingData[index]["amount"])}円',
+                              style: const TextStyle(
+                                fontSize: CustomFontSize.normal,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],

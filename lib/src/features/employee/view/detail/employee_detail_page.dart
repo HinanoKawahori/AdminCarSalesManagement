@@ -23,11 +23,11 @@ class EmployeeDetailPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: PaddingStyle.normal,
-      child: Scaffold(
-        backgroundColor: ColorStyle.paleBlue,
-        body: Column(
+    return Scaffold(
+      backgroundColor: ColorStyle.paleBlue,
+      body: Padding(
+        padding: PaddingStyle.normal,
+        child: Column(
           children: [
             //タイトル/////////////////////////////////
             Row(

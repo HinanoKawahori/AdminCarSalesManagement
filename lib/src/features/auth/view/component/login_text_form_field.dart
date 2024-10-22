@@ -20,6 +20,7 @@ class LoginTextFormField extends StatelessWidget {
     return TextFormField(
       controller: passwordController,
       obscureText: (title == 'パスワード') ? true : false,
+      cursorHeight: 16,
       decoration: InputDecoration(
         labelStyle: const TextStyle(
           color: ColorStyle.mainBlack,
@@ -27,10 +28,10 @@ class LoginTextFormField extends StatelessWidget {
         ),
         labelText: title,
         prefixIcon: Padding(
-          padding: PaddingStyle.small,
+          padding: const EdgeInsets.all(12.0),
           child: Image.asset(
-            width: 10,
-            height: 10,
+            width: 5,
+            height: 5,
             imagePath,
           ),
         ),

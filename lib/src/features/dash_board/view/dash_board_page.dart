@@ -107,17 +107,20 @@ class DashBoardPage extends HookConsumerWidget {
                                       title: '8月の買取総額ランキング',
                                     ),
                                     //ランキングダイアログ表示ボタン
-                                    Padding(
-                                      padding: PaddingStyle.normal,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          showRankingDialog(
-                                            context: context,
-                                          ); //ランキングダイアログの表示
-                                        },
-                                        icon: const Icon(
-                                          Icons.open_in_new_rounded,
-                                          color: ColorStyle.mainGrey,
+                                    Tooltip(
+                                      message: '全従業員のランキング表示',
+                                      child: Padding(
+                                        padding: PaddingStyle.normal,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            showRankingDialog(
+                                              context: context,
+                                            ); //ランキングダイアログの表示
+                                          },
+                                          icon: const Icon(
+                                            Icons.open_in_new_rounded,
+                                            color: ColorStyle.mainGrey,
+                                          ),
                                         ),
                                       ),
                                     ),
