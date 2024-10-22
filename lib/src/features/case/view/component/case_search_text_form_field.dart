@@ -21,7 +21,7 @@ class CaseSearchTextFormField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final TextEditingController searchController = useTextEditingController();
     return SizedBox(
-      width: 350,
+      width: 400,
       child: TextFormField(
         controller: searchController,
         cursorColor: ColorStyle.mainBlack,
@@ -32,9 +32,23 @@ class CaseSearchTextFormField extends HookConsumerWidget {
           hoverColor: ColorStyle.white,
           contentPadding: const EdgeInsets.only(left: 20),
           suffixIcon: SizedBox(
-            width: 80,
+            width: 120,
             child: Row(
               children: [
+                TextButton(
+                  onPressed: () {
+                    searchController.clear();
+                    searchWord.value = '';
+                  },
+                  child: const Text(
+                    'クリア',
+                    style: TextStyle(
+                      fontSize: CustomFontSize.small,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+
                 //
                 IconButton(
                   icon: const Icon(
@@ -45,17 +59,6 @@ class CaseSearchTextFormField extends HookConsumerWidget {
                   onPressed: () {
                     //検索したい言葉を、更新する
                     searchWord.value = searchController.text;
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.clear,
-                    size: 20,
-                    color: ColorStyle.mainBlack,
-                  ),
-                  onPressed: () {
-                    searchController.clear();
-                    searchWord.value = '';
                   },
                 ),
               ],

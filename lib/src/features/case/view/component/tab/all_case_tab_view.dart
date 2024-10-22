@@ -59,8 +59,11 @@ class AllCaseTabView extends HookConsumerWidget {
 
 const dataColumns = [
   DataColumn2(
-    label: Text(
-      '顧客名',
+    label: Padding(
+      padding: EdgeInsets.only(left: 12),
+      child: Text(
+        '顧客名',
+      ),
     ),
     size: ColumnSize.S,
   ),

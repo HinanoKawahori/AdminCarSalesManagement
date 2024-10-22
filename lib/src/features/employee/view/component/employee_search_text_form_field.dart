@@ -20,7 +20,7 @@ class EmployeeSearchTextFormField extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
-      width: 350,
+      width: 400,
       child: TextFormField(
         controller: searchController,
         cursorColor: ColorStyle.mainBlack,
@@ -31,10 +31,24 @@ class EmployeeSearchTextFormField extends HookConsumerWidget {
           hoverColor: ColorStyle.white,
           contentPadding: const EdgeInsets.only(left: 20),
           suffixIcon: SizedBox(
-            width: 80,
+            width: 120,
             child: Row(
               children: [
-                //
+                TextButton(
+                  onPressed: () {
+                    searchController.clear();
+                    searchEmployeeList.value = employeeList;
+                  },
+                  child: const Text(
+                    'クリア',
+                    style: TextStyle(
+                      fontSize: CustomFontSize.small,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+
+                //検索アイコン
                 IconButton(
                   icon: const Icon(
                     Icons.search,
@@ -48,17 +62,6 @@ class EmployeeSearchTextFormField extends HookConsumerWidget {
                           employeeList: employeeList,
                           searchController: searchController,
                         );
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.clear,
-                    size: 20,
-                    color: ColorStyle.mainBlack,
-                  ),
-                  onPressed: () {
-                    searchController.clear();
-                    searchEmployeeList.value = employeeList;
                   },
                 ),
               ],

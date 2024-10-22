@@ -69,8 +69,11 @@ class EmployeeListView extends HookConsumerWidget {
               child: CustomDataTable(
                 columns: const [
                   DataColumn2(
-                    label: Text(
-                      '従業員名',
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 12),
+                      child: Text(
+                        '従業員名',
+                      ),
                     ),
                     size: ColumnSize.S,
                   ),

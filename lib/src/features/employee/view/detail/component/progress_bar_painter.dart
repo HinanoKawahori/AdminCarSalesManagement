@@ -27,14 +27,17 @@ class ActiveCaseProgressBarPainter extends CustomPainter {
     // "検討中"のセグメントを描画（右側に描画）
     paint.color = ColorStyle.lightBlue2;
     canvas.drawRRect(
-      RRect.fromRectAndRadius(
+      RRect.fromRectAndCorners(
         Rect.fromLTWH(
           size.width - awaitingPaymentWidth,
           0,
           awaitingPaymentWidth,
           size.height,
         ),
-        const Radius.circular(5),
+        topRight: const Radius.circular(5), // 右上を丸く
+        bottomRight: const Radius.circular(5), // 右下を丸く
+        topLeft: Radius.zero, // 左上を鋭角に
+        bottomLeft: Radius.zero, // 左下を鋭角に
       ),
       paint,
     );
@@ -49,7 +52,7 @@ class ActiveCaseProgressBarPainter extends CustomPainter {
           awaitingConfirmationWidth,
           size.height,
         ),
-        const Radius.circular(5),
+        const Radius.circular(0),
       ),
       paint,
     );
@@ -57,14 +60,17 @@ class ActiveCaseProgressBarPainter extends CustomPainter {
     // "日程調整中"のセグメントを描画（左側に描画）
     paint.color = ColorStyle.blue;
     canvas.drawRRect(
-      RRect.fromRectAndRadius(
+      RRect.fromRectAndCorners(
         Rect.fromLTWH(
           0,
           0,
           inProgressWidth,
           size.height,
         ),
-        const Radius.circular(5),
+        topRight: Radius.zero,
+        bottomRight: Radius.zero,
+        topLeft: const Radius.circular(5),
+        bottomLeft: const Radius.circular(5),
       ),
       paint,
     );
@@ -92,9 +98,12 @@ class PastCaseProgressBarPainter extends CustomPainter {
     // 成約のセグメントを描画
     paint.color = ColorStyle.pink;
     canvas.drawRRect(
-      RRect.fromRectAndRadius(
+      RRect.fromRectAndCorners(
         Rect.fromLTWH(0, 0, size.width * (success / totalCases), size.height),
-        const Radius.circular(5),
+        topRight: Radius.zero,
+        bottomRight: Radius.zero,
+        topLeft: const Radius.circular(5),
+        bottomLeft: const Radius.circular(5),
       ),
       paint,
     );
@@ -102,14 +111,17 @@ class PastCaseProgressBarPainter extends CustomPainter {
     // 失注のセグメントを描画（成約の直後に）
     paint.color = ColorStyle.secondGrey;
     canvas.drawRRect(
-      RRect.fromRectAndRadius(
+      RRect.fromRectAndCorners(
         Rect.fromLTWH(
           size.width * (success / totalCases),
           0,
           size.width * (lost / totalCases),
           size.height,
         ),
-        const Radius.circular(5),
+        topRight: const Radius.circular(5), // 右上を丸く
+        bottomRight: const Radius.circular(5), // 右下を丸く
+        topLeft: Radius.zero, // 左上を鋭角に
+        bottomLeft: Radius.zero, // 左下を鋭角に
       ),
       paint,
     );

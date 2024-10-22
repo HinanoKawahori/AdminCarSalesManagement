@@ -158,6 +158,7 @@ class CaseListView extends HookConsumerWidget {
                       //案件履歴ページの場合
                       child: isPast
                           ? TabBarView(
+                              physics: const NeverScrollableScrollPhysics(),
                               controller: tabController,
                               children: (searchType.value == '担当者')
                                   //検索種別が担当者の場合
@@ -185,6 +186,7 @@ class CaseListView extends HookConsumerWidget {
                             )
                           //案件一覧ページの場合
                           : TabBarView(
+                              physics: const NeverScrollableScrollPhysics(),
                               controller: tabController,
                               children: (searchType.value == '担当者')
                                   //検索種別が担当者の場合

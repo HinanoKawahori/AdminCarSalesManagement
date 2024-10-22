@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:admin_car_sales_management/src/features/auth/repo/auth_repo.dart';
 import 'package:admin_car_sales_management/src/features/auth/view/login_page.dart';
-import 'package:admin_car_sales_management/src/features/employee/view/add_or_edit/add_or_edit_employee_page.dart';
 import 'package:admin_car_sales_management/src/features/employee/view/employee_list_page.dart';
 import 'package:admin_car_sales_management/src/features/employee/view/detail/employee_detail_page.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/dash_board_page.dart';
@@ -64,6 +63,7 @@ GoRouter goRouter(GoRouterRef ref) {
                 routes: [
                   //従業員作成画面
                   GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
                     path: AppRoute.addEmployee.path,
                     name: AppRoute.addEmployee.name,
                     pageBuilder: (context, state) {
@@ -74,31 +74,32 @@ GoRouter goRouter(GoRouterRef ref) {
                   ),
                   //従業員詳細ページ
                   GoRoute(
-                      parentNavigatorKey: rootNavigatorKey,
-                      path: AppRoute.employeeDetail.path,
-                      name: AppRoute.employeeDetail.name,
-                      pageBuilder: (context, state) {
-                        final String? employeeId = state.queryParameters[
-                            FirebaseCasesKey.assignedEmployeeId];
-                        return NoTransitionPage(
-                          child: EmployeeDetailPage(employeeId: employeeId),
-                        );
-                      },
-                      routes: [
-                        //従業員編集ページ
-                        GoRoute(
-                          path: AppRoute.editEmployee.path,
-                          name: AppRoute.editEmployee.name,
-                          pageBuilder: (context, state) {
-                            final String? employeeId = state.queryParameters[
-                                FirebaseCasesKey.assignedEmployeeId];
-
-                            return NoTransitionPage(
-                              child: EditEmployeePage(employeeId: employeeId),
-                            );
-                          },
-                        ),
-                      ]),
+                    parentNavigatorKey: rootNavigatorKey,
+                    path: AppRoute.employeeDetail.path,
+                    name: AppRoute.employeeDetail.name,
+                    pageBuilder: (context, state) {
+                      final String? employeeId = state
+                          .queryParameters[FirebaseCasesKey.assignedEmployeeId];
+                      return NoTransitionPage(
+                        child: EmployeeDetailPage(employeeId: employeeId),
+                      );
+                    },
+                    routes: [
+                      //従業員編集ページ
+                      GoRoute(
+                        parentNavigatorKey: rootNavigatorKey,
+                        path: AppRoute.editEmployee.path,
+                        name: AppRoute.editEmployee.name,
+                        pageBuilder: (context, state) {
+                          final String? employeeId = state
+                              .queryParameters[FirebaseEmployeesKey.employeeId];
+                          return NoTransitionPage(
+                            child: EditEmployeePage(employeeId: employeeId),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ],
@@ -133,6 +134,7 @@ GoRouter goRouter(GoRouterRef ref) {
                   ),
                   //案件作成編集画面
                   GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
                     path: AppRoute.addOrEditCase.path,
                     name: AppRoute.addOrEditCase.name,
                     pageBuilder: (context, state) {
