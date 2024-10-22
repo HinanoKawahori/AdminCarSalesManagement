@@ -169,7 +169,7 @@ class SalesBarChart extends HookConsumerWidget {
             final month = months[groupIndex];
             return BarTooltipItem(
               value != null
-                  ? '$month月：${formatter.format(value.round())}円\n成約率：${successRate}%'
+                  ? '$month月：${formatter.format(value.round())}円\n成約率：$successRate%'
                   : '$month月：0円\n成約率：0%',
               const TextStyle(
                 color: ColorStyle.white,

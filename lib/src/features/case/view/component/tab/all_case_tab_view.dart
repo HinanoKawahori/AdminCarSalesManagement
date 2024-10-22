@@ -18,8 +18,6 @@ class AllCaseTabView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(watchCaseListOfActiveStatusProvider).when(
       data: (caseList) {
-        //TODO
-
         return CustomDataTable(
           columns: dataColumns,
 

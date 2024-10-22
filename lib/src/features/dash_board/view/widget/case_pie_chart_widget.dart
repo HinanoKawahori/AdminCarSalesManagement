@@ -7,7 +7,7 @@ class CasePieChartWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //TODO データをここから渡すようにする
-    return Scaffold(
+    return const Scaffold(
       body: CasePieChart(),
     );
   }

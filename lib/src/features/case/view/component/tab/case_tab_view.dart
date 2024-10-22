@@ -32,8 +32,6 @@ class CaseTabView extends HookConsumerWidget {
           columns: dataColumns,
           onPageChanged: (value) {},
           //Rowのデータ
-
-          //TODO ここに、searchCaseListを渡したい。
           source: RowSourceCaseData(
             context: context,
             count: (searchWord.value.isNotEmpty)

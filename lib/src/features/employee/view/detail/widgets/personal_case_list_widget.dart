@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../config/enum/sales_status.dart';
-import '../../../../config/utils/style/padding_style.dart';
-import '../component/tab/personal_all_case_tab_view.dart';
-import '../component/tab_title.dart';
+import '../../../../../config/enum/sales_status.dart';
+import '../../../../../config/utils/style/padding_style.dart';
+import '../../../../case/view/component/tab/personal_all_case_tab_view.dart';
+import '../../../../case/view/component/tab_title.dart';
 
 class PersonalCaseListWidget extends HookConsumerWidget {
   const PersonalCaseListWidget({

@@ -8,6 +8,7 @@ import 'package:admin_car_sales_management/src/features/routing/router_utils.dar
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+//
 class EmployeeCaseDetailCard extends StatelessWidget {
   const EmployeeCaseDetailCard({
     super.key,
@@ -41,13 +42,14 @@ class EmployeeCaseDetailCard extends StatelessWidget {
                 WidthMargin.normal,
                 (title == '従業員情報')
                     ? SizedBox(
-                        width: 24,
-                        height: 24,
+                        // width: 24,
+                        // height: 24,
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
                               context.goNamed(
-                                AppRoute.addOrEditEmployee.name,
+                                AppRoute.editEmployee.name,
+                                //TODO 従業員IDが取れていない
                                 queryParameters: {
                                   FirebaseEmployeesKey.employeeId: employeeId,
                                 },

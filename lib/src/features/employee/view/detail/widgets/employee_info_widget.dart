@@ -2,8 +2,8 @@ import 'package:admin_car_sales_management/src/config/utils/style/custom_font_st
 import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../common_widgets/employee_info_row.dart';
-import '../../../../config/utils/style/color_style.dart';
+import '../../../../../common_widgets/employee_info_row.dart';
+import '../../../../../config/utils/style/color_style.dart';
 
 class EmployeeInfoWidget extends ConsumerWidget {
   const EmployeeInfoWidget({super.key});

@@ -45,7 +45,6 @@ class CaseSearchTextFormField extends HookConsumerWidget {
                   onPressed: () {
                     //検索したい言葉を、更新する
                     searchWord.value = searchController.text;
-                    print(searchWord.value);
                   },
                 ),
                 IconButton(
@@ -57,7 +56,6 @@ class CaseSearchTextFormField extends HookConsumerWidget {
                   onPressed: () {
                     searchController.clear();
                     searchWord.value = '';
-                    print(searchWord.value);
                   },
                 ),
               ],

@@ -2,17 +2,17 @@ import 'package:admin_car_sales_management/src/config/utils/style/color_style.da
 import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
-import 'package:admin_car_sales_management/src/features/case/view/employee_detail/personal_active_case_bar_widget.dart';
-import 'package:admin_car_sales_management/src/features/case/view/employee_detail/personal_case_result_widget.dart';
-import 'package:admin_car_sales_management/src/features/case/view/employee_detail/success_rate_widget.dart';
-import 'package:admin_car_sales_management/src/features/employee/view/detail/employee_case_detail_card.dart';
-import 'package:admin_car_sales_management/src/features/employee/view/detail/employee_info_widget.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/detail/widgets/personal_active_case_bar_widget.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/detail/widgets/personal_case_result_widget.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/detail/widgets/success_rate_widget.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/detail/component/employee_case_detail_card.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/detail/widgets/employee_info_widget.dart';
 import 'package:admin_car_sales_management/src/features/routing/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_widgets/title_with_back_button.dart';
-import '../../../case/view/employee_detail/personal_case_list_widget.dart';
+import 'widgets/personal_case_list_widget.dart';
 
 class EmployeeDetailPage extends HookConsumerWidget {
   const EmployeeDetailPage({

@@ -2,13 +2,13 @@ import 'package:admin_car_sales_management/src/config/utils/style/color_style.da
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
-import 'package:admin_car_sales_management/src/features/case/view/employee_detail/component/indicator_with_number.dart';
-import 'package:admin_car_sales_management/src/features/case/view/employee_detail/component/progress_bar_painter.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/detail/component/indicator_with_number.dart';
+import 'package:admin_car_sales_management/src/features/employee/view/detail/component/progress_bar_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../config/enum/sales_status.dart';
-import '../../../../function/switch_data.dart';
+import '../../../../../config/enum/sales_status.dart';
+import '../../../../../function/switch_data.dart';
 
 class SuccessRateWidget extends ConsumerWidget {
   const SuccessRateWidget({
