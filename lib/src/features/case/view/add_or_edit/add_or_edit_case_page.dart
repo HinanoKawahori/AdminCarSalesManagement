@@ -211,6 +211,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
         //生年月日
         const FormDateField(
           label: '生年月日',
+          // birthDate: '',
         ),
         const FormDivider(),
         //住所

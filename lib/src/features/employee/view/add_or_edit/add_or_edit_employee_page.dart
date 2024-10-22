@@ -12,6 +12,7 @@ import '../../../../common_widgets/form/form_date_field.dart';
 import '../../../../common_widgets/form/form_dropdown_field.dart';
 import '../../../../common_widgets/form/form_input_field.dart';
 import '../../../../common_widgets/title_with_back_button.dart';
+import '../../../../config/utils/style/width_margin.dart';
 
 class AddOrEditEmployeePage extends HookConsumerWidget {
   const AddOrEditEmployeePage({
@@ -27,6 +28,7 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
     final TextEditingController phoneController = useTextEditingController();
     final TextEditingController emailController = useTextEditingController();
     final TextEditingController addressController = useTextEditingController();
+    // final ValueNotifier<String> birthDate = useState('');
 
     return Scaffold(
       backgroundColor: ColorStyle.paleBlue,
@@ -53,8 +55,6 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                 ),
               ],
             ),
-
-            // BlueGradationButton(onPressed: ,t)
             const SizedBox(height: 24),
             FormInputField(
               label: '名前',
@@ -63,14 +63,45 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
               isCaseForm: false,
             ),
             const FormDivider(),
-            FormInputField(
-              label: 'メールアドレス',
-              isRequired: true,
-              controller: emailController,
-              isCaseForm: false,
-            ),
+            employeeId != null
+                ? SizedBox(
+                    width: 600,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Row(
+                          children: [
+                            Text(
+                              'メールアドレス',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: ColorStyle.mainBlack,
+                              ),
+                            ),
+                            WidthMargin.normal,
+                          ],
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          width: 300,
+                          height: 48,
+                          child: const Text(
+                            '1524hinano@gmail.com',
+                            style: const TextStyle(
+                              color: ColorStyle.mainBlack,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : FormInputField(
+                    label: 'メールアドレス',
+                    isRequired: true,
+                    controller: emailController,
+                    isCaseForm: false,
+                  ),
             const FormDivider(),
-
             const FormDropdownField(
               label: '役割',
               items: ['スタッフ', '責任者'],
@@ -84,7 +115,10 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
               isCaseForm: false,
             ),
             const FormDivider(),
-            const FormDateField(label: '生年月日'),
+            FormDateField(
+              label: '生年月日',
+              // birthDate: birthDate,
+            ),
             const FormDivider(),
             FormInputField(
               label: '住所',

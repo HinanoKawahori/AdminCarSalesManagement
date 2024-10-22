@@ -51,7 +51,7 @@ class LoginPage extends HookConsumerWidget {
                   SizedBox(
                     height: 100,
                     child: Image.asset(
-                      'assets/images/logo_and_text.png',
+                      'assets/images/blue_grade_logo_with_text.png',
                       fit: BoxFit.contain,
                     ),
                   ),

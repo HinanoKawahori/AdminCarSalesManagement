@@ -7,8 +7,10 @@ class FormDateField extends ConsumerWidget {
   const FormDateField({
     super.key,
     required this.label,
+    // required this.birthDate,/
   });
   final String label;
+  // final ValueNotifier birthDate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -49,6 +51,10 @@ class FormDateField extends ConsumerWidget {
                   firstDate: DateTime(2000),
                   lastDate: DateTime(2100),
                 );
+              },
+              onChanged: (newValue) {
+                // birthDate.value = newValue;
+                //TODO ここを変更する
               },
             ),
           ),
