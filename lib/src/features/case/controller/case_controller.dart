@@ -186,6 +186,7 @@ class CaseController extends _$CaseController {
           caseStatus: caseStatus,
         );
   }
+  //ケース取得(日程絵調整中、訪問日確定、検討待ち)
 
   Future<List<Case>> getEmployeeCaseListOfActiveStatus({
     required String employeeId,
@@ -195,6 +196,11 @@ class CaseController extends _$CaseController {
         .getEmployeeCaseListOfActiveStatus(
           employeeId: employeeId,
         );
+  }
+
+//４つのステータスの案件リストを取得
+  Future<List<Case>> getCaseListOfFourStatus() async {
+    return await ref.read(caseRepoProvider.notifier).getCaseListOfFourStatus();
   }
 
 //////////////////計算系////////////////////////

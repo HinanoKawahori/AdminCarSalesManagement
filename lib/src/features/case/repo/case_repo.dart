@@ -185,6 +185,23 @@ class CaseRepo extends _$CaseRepo {
     return query.docs.map((doc) => doc.data()).toList();
   }
 
+//４つのステータスの案件リストを取得
+  Future<List<Case>> getCaseListOfFourStatus() async {
+    final query = await state
+        .where(FirebaseCasesKey.caseStatus, whereIn: [
+          CaseStatus.assigningPerson.value,
+          CaseStatus.scheduling.value,
+          CaseStatus.confirmedVisit.value,
+          CaseStatus.pending.value,
+        ])
+        .orderBy(FirebaseCasesKey.updatedAt, descending: true)
+        .get();
+    if (query.docs.isEmpty) {
+      return [];
+    }
+    return query.docs.map((doc) => doc.data()).toList();
+  }
+
 ////////////////////////////////////////////////////////////////////////////////////
   //1ヶ月での成約率取得
   Future<List<Case?>> getSalesResultOfTheMonth({

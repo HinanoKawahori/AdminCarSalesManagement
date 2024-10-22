@@ -20,6 +20,7 @@ import 'search_type_drop_down_button.dart';
 import 'tab/all_case_tab_view.dart';
 import 'tab/case_tab_search_type_employee_name.dart';
 
+//TODO ⭐️案件一覧ページチェックお願いします！⭐️
 class CaseListView extends HookConsumerWidget {
   const CaseListView({
     super.key,
@@ -181,10 +182,10 @@ class CaseListView extends HookConsumerWidget {
                                   AllCaseTabViewSearchTypeEmployeeName(
                                     searchWord: searchWord,
                                   ),
-                                  CaseTabViewSearchTypeEmployeeName(
+                                  CaseTabView(
                                     caseStatus: CaseStatus.assigningPerson,
                                     searchWord: searchWord,
-                                  ),
+                                  ), //担当者で検索する必要がないので、同じウィジェットを使用
                                   CaseTabViewSearchTypeEmployeeName(
                                     caseStatus: CaseStatus.scheduling,
                                     searchWord: searchWord,
