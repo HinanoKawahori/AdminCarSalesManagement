@@ -4,14 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EditEmployeePage extends HookConsumerWidget {
-  const EditEmployeePage({super.key, this.employeeId});
+  const EditEmployeePage({
+    super.key,
+    this.employeeId,
+  });
 
   final String? employeeId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print('editEmployeePage');
+    print(employeeId);
     return Scaffold(
-      body: AddOrEditEmployeePage(employeeId: employeeId),
+      body: AddOrEditEmployeePage(
+        employeeId: employeeId,
+      ),
     );
   }
 }

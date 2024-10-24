@@ -182,7 +182,10 @@ class AddOrEditCasePage extends HookConsumerWidget {
         const FormDivider(),
         //顧客名
         FormInputField(
-          label: '顧客名',
+          title: '顧客名',
+          labelText: (customerNameController.text.isNotEmpty)
+              ? customerNameController.text
+              : '顧客名',
           controller: customerNameController,
           isRequired: true,
           isCaseForm: true,
@@ -190,7 +193,10 @@ class AddOrEditCasePage extends HookConsumerWidget {
         const FormDivider(),
         //メールアドレス
         FormInputField(
-          label: 'メールアドレス',
+          title: 'メールアドレス',
+          labelText: (emailController.text.isNotEmpty)
+              ? emailController.text
+              : 'メールアドレス',
           controller: emailController,
           isRequired: false,
           isCaseForm: true,
@@ -201,7 +207,9 @@ class AddOrEditCasePage extends HookConsumerWidget {
         const FormDivider(),
         //電話番号
         FormInputField(
-          label: '電話番号',
+          title: '電話番号',
+          labelText:
+              (phoneController.text.isNotEmpty) ? phoneController.text : '電話番号',
           controller: phoneController,
           isRequired: false,
           isCaseForm: true,
@@ -216,7 +224,10 @@ class AddOrEditCasePage extends HookConsumerWidget {
         const FormDivider(),
         //住所
         FormInputField(
-          label: '住所',
+          title: '住所',
+          labelText: (addressController.text.isNotEmpty)
+              ? addressController.text
+              : '住所',
           controller: addressController,
           isRequired: false,
           isCaseForm: true,
@@ -238,7 +249,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
             children: [
               Text(
                 '性別',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: ColorStyle.mainBlack,
                 ),
@@ -372,7 +383,9 @@ class AddOrEditCasePage extends HookConsumerWidget {
         const FormDivider(),
         //査定金額
         FormInputField(
-          label: '査定金額',
+          title: '査定金額',
+          labelText:
+              (priceController.text.isNotEmpty) ? priceController.text : '名前',
           controller: priceController,
           isRequired: false,
           isCaseForm: true,
@@ -383,7 +396,9 @@ class AddOrEditCasePage extends HookConsumerWidget {
         const FormDivider(),
         //メモ
         FormInputField(
-          label: 'メモ',
+          title: 'メモ',
+          labelText:
+              (memoController.text.isNotEmpty) ? memoController.text : 'メモ',
           controller: memoController,
           isRequired: false,
           isCaseForm: true,

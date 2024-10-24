@@ -19,10 +19,12 @@ class EmployeeDetailPage extends HookConsumerWidget {
     super.key,
     required this.employeeId,
   });
-  final String? employeeId;
+  final String employeeId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print(employeeId);
+
     return Scaffold(
       backgroundColor: ColorStyle.paleBlue,
       body: Padding(

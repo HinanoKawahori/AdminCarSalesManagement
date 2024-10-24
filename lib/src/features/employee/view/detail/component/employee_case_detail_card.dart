@@ -18,7 +18,7 @@ class EmployeeCaseDetailCard extends StatelessWidget {
   });
   final Widget contentWidget;
   final String title;
-  final String? employeeId;
+  final String employeeId;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +48,7 @@ class EmployeeCaseDetailCard extends StatelessWidget {
                             context.goNamed(
                               AppRoute.editEmployee.name,
                               //TODO 従業員IDが取れていない
+
                               queryParameters: {
                                 FirebaseEmployeesKey.employeeId: employeeId,
                               },

@@ -2,6 +2,9 @@ import 'package:admin_car_sales_management/src/common_widgets/blue_button.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form_divider.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
+import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
+import 'package:admin_car_sales_management/src/features/employee/data_model/employee.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -24,11 +27,47 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print('addOrEditEmployeePage');
+    print(employeeId);
+    final ValueNotifier<bool> isLoading = useState(false);
+
+    // 1初めにUSEFUTUREで初期値を取得
+    // 2初期値がある場合は、表示
+    // 3useStateまたはuseTextEditingControllerを変化させる
+    //名前
     final TextEditingController nameController = useTextEditingController();
+    //電話番号
     final TextEditingController phoneController = useTextEditingController();
+    //メールアドレス
     final TextEditingController emailController = useTextEditingController();
+    //住所
     final TextEditingController addressController = useTextEditingController();
-    // final ValueNotifier<String> birthDate = useState('');
+    //役割
+    final ValueNotifier<int?> role = useState(null);
+    //生年月日
+    final ValueNotifier<Timestamp?> birthDate = useState(null);
+    useEffect(
+      () {
+        Future(() async {
+          isLoading.value = true;
+          if (employeeId != null && employeeId!.isNotEmpty) {
+            final Employee employeeData = await ref
+                .read(employeeControllerProvider.notifier)
+                .getEmployeeData(employeeId: employeeId!);
+            nameController.text = employeeData.employeeName;
+            phoneController.text = employeeData.phoneNumber;
+            emailController.text = employeeData.email;
+            addressController.text = employeeData.address;
+            role.value = employeeData.role;
+            birthDate.value = employeeData.birthDate;
+          }
+
+          isLoading.value = false;
+        });
+        return null;
+      },
+      [],
+    );
 
     return Scaffold(
       backgroundColor: ColorStyle.paleBlue,
@@ -56,13 +95,17 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
               ],
             ),
             const SizedBox(height: 24),
+            //名前
             FormInputField(
-              label: '名前',
+              title: '名前',
+              labelText:
+                  (nameController.text.isNotEmpty) ? nameController.text : '名前',
               isRequired: true,
               controller: nameController,
               isCaseForm: false,
             ),
             const FormDivider(),
+            //メールアドレス
             employeeId != null
                 ? SizedBox(
                     width: 600,
@@ -85,8 +128,10 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                           alignment: Alignment.centerLeft,
                           width: 300,
                           height: 48,
-                          child: const Text(
-                            '1524hinano@gmail.com',
+                          child: Text(
+                            (emailController.text.isNotEmpty)
+                                ? emailController.text
+                                : 'メールアドレス',
                             style: const TextStyle(
                               color: ColorStyle.mainBlack,
                             ),
@@ -96,32 +141,40 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                     ),
                   )
                 : FormInputField(
-                    label: 'メールアドレス',
+                    title: 'メールアドレス',
+                    labelText: 'メールアドレス',
                     isRequired: true,
                     controller: emailController,
                     isCaseForm: false,
                   ),
             const FormDivider(),
-            const FormDropdownField(
-              label: '役割',
-              items: ['スタッフ', '責任者'],
+            FormDropdownField(
+              //TODO
+              label: (role.value != null) ? role.value.toString() : '役割',
+              items: const ['スタッフ', '責任者'],
               isRequired: true,
             ),
             const FormDivider(),
             FormInputField(
-              label: '電話番号',
+              labelText: (phoneController.text.isNotEmpty)
+                  ? phoneController.text
+                  : '電話番号',
+              title: '電話番号',
               isRequired: false,
               controller: phoneController,
               isCaseForm: false,
             ),
             const FormDivider(),
-            FormDateField(
+            const FormDateField(
               label: '生年月日',
               // birthDate: birthDate,
             ),
             const FormDivider(),
             FormInputField(
-              label: '住所',
+              labelText: (addressController.text.isNotEmpty)
+                  ? addressController.text
+                  : '住所',
+              title: '住所',
               isRequired: false,
               controller: addressController,
               isCaseForm: false,

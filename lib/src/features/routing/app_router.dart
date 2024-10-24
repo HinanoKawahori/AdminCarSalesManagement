@@ -78,8 +78,8 @@ GoRouter goRouter(GoRouterRef ref) {
                     path: AppRoute.employeeDetail.path,
                     name: AppRoute.employeeDetail.name,
                     pageBuilder: (context, state) {
-                      final String? employeeId = state
-                          .queryParameters[FirebaseCasesKey.assignedEmployeeId];
+                      final String employeeId = state
+                          .queryParameters[FirebaseEmployeesKey.employeeId]!;
                       return NoTransitionPage(
                         child: EmployeeDetailPage(employeeId: employeeId),
                       );
