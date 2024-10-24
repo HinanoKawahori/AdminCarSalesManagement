@@ -81,7 +81,7 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                   onPressed: () {
                     context.pop();
                   },
-                  title: employeeId == null ? '従業員新規作成' : '従業員編集',
+                  title: employeeId == null ? '従業員新規追加' : '従業員編集',
                 ),
                 BlueButton(
                   onPressed: () {

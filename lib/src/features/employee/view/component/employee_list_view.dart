@@ -60,7 +60,7 @@ class EmployeeListView extends HookConsumerWidget {
                   onPressed: () {
                     context.goNamed(AppRoute.addEmployee.name);
                   },
-                  title: '＋従業員新規登録',
+                  title: '＋従業員新規追加',
                 ),
               ],
             ),

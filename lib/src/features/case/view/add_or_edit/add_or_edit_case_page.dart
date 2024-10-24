@@ -57,7 +57,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
                   onPressed: () {
                     context.pop();
                   },
-                  title: caseId == null ? '案件新規作成' : '案件詳細',
+                  title: caseId == null ? '案件新規追加' : '案件詳細',
                 ),
                 //登録or編集ボタン
                 BlueButton(
