@@ -40,7 +40,6 @@ class MyApp extends ConsumerWidget {
       ],
       theme: ThemeData(
         // fontFamily: GoogleFonts.notoSansJp().fontFamily,
-        //TODO ホスティングの時に元に戻す
         dividerColor: ColorStyle.secondGrey,
         textSelectionTheme: const TextSelectionThemeData(
           selectionColor: ColorStyle.hoverGrey,

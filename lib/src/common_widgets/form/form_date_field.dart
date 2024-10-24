@@ -1,4 +1,5 @@
 import 'package:admin_car_sales_management/src/function/timestamp_converter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,10 +11,11 @@ class FormDateField extends ConsumerWidget {
     required this.hintText,
     required this.birthDate,
     required this.onTap,
+    required String label,
   });
   final String hintText;
   final VoidCallback onTap;
-  final ValueNotifier birthDate;
+  final ValueNotifier<Timestamp?> birthDate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +43,7 @@ class FormDateField extends ConsumerWidget {
             child: TextField(
               decoration: InputDecoration(
                 hintText: (birthDate.value != null)
-                    ? createDateText(birthDate.value)
+                    ? createDateText(birthDate.value!)
                     : hintText,
                 labelStyle: const TextStyle(
                   color: ColorStyle.secondGrey,

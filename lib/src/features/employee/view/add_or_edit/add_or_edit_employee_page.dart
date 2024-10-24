@@ -222,6 +222,7 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                       }
                     },
                     birthDate: birthDate,
+                    label: '生年月日',
                   ),
                   const FormDivider(),
                   //住所
