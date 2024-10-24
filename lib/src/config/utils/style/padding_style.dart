@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PaddingStyle {
+  static const EdgeInsets none = EdgeInsets.all(0.0);
   static const EdgeInsets minimum = EdgeInsets.all(4.0);
   static const EdgeInsets small = EdgeInsets.all(8.0);
   static const EdgeInsets normal = EdgeInsets.all(16.0);

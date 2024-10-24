@@ -113,7 +113,7 @@ class CaseListView extends HookConsumerWidget {
         //////////////////////////////////////////////案件一覧UI////////////////////////////////////////
         Expanded(
           child: Padding(
-            padding: PaddingStyle.detailForm,
+            padding: isPast ? PaddingStyle.detailForm : PaddingStyle.none,
             child: Column(
               children: [
                 //タブ

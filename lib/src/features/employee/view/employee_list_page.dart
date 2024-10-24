@@ -1,3 +1,4 @@
+import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -11,7 +12,7 @@ class EmployeeListPage extends HookConsumerWidget {
     return const Scaffold(
       backgroundColor: ColorStyle.paleBlue,
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: PaddingStyle.normal,
         child: EmployeeListView(),
       ),
     );
