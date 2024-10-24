@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../config/utils/key/firebase_key.dart';
+import '../../../../../config/utils/style/color_style.dart';
 import '../../../data_model/case.dart';
 
 class RowSourceCaseData extends DataTableSource {
@@ -53,8 +54,12 @@ DataRow recentFileDataRow(
     cells: [
       //顧客名
       DataCell(
-        InkWell(
-          onTap: () {
+        TextButton(
+          style: TextButton.styleFrom(
+            foregroundColor: ColorStyle.blue,
+            overlayColor: Colors.transparent,
+          ),
+          onPressed: () {
             context.goNamed(
               AppRoute.addOrEditCase.name,
               queryParameters: {
@@ -66,6 +71,13 @@ DataRow recentFileDataRow(
             caseData.customerName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              decoration: TextDecoration.underline,
+              color: ColorStyle.blue,
+              fontWeight: FontWeight.bold,
+              decorationThickness: 2.0,
+              decorationColor: ColorStyle.blue,
+            ),
           ),
         ),
       ),

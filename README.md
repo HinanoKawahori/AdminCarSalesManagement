@@ -7,7 +7,7 @@ A new Flutter project.
 
 ## Hosting
 flutter build web --web-renderer html 
-firebase deploy --only hosting
+firebase deploy --only hosting:carsalesmanagement-admin
 
 flutter build web --web-renderer canvaskit
 firebase deploy --only hosting

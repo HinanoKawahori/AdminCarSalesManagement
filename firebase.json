@@ -1,1 +1,27 @@
-{"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"carsalesmanagement-5f54a","configurations":{"web":"1:106517678758:web:d853d9e993314716990267"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "carsalesmanagement",
+          "configurations": {
+            "web": "1:106517678758:web:d853d9e993314716990267"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "site": "carsalesmanagement-admin",
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

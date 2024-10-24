@@ -1,6 +1,5 @@
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
-import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:flutter/material.dart';
 
 class LoginTextFormField extends StatelessWidget {
@@ -20,6 +19,7 @@ class LoginTextFormField extends StatelessWidget {
     return TextFormField(
       controller: passwordController,
       obscureText: (title == 'パスワード') ? true : false,
+      cursorHeight: 16,
       decoration: InputDecoration(
         labelStyle: const TextStyle(
           color: ColorStyle.mainBlack,
@@ -27,10 +27,10 @@ class LoginTextFormField extends StatelessWidget {
         ),
         labelText: title,
         prefixIcon: Padding(
-          padding: PaddingStyle.small,
+          padding: const EdgeInsets.all(12.0),
           child: Image.asset(
-            width: 10,
-            height: 10,
+            width: 5,
+            height: 5,
             imagePath,
           ),
         ),

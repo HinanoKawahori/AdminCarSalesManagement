@@ -7,14 +7,16 @@ import '../form_must_mark.dart';
 class FormInputField extends StatelessWidget {
   const FormInputField({
     super.key,
-    required this.label,
+    required this.title,
+    required this.labelText,
     required this.isRequired,
     required this.controller,
     required this.isCaseForm,
     this.maxLine,
   });
 
-  final String label;
+  final String title;
+  final String labelText;
   final bool isRequired;
   final TextEditingController controller;
   final bool isCaseForm;
@@ -30,7 +32,7 @@ class FormInputField extends StatelessWidget {
           Row(
             children: [
               Text(
-                label,
+                title,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: ColorStyle.mainBlack,
@@ -47,7 +49,10 @@ class FormInputField extends StatelessWidget {
               style: const TextStyle(color: ColorStyle.mainBlack),
               maxLines: maxLine,
               decoration: InputDecoration(
-                labelText: label,
+                labelText: labelText,
+                labelStyle: const TextStyle(
+                  color: ColorStyle.secondGrey,
+                ),
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: ColorStyle.mainGrey,

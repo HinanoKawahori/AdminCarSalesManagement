@@ -1,6 +1,7 @@
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../config/utils/style/color_style.dart';
@@ -33,12 +34,22 @@ class RankingDialog extends HookConsumerWidget {
       child: SizedBox(
         width: 400,
         height: 600,
-        child: Card(
-          child: Padding(
-            padding: PaddingStyle.normal,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            //クローズボタン
+            IconButton(
+              onPressed: () {
+                context.pop();
+              },
+              icon: const Icon(
+                Icons.close,
+                color: ColorStyle.mainGrey,
+              ),
+            ),
+            Column(
               children: [
+                HeightMargin.large,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -68,9 +79,10 @@ class RankingDialog extends HookConsumerWidget {
                 Expanded(
                   child: SalesRankingWidget(isDialog: true),
                 ),
+                HeightMargin.large,
               ],
             ),
-          ),
+          ],
         ),
       ),
     );

@@ -18,7 +18,7 @@ class EmployeeCaseDetailCard extends StatelessWidget {
   });
   final Widget contentWidget;
   final String title;
-  final String? employeeId;
+  final String employeeId;
 
   @override
   Widget build(BuildContext context) {
@@ -41,25 +41,23 @@ class EmployeeCaseDetailCard extends StatelessWidget {
                 ),
                 WidthMargin.normal,
                 (title == '従業員情報')
-                    ? SizedBox(
-                        // width: 24,
-                        // height: 24,
-                        child: Center(
-                          child: GestureDetector(
-                            onTap: () {
-                              context.goNamed(
-                                AppRoute.editEmployee.name,
-                                //TODO 従業員IDが取れていない
-                                queryParameters: {
-                                  FirebaseEmployeesKey.employeeId: employeeId,
-                                },
-                              );
-                            },
-                            child: const Icon(
-                              Icons.edit,
-                              size: 24,
-                              color: ColorStyle.mainGrey,
-                            ),
+                    ? Tooltip(
+                        message: '編集',
+                        child: IconButton(
+                          onPressed: () {
+                            context.goNamed(
+                              AppRoute.editEmployee.name,
+                              //TODO 従業員IDが取れていない
+
+                              queryParameters: {
+                                FirebaseEmployeesKey.employeeId: employeeId,
+                              },
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.edit,
+                            size: 24,
+                            color: ColorStyle.mainGrey,
                           ),
                         ),
                       )

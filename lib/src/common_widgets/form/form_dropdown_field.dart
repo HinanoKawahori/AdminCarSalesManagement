@@ -42,6 +42,9 @@ class FormDropdownField extends ConsumerWidget {
             child: DropdownButtonFormField<String>(
               decoration: InputDecoration(
                 labelText: label,
+                labelStyle: const TextStyle(
+                  color: ColorStyle.secondGrey,
+                ),
                 border: const OutlineInputBorder(),
               ),
               items: items.map((String value) {

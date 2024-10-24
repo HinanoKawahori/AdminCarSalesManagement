@@ -60,7 +60,7 @@ class EmployeeListView extends HookConsumerWidget {
                   onPressed: () {
                     context.goNamed(AppRoute.addEmployee.name);
                   },
-                  title: '＋従業員新規登録',
+                  title: '＋従業員新規追加',
                 ),
               ],
             ),
@@ -69,8 +69,11 @@ class EmployeeListView extends HookConsumerWidget {
               child: CustomDataTable(
                 columns: const [
                   DataColumn2(
-                    label: Text(
-                      '従業員名',
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 12),
+                      child: Text(
+                        '従業員名',
+                      ),
                     ),
                     size: ColumnSize.S,
                   ),

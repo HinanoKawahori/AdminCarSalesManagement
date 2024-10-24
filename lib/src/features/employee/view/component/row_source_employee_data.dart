@@ -54,41 +54,50 @@ DataRow recentFileDataRow(
 ) {
   return DataRow(
     cells: [
-      //従業員名
       DataCell(
-        InkWell(
-          onTap: () {
-            context.goNamed(
-              AppRoute.employeeDetail.name,
-              queryParameters: {
-                FirebaseEmployeesKey.employeeId: employee.employeeId,
+        Row(
+          children: [
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: ColorStyle.blue,
+                overlayColor: Colors.transparent,
+              ),
+              onPressed: () {
+                context.goNamed(
+                  AppRoute.employeeDetail.name,
+                  queryParameters: {
+                    FirebaseEmployeesKey.employeeId: employee.employeeId,
+                  },
+                );
               },
-            );
-          },
-          child: Row(
-            children: [
-              Text(
+              child: Text(
                 employee.employeeName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-              ),
-              Tooltip(
-                message: 'コピー',
-                child: IconButton(
-                  onPressed: () {
-                    Clipboard.setData(
-                        ClipboardData(text: employee.employeeName));
-                    showToast(toastMessage: '従業員の名前をコピーしました！');
-                  },
-                  icon: const Icon(
-                    Icons.copy,
-                    color: ColorStyle.mainBlack,
-                    size: 16,
-                  ),
+                style: const TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: ColorStyle.blue,
+                  fontWeight: FontWeight.bold,
+                  decorationThickness: 2.0,
+                  decorationColor: ColorStyle.blue,
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            Tooltip(
+              message: 'コピー',
+              child: IconButton(
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: employee.employeeName));
+                  showToast(toastMessage: '従業員の名前をコピーしました！');
+                },
+                icon: const Icon(
+                  Icons.copy,
+                  color: ColorStyle.mainBlack,
+                  size: 16,
+                ),
+              ),
+            )
+          ],
         ),
       ),
 

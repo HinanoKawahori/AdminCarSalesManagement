@@ -20,11 +20,12 @@ class ManufacturerPieChart extends HookConsumerWidget {
         final isTouched = i == touchedIndex.value;
         final fontSize = isTouched ? 20.0 : 16.0;
         final radius = isTouched ? 48.0 : 42.0;
-        const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
         switch (i) {
           case 0:
             return PieChartSectionData(
-              color: ColorStyle.pieChartDarkBlue,
+              gradient: const LinearGradient(
+                colors: ColorStyle.pieChartFirst,
+              ),
               value: 40,
               title: '40%',
               radius: radius,
@@ -32,12 +33,14 @@ class ManufacturerPieChart extends HookConsumerWidget {
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,
                 color: ColorStyle.white,
-                shadows: shadows,
+                // shadows: shadows,
               ),
             );
           case 1:
             return PieChartSectionData(
-              color: ColorStyle.pieChartMediumBlue,
+              gradient: const LinearGradient(
+                colors: ColorStyle.pieChartSecond,
+              ),
               value: 30,
               title: '30%',
               radius: radius,
@@ -45,12 +48,14 @@ class ManufacturerPieChart extends HookConsumerWidget {
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,
                 color: ColorStyle.white,
-                shadows: shadows,
+                // shadows: shadows,
               ),
             );
           case 2:
             return PieChartSectionData(
-              color: ColorStyle.pieChartLightBlue,
+              gradient: const LinearGradient(
+                colors: ColorStyle.pieChartThird,
+              ),
               value: 15,
               title: '15%',
               radius: radius,
@@ -58,12 +63,14 @@ class ManufacturerPieChart extends HookConsumerWidget {
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,
                 color: ColorStyle.white,
-                shadows: shadows,
+                // shadows: shadows,
               ),
             );
           case 3:
             return PieChartSectionData(
-              color: ColorStyle.pieChartPowderBlue,
+              gradient: const LinearGradient(
+                colors: ColorStyle.pieChartForth,
+              ),
               value: 15,
               title: '15%',
               radius: radius,
@@ -71,7 +78,7 @@ class ManufacturerPieChart extends HookConsumerWidget {
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,
                 color: ColorStyle.white,
-                shadows: shadows,
+                // shadows: shadows,
               ),
             );
           default:
@@ -120,24 +127,25 @@ class ManufacturerPieChart extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Indicator(
-                color: ColorStyle.pieChartDarkBlue,
+                colors: ColorStyle.pieChartFirst,
                 text: 'トヨタ',
               ),
               HeightMargin.small,
               Indicator(
-                color: ColorStyle.pieChartMediumBlue,
+                colors: ColorStyle.pieChartSecond,
                 text: '日産',
               ),
               HeightMargin.small,
               Indicator(
-                color: ColorStyle.pieChartLightBlue,
+                colors: ColorStyle.pieChartThird,
                 text: 'マツダ',
               ),
               HeightMargin.small,
               Indicator(
-                color: ColorStyle.pieChartPowderBlue,
+                colors: ColorStyle.pieChartForth,
                 text: 'ホンダ',
               ),
+              HeightMargin.small,
             ],
           ),
         ],

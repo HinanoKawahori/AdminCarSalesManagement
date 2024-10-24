@@ -27,6 +27,18 @@ class AllCaseTabViewSearchTypeEmployeeName extends HookConsumerWidget {
       () {
         Future(() async {
           isLoading.value = true;
+
+          //0️⃣まず全ての案件（担当者未定含む）を取得
+          final allCases = await ref
+              .read(caseControllerProvider.notifier)
+              .getCaseListOfFourStatus();
+
+          if (searchWord.value.isEmpty) {
+            // 検索ワードが空の場合は、担当者未定含む全ての案件を表示する。
+            searchedCaseList.value = allCases;
+            isLoading.value = false;
+            return;
+          }
           //1️⃣従業員名に当てはまる従業員リストを取得する
           allEmployeeList.value = await ref
               .read(employeeControllerProvider.notifier)
@@ -40,7 +52,8 @@ class AllCaseTabViewSearchTypeEmployeeName extends HookConsumerWidget {
               );
 
           //2️⃣従業員リストから、一人ずつの案件リストを取得する。
-          List<Case> allCases = [];
+          allCases.clear();
+
           for (Employee employee in searchEmployeeList.value) {
             final employeeCaseList = await ref
                 .read(caseControllerProvider.notifier)
@@ -51,7 +64,6 @@ class AllCaseTabViewSearchTypeEmployeeName extends HookConsumerWidget {
           }
           // 一人ずつの案件リストを、全ての案件リストに追加
           searchedCaseList.value = allCases;
-
           isLoading.value = false;
         });
         return null;

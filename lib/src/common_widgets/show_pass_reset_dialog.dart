@@ -65,7 +65,7 @@ class PassResetDialog extends HookConsumerWidget {
                     ),
                   ),
                   Image.asset(
-                    'assets/images/logo_blue.png',
+                    'assets/images/blue_grade_logo_with_text.png',
                     width: 80,
                     fit: BoxFit.contain,
                   ),

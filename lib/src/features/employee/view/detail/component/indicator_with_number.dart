@@ -26,7 +26,7 @@ class IndicatorWithNumber extends StatelessWidget {
           ),
         ),
         WidthMargin.small,
-        Text('$label $count'),
+        Text('$label $count件'),
       ],
     );
   }

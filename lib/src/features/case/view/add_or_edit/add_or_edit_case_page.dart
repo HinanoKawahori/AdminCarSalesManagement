@@ -3,6 +3,7 @@ import 'package:admin_car_sales_management/src/common_widgets/title_with_back_bu
 import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,6 +15,7 @@ import 'package:admin_car_sales_management/src/common_widgets/form/form_date_fie
 import 'package:admin_car_sales_management/src/common_widgets/form/form_dropdown_field.dart';
 
 import '../../../../common_widgets/form/form_input_field.dart';
+import '../../../../common_widgets/show_toast.dart';
 
 class AddOrEditCasePage extends HookConsumerWidget {
   const AddOrEditCasePage({
@@ -42,65 +44,70 @@ class AddOrEditCasePage extends HookConsumerWidget {
 
     return Scaffold(
       backgroundColor: ColorStyle.paleBlue,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: PaddingStyle.normal,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //タイトル
-                  TitleWithBackButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    title: caseId == null ? '案件新規作成' : '案件詳細',
+      body: Padding(
+        padding: PaddingStyle.normal,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //タイトル
+                TitleWithBackButton(
+                  onPressed: () {
+                    context.pop();
+                  },
+                  title: caseId == null ? '案件新規追加' : '案件詳細',
+                ),
+                //登録or編集ボタン
+                BlueButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  title: caseId == null ? '登録' : '編集',
+                ),
+              ],
+            ),
+            HeightMargin.large,
+            //フォーム
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: PaddingStyle.detailForm,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        //案件情報フォーム
+                        child: _buildCaseInfoForm(
+                          ref,
+                          caseIdController,
+                          customerNameController,
+                          emailController,
+                          phoneController,
+                          mileageController,
+                          addressController,
+                        ),
+                      ),
+                      WidthMargin.large,
+                      //査定情報フォーム
+                      Expanded(
+                        child: _buildAssessmentInfoForm(
+                          ref,
+                          manufacturerController,
+                          modelController,
+                          yearController,
+                          mileageAssessmentController,
+                          priceController,
+                          memoController,
+                        ),
+                      ),
+                    ],
                   ),
-                  //登録or編集ボタン
-                  BlueButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    title: caseId == null ? '登録' : '編集',
-                  ),
-                ],
+                ),
               ),
-              HeightMargin.large,
-              //フォーム
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    //案件情報フォーム
-                    child: _buildCaseInfoForm(
-                      ref,
-                      caseIdController,
-                      customerNameController,
-                      emailController,
-                      phoneController,
-                      mileageController,
-                      addressController,
-                    ),
-                  ),
-                  WidthMargin.large,
-                  //査定情報フォーム
-                  Expanded(
-                    child: _buildAssessmentInfoForm(
-                      ref,
-                      manufacturerController,
-                      modelController,
-                      yearController,
-                      mileageAssessmentController,
-                      priceController,
-                      memoController,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -124,48 +131,108 @@ class AddOrEditCasePage extends HookConsumerWidget {
         ),
         HeightMargin.normal,
         const Divider(color: ColorStyle.mainBlack),
-        const SizedBox(height: 16),
-        FormInputField(
-          label: '案件ID',
-          controller: caseIdController,
-          isRequired: false,
-          isCaseForm: true,
+        HeightMargin.normal,
+        //TODO 案件ID
+        SizedBox(
+          height: 48,
+          width: 600,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '案件ID',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: ColorStyle.mainBlack,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 300,
+                child: Row(
+                  children: [
+                    const Text('1231413321AED123'),
+                    WidthMargin.minimum,
+                    Tooltip(
+                      message: 'コピー',
+                      child: SizedBox(
+                        width: 20,
+                        height: 16,
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              Clipboard.setData(const ClipboardData(
+                                  text: '1231413321AED123'));
+                              showToast(toastMessage: '案件IDをコピーしました！');
+                            },
+                            child: const Icon(
+                              Icons.copy,
+                              color: ColorStyle.mainGrey,
+                              size: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
         const FormDivider(),
+        //顧客名
         FormInputField(
-          label: '顧客名',
+          title: '顧客名',
+          labelText: (customerNameController.text.isNotEmpty)
+              ? customerNameController.text
+              : '顧客名',
           controller: customerNameController,
           isRequired: true,
           isCaseForm: true,
         ),
         const FormDivider(),
+        //メールアドレス
         FormInputField(
-          label: 'メールアドレス',
+          title: 'メールアドレス',
+          labelText: (emailController.text.isNotEmpty)
+              ? emailController.text
+              : 'メールアドレス',
           controller: emailController,
           isRequired: false,
           isCaseForm: true,
         ),
         const FormDivider(),
+        //性別
         _buildGenderRadio(ref),
         const FormDivider(),
+        //電話番号
         FormInputField(
-          label: '電話番号',
+          title: '電話番号',
+          labelText:
+              (phoneController.text.isNotEmpty) ? phoneController.text : '電話番号',
           controller: phoneController,
           isRequired: false,
           isCaseForm: true,
         ),
+
         const FormDivider(),
-        FormInputField(
-          label: '走行距離',
-          controller: mileageController,
-          isRequired: false,
-          isCaseForm: true,
+        //生年月日
+        const FormDateField(
+          label: '生年月日',
+          // birthDate: '',
         ),
         const FormDivider(),
-        const FormDateField(label: '生年月日'),
-        const FormDivider(),
+        //住所
         FormInputField(
-          label: '住所',
+          title: '住所',
+          labelText: (addressController.text.isNotEmpty)
+              ? addressController.text
+              : '住所',
           controller: addressController,
           isRequired: false,
           isCaseForm: true,
@@ -178,6 +245,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
   Widget _buildGenderRadio(WidgetRef ref) {
     String _selectedGender = '女性';
     return SizedBox(
+      height: 48,
       width: 600,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -186,7 +254,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
             children: [
               Text(
                 '性別',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: ColorStyle.mainBlack,
                 ),
@@ -257,63 +325,91 @@ class AddOrEditCasePage extends HookConsumerWidget {
         ),
         HeightMargin.normal,
         const Divider(color: ColorStyle.mainBlack),
-        const SizedBox(height: 16),
+        HeightMargin.normal,
+        //営業ステータス
         const FormDropdownField(
           label: '営業ステータス',
           items: ['商談中', '成約', '失注'],
           isRequired: true,
         ),
         const FormDivider(),
-        FormInputField(
+        //メーカー
+        const FormDropdownField(
           label: 'メーカー',
-          controller: manufacturerController,
+          items: [
+            'ホンダ',
+            'スズキ',
+            'トヨタ',
+          ],
           isRequired: false,
-          isCaseForm: true,
         ),
         const FormDivider(),
-        FormInputField(
+        //車種
+        const FormDropdownField(
           label: '車種',
-          controller: modelController,
+          items: [
+            'ワゴン',
+            'ワルツ',
+            'ブリヂストン',
+          ],
           isRequired: false,
-          isCaseForm: true,
         ),
         const FormDivider(),
-        FormInputField(
+        //年式
+        const FormDropdownField(
           label: '年式',
-          controller: yearController,
+          items: [
+            '1920',
+            '1930',
+            '1940',
+            '1950',
+            '1960',
+          ],
           isRequired: false,
-          isCaseForm: true,
         ),
         const FormDivider(),
+        //ランク
         const FormDropdownField(
           label: 'ランク',
           items: ['S', 'A', 'B', 'C'],
           isRequired: false,
         ),
         const FormDivider(),
-        FormInputField(
+        //走行距離
+        const FormDropdownField(
           label: '走行距離',
-          controller: mileageAssessmentController,
+          items: [
+            '19000km-20000km',
+            '20000km-21000km',
+            '22000km-23000km',
+          ],
           isRequired: false,
-          isCaseForm: true,
         ),
         const FormDivider(),
+        //査定金額
         FormInputField(
-          label: '査定金額',
+          title: '査定金額',
+          labelText:
+              (priceController.text.isNotEmpty) ? priceController.text : '名前',
           controller: priceController,
           isRequired: false,
           isCaseForm: true,
         ),
         const FormDivider(),
+        //訪問日時
         const FormVisitDateField(label: '訪問日時'),
         const FormDivider(),
+        //メモ
         FormInputField(
-          label: 'メモ',
+          title: 'メモ',
+          labelText:
+              (memoController.text.isNotEmpty) ? memoController.text : 'メモ',
           controller: memoController,
           isRequired: false,
           isCaseForm: true,
           maxLine: 4,
         ),
+        HeightMargin.medium,
       ],
     );
   }

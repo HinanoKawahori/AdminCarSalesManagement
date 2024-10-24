@@ -4,7 +4,7 @@ import 'package:admin_car_sales_management/src/config/utils/style/width_margin.d
 import 'package:admin_car_sales_management/src/features/dash_board/view/component/dash_board_card.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/component/year_and_month_drop_button.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/component/sales_ranking_dialog.dart';
-import 'package:admin_car_sales_management/src/features/dash_board/view/widget/case_pie_chart_widget.dart';
+import 'package:admin_car_sales_management/src/features/dash_board/view/widget/active_case_count_widget.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/widget/case_result_bar_chart_widget.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/widget/manufacturer_pie_chart_widget.dart';
 import 'package:admin_car_sales_management/src/features/dash_board/view/widget/sales_ranking_widget.dart';
@@ -44,15 +44,17 @@ class DashBoardPage extends HookConsumerWidget {
                       children: [
                         //稼働中の案件状況
                         Expanded(
+                          // flex: 4,
                           child: DashBoardCard(
                             contentWidget: Expanded(
-                              child: CasePieChartWidget(),
+                              child: ActiveCaseCountWidget(),
                             ),
                             title: '稼働中の案件状況',
                           ),
                         ),
                         //買取総額の推移
                         Expanded(
+                          // flex: 6,
                           child: DashBoardCard(
                             contentWidget:
                                 Expanded(child: CaseResultBarChartWidget()),
@@ -66,7 +68,7 @@ class DashBoardPage extends HookConsumerWidget {
                   // 右側のカラム（3つのカード）
                   Expanded(
                     child: Card(
-                      color: ColorStyle.lightBlue2,
+                      color: const Color.fromARGB(255, 213, 233, 255),
                       child: Padding(
                         padding: PaddingStyle.normal,
                         child: Column(
@@ -107,17 +109,21 @@ class DashBoardPage extends HookConsumerWidget {
                                       title: '8月の買取総額ランキング',
                                     ),
                                     //ランキングダイアログ表示ボタン
-                                    Padding(
-                                      padding: PaddingStyle.normal,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          showRankingDialog(
-                                            context: context,
-                                          ); //ランキングダイアログの表示
-                                        },
-                                        icon: const Icon(
-                                          Icons.open_in_new_rounded,
-                                          color: ColorStyle.mainGrey,
+                                    Tooltip(
+                                      message: '全従業員のランキング表示',
+                                      child: Padding(
+                                        padding: PaddingStyle.normal,
+                                        child: IconButton(
+                                          //ランキングダイアログの表示
+                                          onPressed: () {
+                                            showRankingDialog(
+                                              context: context,
+                                            );
+                                          },
+                                          icon: const Icon(
+                                            Icons.open_in_new_rounded,
+                                            color: ColorStyle.mainGrey,
+                                          ),
                                         ),
                                       ),
                                     ),

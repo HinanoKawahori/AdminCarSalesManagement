@@ -9,5 +9,7 @@ class PaddingStyle {
   static const EdgeInsets top = EdgeInsets.only(top: 20);
   static const EdgeInsets vertical = EdgeInsets.only(top: 4, bottom: 4);
   static const EdgeInsets horizontal = EdgeInsets.only(right: 10, left: 10);
+  static const EdgeInsets right = EdgeInsets.only(right: 20);
   static const EdgeInsets tabNumber = EdgeInsets.only(top: 3);
+  static const EdgeInsets detailForm = EdgeInsets.only(left: 50, right: 50);
 }

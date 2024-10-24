@@ -49,6 +49,7 @@ class PersonalCaseListWidget extends HookConsumerWidget {
             padding: PaddingStyle.top,
             child: isPast
                 ? TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
                     controller: tabController,
                     children: const <Widget>[
                       PersonalCaseTabView(
@@ -60,6 +61,7 @@ class PersonalCaseListWidget extends HookConsumerWidget {
                     ],
                   )
                 : TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
                     controller: tabController,
                     children: const <Widget>[
                       //すべて

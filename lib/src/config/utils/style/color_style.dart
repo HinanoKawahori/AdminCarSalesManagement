@@ -30,16 +30,35 @@ class ColorStyle {
 
   static const validationRed = Color.fromARGB(255, 206, 53, 53);
 
-  ///円グラフの色
-  static const pieChartDarkBlue = ColorStyle.blue;
-  static const pieChartLightBlue =
-      Color.fromARGB(255, 102, 179, 255); // #66B3FF
-  static const pieChartMediumBlue =
-      Color.fromARGB(255, 111, 171, 255); // #4A90E2
-  static const pieChartPowderBlue =
-      Color.fromARGB(255, 179, 212, 255); // #B3D4FF
+  ///円グラフの色（案件）
 
-  ///
+  static const pieChartAssigningPerson = Color.fromARGB(255, 150, 150, 150);
+  static const pieChartScheduling = Color(0xFF82CFFD);
+  static const pieChartConfirmedVisit = Color(0xFF80E6E0);
+  static const pieChartPending = Color(0xFFB099FF);
+//円グラフの色（メーカー）
+
+  static const pieChartFirst = [
+    Color.fromARGB(255, 0, 152, 241),
+    Color.fromARGB(255, 75, 190, 250),
+  ];
+
+  static const pieChartSecond = [
+    Color.fromARGB(255, 130, 97, 226), // 柔らかい紫
+    Color.fromARGB(255, 160, 130, 240), // 優しい紫
+  ];
+
+  static const pieChartThird = [
+    Color.fromARGB(255, 255, 136, 188),
+    Color.fromARGB(255, 254, 126, 190),
+  ];
+
+  static const pieChartForth = [
+    Color.fromARGB(255, 62, 201, 192),
+    Color.fromARGB(255, 80, 230, 220),
+  ];
+
+  ///ボタンの色////////////////////////////////////////////
 
   static const confirmedVisitButton = [
     Color.fromARGB(255, 30, 200, 190), // ダークターコイズ
@@ -79,4 +98,7 @@ class ColorStyle {
     Color(0xFFF7F9FF),
     Color(0xFFE7EBF8),
   ];
+
+  // ignore: prefer_typing_uninitialized_variables
+  static var pieChartDarkBlue;
 }

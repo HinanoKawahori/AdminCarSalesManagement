@@ -20,6 +20,8 @@ class CaseTabBar extends HookConsumerWidget {
         PreferredSize(
           preferredSize: const Size.fromHeight(10),
           child: TabBar(
+            physics: const NeverScrollableScrollPhysics(),
+            isScrollable: false,
             controller: tabController,
             dividerHeight: 0,
             indicatorSize: TabBarIndicatorSize.label,
