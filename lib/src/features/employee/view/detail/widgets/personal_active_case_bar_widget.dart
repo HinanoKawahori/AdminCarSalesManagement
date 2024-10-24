@@ -44,7 +44,7 @@ class PersonalActiveCaseBarWidget extends ConsumerWidget {
             totalCases: totalCases,
           ),
         ),
-        HeightMargin.normal,
+        HeightMargin.medium,
         Row(
           children: [
             //日程調整中

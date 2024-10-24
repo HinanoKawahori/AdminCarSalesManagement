@@ -37,6 +37,9 @@ class FormVisitDateField extends ConsumerWidget {
             child: TextField(
               decoration: InputDecoration(
                 labelText: label,
+                labelStyle: const TextStyle(
+                  color: ColorStyle.secondGrey,
+                ),
                 border: const OutlineInputBorder(),
                 suffixIcon: const Icon(
                   Icons.calendar_today,

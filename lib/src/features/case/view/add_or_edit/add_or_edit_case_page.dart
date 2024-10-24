@@ -44,65 +44,70 @@ class AddOrEditCasePage extends HookConsumerWidget {
 
     return Scaffold(
       backgroundColor: ColorStyle.paleBlue,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: PaddingStyle.normal,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //タイトル
-                  TitleWithBackButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    title: caseId == null ? '案件新規作成' : '案件詳細',
+      body: Padding(
+        padding: PaddingStyle.normal,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //タイトル
+                TitleWithBackButton(
+                  onPressed: () {
+                    context.pop();
+                  },
+                  title: caseId == null ? '案件新規作成' : '案件詳細',
+                ),
+                //登録or編集ボタン
+                BlueButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  title: caseId == null ? '登録' : '編集',
+                ),
+              ],
+            ),
+            HeightMargin.large,
+            //フォーム
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: PaddingStyle.detailForm,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        //案件情報フォーム
+                        child: _buildCaseInfoForm(
+                          ref,
+                          caseIdController,
+                          customerNameController,
+                          emailController,
+                          phoneController,
+                          mileageController,
+                          addressController,
+                        ),
+                      ),
+                      WidthMargin.large,
+                      //査定情報フォーム
+                      Expanded(
+                        child: _buildAssessmentInfoForm(
+                          ref,
+                          manufacturerController,
+                          modelController,
+                          yearController,
+                          mileageAssessmentController,
+                          priceController,
+                          memoController,
+                        ),
+                      ),
+                    ],
                   ),
-                  //登録or編集ボタン
-                  BlueButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    title: caseId == null ? '登録' : '編集',
-                  ),
-                ],
+                ),
               ),
-              HeightMargin.large,
-              //フォーム
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    //案件情報フォーム
-                    child: _buildCaseInfoForm(
-                      ref,
-                      caseIdController,
-                      customerNameController,
-                      emailController,
-                      phoneController,
-                      mileageController,
-                      addressController,
-                    ),
-                  ),
-                  WidthMargin.large,
-                  //査定情報フォーム
-                  Expanded(
-                    child: _buildAssessmentInfoForm(
-                      ref,
-                      manufacturerController,
-                      modelController,
-                      yearController,
-                      mileageAssessmentController,
-                      priceController,
-                      memoController,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -404,6 +409,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
           isCaseForm: true,
           maxLine: 4,
         ),
+        HeightMargin.medium,
       ],
     );
   }

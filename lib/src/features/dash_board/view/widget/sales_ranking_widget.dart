@@ -1,5 +1,6 @@
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
+import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/width_margin.dart';
 import 'package:flutter/material.dart';
@@ -27,23 +28,29 @@ class SalesRankingWidget extends StatelessWidget {
   //数字にカンマを入れるフォーマッターを作成
   final formatter = NumberFormat('#,##0');
 
-  SalesRankingWidget({super.key, required this.isDialog});
+  SalesRankingWidget({
+    super.key,
+    required this.isDialog,
+  });
   final bool isDialog;
-
+  // SizedBox(width: (isDialog) ? 20 : 0),
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
+        //タイトル//////////////////////////////////////
+        HeightMargin.small,
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(width: 20),
-            SizedBox(
+            SizedBox(width: (isDialog) ? 60 : 20),
+            const SizedBox(
               width: 100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  //従業員名
                   Text(
                     '従業員名',
                     style: TextStyle(
@@ -53,7 +60,8 @@ class SalesRankingWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
+            //金額
+            const Padding(
               padding: PaddingStyle.right,
               child: SizedBox(
                 width: 100,
@@ -73,21 +81,32 @@ class SalesRankingWidget extends StatelessWidget {
             ),
           ],
         ),
-        const Divider(color: ColorStyle.secondGrey),
+
+        const Padding(
+          padding: PaddingStyle.small,
+          child: Divider(
+            color: ColorStyle.secondGrey,
+          ),
+        ),
+        //ランキング//////////////////////////////////////
         Expanded(
           child: ListView.builder(
             physics: isDialog
                 ? const AlwaysScrollableScrollPhysics()
-                : const NeverScrollableScrollPhysics(), // 三項演算子で切り替え
+                : const NeverScrollableScrollPhysics(),
             itemCount: rankingData.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: EdgeInsets.symmetric(
+                  vertical: 6.0,
+                  horizontal: (isDialog) ? 20 : 0.0,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    //ランキング番号
                     SizedBox(
-                      width: 20,
+                      width: (isDialog) ? 60 : 20,
                       child: Center(
                         child: Text(
                           '${rankingData[index]["rank"]}',
@@ -97,6 +116,7 @@ class SalesRankingWidget extends StatelessWidget {
                         ),
                       ),
                     ),
+                    //従業員名
                     SizedBox(
                       width: 100,
                       child: Row(
@@ -111,6 +131,7 @@ class SalesRankingWidget extends StatelessWidget {
                         ],
                       ),
                     ),
+                    //金額
                     Padding(
                       padding: PaddingStyle.right,
                       child: SizedBox(

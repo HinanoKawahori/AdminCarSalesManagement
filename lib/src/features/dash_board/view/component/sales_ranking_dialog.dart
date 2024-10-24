@@ -38,53 +38,49 @@ class RankingDialog extends HookConsumerWidget {
           alignment: Alignment.topRight,
           children: [
             //クローズボタン
-            Padding(
-              padding: PaddingStyle.small,
-              child: IconButton(
-                onPressed: () {
-                  context.pop();
-                },
-                icon: const Icon(
-                  Icons.close,
-                  color: ColorStyle.mainGrey,
-                ),
+            IconButton(
+              onPressed: () {
+                context.pop();
+              },
+              icon: const Icon(
+                Icons.close,
+                color: ColorStyle.mainGrey,
               ),
             ),
-            Padding(
-              padding: PaddingStyle.normal,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/ranking_icon.png',
-                        width: 20,
-                        height: 20,
+            Column(
+              children: [
+                HeightMargin.large,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/ranking_icon.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                    WidthMargin.small,
+                    const Text(
+                      '8月の買取総額ランキング',
+                      style: TextStyle(
+                        fontSize: CustomFontSize.large,
+                        fontWeight: FontWeight.bold,
+                        color: ColorStyle.mainBlack,
                       ),
-                      WidthMargin.small,
-                      const Text(
-                        '8月の買取総額ランキング',
-                        style: TextStyle(
-                          fontSize: CustomFontSize.large,
-                          fontWeight: FontWeight.bold,
-                          color: ColorStyle.mainBlack,
-                        ),
-                      ),
-                      WidthMargin.small,
-                      Image.asset(
-                        'assets/images/ranking_icon.png',
-                        width: 20,
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                  HeightMargin.normal,
-                  Expanded(
-                    child: SalesRankingWidget(isDialog: true),
-                  ),
-                ],
-              ),
+                    ),
+                    WidthMargin.small,
+                    Image.asset(
+                      'assets/images/ranking_icon.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                  ],
+                ),
+                HeightMargin.normal,
+                Expanded(
+                  child: SalesRankingWidget(isDialog: true),
+                ),
+                HeightMargin.large,
+              ],
             ),
           ],
         ),

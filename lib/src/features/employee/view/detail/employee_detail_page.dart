@@ -23,8 +23,6 @@ class EmployeeDetailPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print(employeeId);
-
     return Scaffold(
       backgroundColor: ColorStyle.paleBlue,
       body: Padding(
@@ -85,33 +83,36 @@ class EmployeeDetailPage extends HookConsumerWidget {
                           // 右側（稼働中案件と稼働中案件一覧）
                           Expanded(
                             flex: 6,
-                            child: Column(
-                              children: [
-                                //稼働中案件/////////////////////////////////
-                                Expanded(
-                                  flex: 3,
-                                  child: EmployeeCaseDetailCard(
-                                    contentWidget:
-                                        const PersonalActiveCaseBarWidget(),
-                                    title: '稼働中案件',
-                                    employeeId: employeeId,
-                                  ),
-                                ),
-                                HeightMargin.normal,
-                                //稼働中案件一覧/////////////////////////////////
-                                Expanded(
-                                  flex: 7,
-                                  child: EmployeeCaseDetailCard(
-                                    contentWidget: const Expanded(
-                                      child: PersonalCaseListWidget(
-                                        isPast: false,
-                                      ),
+                            child: Padding(
+                              padding: PaddingStyle.right,
+                              child: Column(
+                                children: [
+                                  //稼働中案件/////////////////////////////////
+                                  Expanded(
+                                    flex: 3,
+                                    child: EmployeeCaseDetailCard(
+                                      contentWidget:
+                                          const PersonalActiveCaseBarWidget(),
+                                      title: '稼働中案件',
+                                      employeeId: employeeId,
                                     ),
-                                    title: '稼働中案件一覧',
-                                    employeeId: employeeId,
                                   ),
-                                ),
-                              ],
+                                  HeightMargin.normal,
+                                  //稼働中案件一覧/////////////////////////////////
+                                  Expanded(
+                                    flex: 7,
+                                    child: EmployeeCaseDetailCard(
+                                      contentWidget: const Expanded(
+                                        child: PersonalCaseListWidget(
+                                          isPast: false,
+                                        ),
+                                      ),
+                                      title: '稼働中案件一覧',
+                                      employeeId: employeeId,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -119,26 +120,32 @@ class EmployeeDetailPage extends HookConsumerWidget {
                     ),
                     HeightMargin.normal,
                     //成約率////////////////////////////////////////////////
-                    SizedBox(
-                      height: 220,
-                      child: EmployeeCaseDetailCard(
-                        contentWidget: const SuccessRateWidget(),
-                        title: '成約率',
-                        employeeId: employeeId,
+                    Padding(
+                      padding: PaddingStyle.right,
+                      child: SizedBox(
+                        height: 220,
+                        child: EmployeeCaseDetailCard(
+                          contentWidget: const SuccessRateWidget(),
+                          title: '成約率',
+                          employeeId: employeeId,
+                        ),
                       ),
                     ),
                     HeightMargin.normal,
                     //営業履歴一覧/////////////////////////////////////////////
-                    SizedBox(
-                      height: 600,
-                      child: EmployeeCaseDetailCard(
-                        contentWidget: const Expanded(
-                          child: PersonalCaseListWidget(
-                            isPast: true,
+                    Padding(
+                      padding: PaddingStyle.right,
+                      child: SizedBox(
+                        height: 600,
+                        child: EmployeeCaseDetailCard(
+                          contentWidget: const Expanded(
+                            child: PersonalCaseListWidget(
+                              isPast: true,
+                            ),
                           ),
+                          title: '営業履歴一覧',
+                          employeeId: employeeId,
                         ),
-                        title: '営業履歴一覧',
-                        employeeId: employeeId,
                       ),
                     ),
                     // 必要に応じて、さらにコンテンツを追加できます

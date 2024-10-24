@@ -13,8 +13,6 @@ class EditEmployeePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('editEmployeePage');
-    print(employeeId);
     return Scaffold(
       body: AddOrEditEmployeePage(
         employeeId: employeeId,

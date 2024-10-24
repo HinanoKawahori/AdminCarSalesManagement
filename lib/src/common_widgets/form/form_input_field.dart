@@ -50,6 +50,9 @@ class FormInputField extends StatelessWidget {
               maxLines: maxLine,
               decoration: InputDecoration(
                 labelText: labelText,
+                labelStyle: const TextStyle(
+                  color: ColorStyle.secondGrey,
+                ),
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: ColorStyle.mainGrey,

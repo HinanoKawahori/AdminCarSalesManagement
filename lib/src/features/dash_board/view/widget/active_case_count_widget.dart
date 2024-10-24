@@ -3,8 +3,8 @@ import 'package:admin_car_sales_management/src/config/utils/style/width_margin.d
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CasePieChartWidget extends HookConsumerWidget {
-  const CasePieChartWidget({super.key});
+class ActiveCaseCountWidget extends HookConsumerWidget {
+  const ActiveCaseCountWidget({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //TODO データをここから渡すようにする
@@ -39,7 +39,7 @@ class CasePieChartWidget extends HookConsumerWidget {
                     count: '20',
                     colors: ColorStyle.backGroundColor,
                     iconData: Icon(
-                      Icons.schedule_send,
+                      Icons.schedule_outlined,
                       color: ColorStyle.mainGrey,
                     ),
                   ),
@@ -147,11 +147,15 @@ class ShowCaseCount extends StatelessWidget {
                 fontSize: 50,
               ),
             ),
-            const Text(
-              '件',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: ColorStyle.mainGrey,
+            WidthMargin.minimum,
+            const Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: Text(
+                '件',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: ColorStyle.mainGrey,
+                ),
               ),
             ),
           ],

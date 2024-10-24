@@ -44,7 +44,7 @@ class SuccessRateWidget extends ConsumerWidget {
             ),
           ),
         ),
-        HeightMargin.normal,
+        HeightMargin.medium,
         Row(
           children: [
             IndicatorWithNumber(

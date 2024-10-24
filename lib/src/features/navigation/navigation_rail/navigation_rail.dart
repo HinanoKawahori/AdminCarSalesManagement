@@ -1,5 +1,6 @@
 import 'package:admin_car_sales_management/src/common_widgets/loading_widget.dart';
 import 'package:admin_car_sales_management/src/config/firebase/firebase_instance_provider.dart';
+import 'package:admin_car_sales_management/src/config/utils/style/custom_font_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/height_margin.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
 import 'package:admin_car_sales_management/src/features/auth/controller/auth_controller.dart';
@@ -189,7 +190,10 @@ class NavigationRailShellPage extends HookConsumerWidget {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.logout, color: Colors.white),
+                        Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
                         SizedBox(width: 8),
                         Text(
                           'ログアウト',

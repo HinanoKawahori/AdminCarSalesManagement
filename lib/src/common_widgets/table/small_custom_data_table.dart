@@ -23,7 +23,7 @@ class SmallCustomDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        dividerColor: ColorStyle.secondGrey,
+        dividerColor: ColorStyle.hoverGrey,
       ),
       child: PaginatedDataTable2(
         // minWidth: 1000,
@@ -37,7 +37,8 @@ class SmallCustomDataTable extends StatelessWidget {
         dataRowHeight: 32,
         headingRowColor: WidgetStateProperty.all(ColorStyle.white),
         headingRowDecoration: const BoxDecoration(
-          color: ColorStyle.secondGrey,
+          border: Border(),
+          color: ColorStyle.hoverGrey,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10.0),
             topRight: Radius.circular(10.0),
@@ -51,7 +52,7 @@ class SmallCustomDataTable extends StatelessWidget {
           fontSize: 12,
         ),
 
-        dividerThickness: 1,
+        dividerThickness: 0.2,
 
         onRowsPerPageChanged: onRowsPerPageChanged,
         onPageChanged: onPageChanged,
