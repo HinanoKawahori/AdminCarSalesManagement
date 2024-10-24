@@ -80,6 +80,9 @@ DataRow recentFileDataRow(
       DataCell(
         Text(
           createDateText(caseData.createdAt),
+          style: const TextStyle(
+            fontFeatures: [FontFeature.tabularFigures()],
+          ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

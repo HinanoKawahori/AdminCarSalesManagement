@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../config/utils/style/color_style.dart';
 import '../../../../config/utils/style/height_margin.dart';
-import '../../../../config/utils/style/padding_style.dart';
 import '../widget/sales_ranking_widget.dart';
 
 void showRankingDialog({

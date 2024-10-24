@@ -9,11 +9,13 @@ class CaseListPage extends HookConsumerWidget {
   const CaseListPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Scaffold(
-      backgroundColor: ColorStyle.paleBlue,
-      body: Padding(
-        padding: PaddingStyle.normal,
-        child: CaseListView(isPast: false),
+    return const SelectionArea(
+      child: Scaffold(
+        backgroundColor: ColorStyle.paleBlue,
+        body: Padding(
+          padding: PaddingStyle.normal,
+          child: CaseListView(isPast: false),
+        ),
       ),
     );
   }

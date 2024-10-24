@@ -2,7 +2,13 @@ import 'package:intl/intl.dart';
 
 String formatCurrency(int? amount) {
   if (amount == null) return '0円';
-  final formatter = NumberFormat('#,###');
+  // final formatter = NumberFormat('#,###');
+  // より詳細な通貨フォーマット設定
+  final formatter = NumberFormat.currency(
+    locale: 'en_US',
+    symbol: '',
+    decimalDigits: 0,
+  );
   return '${formatter.format(amount)}円';
 }
 

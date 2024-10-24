@@ -136,6 +136,9 @@ DataRow recentFileDataRow(
       DataCell(
         Text(
           createDateText(caseData.createdAt),
+          style: const TextStyle(
+            fontFeatures: [FontFeature.tabularFigures()],
+          ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -144,8 +147,11 @@ DataRow recentFileDataRow(
       DataCell(
         Text(
           createDateText(caseData.updatedAt),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontFeatures: [FontFeature.tabularFigures()],
+          ),
+          // maxLines: 1,
+          // overflow: TextOverflow.ellipsis,
         ),
       ),
     ],
