@@ -1,7 +1,6 @@
 import 'package:admin_car_sales_management/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // ignore: depend_on_referenced_packages
@@ -15,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(
     const ProviderScope(child: MyApp()),
   );
@@ -39,7 +39,8 @@ class MyApp extends ConsumerWidget {
         Locale('ja'),
       ],
       theme: ThemeData(
-        fontFamily: GoogleFonts.notoSansJp().fontFamily,
+        // fontFamily: GoogleFonts.notoSansJp().fontFamily,
+        //TODO ホスティングの時に元に戻す
         dividerColor: ColorStyle.secondGrey,
         textSelectionTheme: const TextSelectionThemeData(
           selectionColor: ColorStyle.hoverGrey,

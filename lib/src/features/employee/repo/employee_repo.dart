@@ -24,16 +24,14 @@ class EmployeeRepo extends _$EmployeeRepo {
   Future<void> addEmployee({
     required Employee employee,
   }) async {
-    await state.add(employee);
+    await state.doc(employee.employeeId).set(employee);
   }
 
   //employee更新
   Future<void> updateEmployee({
     required Employee employee,
   }) async {
-    await state
-        .doc(employee.employeeName)
-        .update(employee.toJson()); // Assuming employeeName is unique
+    await state.doc(employee.employeeId).update(employee.toJson());
   }
 
   //employeeを1件監視

@@ -125,11 +125,12 @@ class NavigationRailShellPage extends HookConsumerWidget {
                   (ref.read(firebaseAuthProvider).currentUser == null)
                       ? Container()
                       : ref
-                          .watch(watchEmployeeDataControllerProvider(
-                              employeeId: ref
-                                  .read(firebaseAuthProvider)
-                                  .currentUser!
-                                  .uid))
+                          .watch(
+                          watchEmployeeDataControllerProvider(
+                            employeeId:
+                                ref.read(firebaseAuthProvider).currentUser!.uid,
+                          ),
+                        )
                           .when(
                           error: (error, stackTrace) {
                             return ErrorWidget('ユーザーが見つかりません');

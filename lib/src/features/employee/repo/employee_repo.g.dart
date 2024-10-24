@@ -6,7 +6,7 @@ part of 'employee_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$employeeRepoHash() => r'24247ca15dfe10a0948cb545d17e7662d6076f44';
+String _$employeeRepoHash() => r'cc6d4d8338385f342a13aa4f26b6bcec00ff6ec2';
 
 /// See also [EmployeeRepo].
 @ProviderFor(EmployeeRepo)

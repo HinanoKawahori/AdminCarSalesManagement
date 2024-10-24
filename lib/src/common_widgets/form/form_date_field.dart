@@ -1,3 +1,4 @@
+import 'package:admin_car_sales_management/src/function/timestamp_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -6,11 +7,13 @@ import '../../config/utils/style/color_style.dart';
 class FormDateField extends ConsumerWidget {
   const FormDateField({
     super.key,
-    required this.label,
-    // required this.birthDate,/
+    required this.hintText,
+    required this.birthDate,
+    required this.onTap,
   });
-  final String label;
-  // final ValueNotifier birthDate;
+  final String hintText;
+  final VoidCallback onTap;
+  final ValueNotifier birthDate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,11 +23,11 @@ class FormDateField extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           //
-          Row(
+          const Row(
             children: [
               Text(
-                label,
-                style: const TextStyle(
+                '生年月日',
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: ColorStyle.mainBlack,
                 ),
@@ -37,7 +40,9 @@ class FormDateField extends ConsumerWidget {
             width: 300,
             child: TextField(
               decoration: InputDecoration(
-                labelText: label,
+                hintText: (birthDate.value != null)
+                    ? createDateText(birthDate.value)
+                    : hintText,
                 labelStyle: const TextStyle(
                   color: ColorStyle.secondGrey,
                 ),
@@ -48,17 +53,8 @@ class FormDateField extends ConsumerWidget {
                 ),
               ),
               readOnly: true,
-              onTap: () async {
-                await showDatePicker(
-                  context: context,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                );
-              },
-              onChanged: (newValue) {
-                // birthDate.value = newValue;
-                //TODO ここを変更する
-              },
+              //pickedDateでデータを取得
+              onTap: onTap,
             ),
           ),
         ],

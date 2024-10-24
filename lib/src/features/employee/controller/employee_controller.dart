@@ -16,16 +16,16 @@ class EmployeeController extends _$EmployeeController {
   }
 
 //employee追加
-  Future<void> addEmployee({
-    required Employee employee,
+  Future<void> createEmployee({
     required String name,
-    required String email,
-    required String phoneNumber,
-    required String address,
-    required Timestamp birthDate,
     required int role,
+    required String email,
+    required String? phoneNumber,
+    required String? address,
+    required Timestamp? birthDate,
   }) async {
     state = const AsyncLoading();
+
     final newEmployee = Employee(
       employeeId: const Uuid().v4(),
       employeeName: name,
@@ -37,6 +37,7 @@ class EmployeeController extends _$EmployeeController {
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
     );
+
     await ref
         .read(employeeRepoProvider.notifier)
         .addEmployee(employee: newEmployee);
@@ -47,17 +48,20 @@ class EmployeeController extends _$EmployeeController {
   Future<void> updateEmployee({
     required Employee employee,
     required String name,
-    required String email,
-    required String phoneNumber,
-    required String address,
-    required Timestamp birthDate,
     required int role,
+    required String? phoneNumber,
+    required String? address,
+    required Timestamp? birthDate,
   }) async {
     state = const AsyncLoading();
     final updatedEmployee = employee.copyWith(
+      employeeName: name,
+      role: role,
+      phoneNumber: phoneNumber,
+      address: address,
+      birthDate: birthDate,
       updatedAt: Timestamp.now(),
     );
-
     await ref.read(employeeRepoProvider.notifier).updateEmployee(
           employee: updatedEmployee,
         );

@@ -635,7 +635,7 @@ class _WatchEmployeeCaseListOfActiveStatusControllerProviderElement
           .employeeId;
 }
 
-String _$caseControllerHash() => r'27e354ac551a43768543b01aa1d3007d6826689e';
+String _$caseControllerHash() => r'af70da64b69cfcde22bf779ba973ed8f9ab3d570';
 
 /// See also [CaseController].
 @ProviderFor(CaseController)

@@ -20,7 +20,6 @@ import 'search_type_drop_down_button.dart';
 import 'tab/all_case_tab_view.dart';
 import 'tab/case_tab_search_type_employee_name.dart';
 
-//TODO ⭐️案件一覧ページチェックお願いします！⭐️
 class CaseListView extends HookConsumerWidget {
   const CaseListView({
     super.key,
@@ -35,7 +34,6 @@ class CaseListView extends HookConsumerWidget {
     final ValueNotifier<String> searchWord = useState('');
     final ValueNotifier<String> searchType = useState('担当者');
 
-    //TODO
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -227,7 +225,7 @@ class CaseListView extends HookConsumerWidget {
                           ),
                   ),
                 ),
-                //TODO ⭐️余白
+
                 isPast
                     ? HeightMargin.normal
                     : const SizedBox(

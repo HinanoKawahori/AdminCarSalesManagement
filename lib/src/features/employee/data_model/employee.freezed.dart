@@ -23,10 +23,10 @@ mixin _$Employee {
   String get employeeId => throw _privateConstructorUsedError;
   String get employeeName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get phoneNumber => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
   @TimestampConverter()
-  Timestamp get birthDate => throw _privateConstructorUsedError;
+  Timestamp? get birthDate => throw _privateConstructorUsedError;
   int get role => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp get createdAt => throw _privateConstructorUsedError;
@@ -52,9 +52,9 @@ abstract class $EmployeeCopyWith<$Res> {
       {String employeeId,
       String employeeName,
       String email,
-      String phoneNumber,
-      String address,
-      @TimestampConverter() Timestamp birthDate,
+      String? phoneNumber,
+      String? address,
+      @TimestampConverter() Timestamp? birthDate,
       int role,
       @TimestampConverter() Timestamp createdAt,
       @TimestampConverter() Timestamp updatedAt});
@@ -78,9 +78,9 @@ class _$EmployeeCopyWithImpl<$Res, $Val extends Employee>
     Object? employeeId = null,
     Object? employeeName = null,
     Object? email = null,
-    Object? phoneNumber = null,
-    Object? address = null,
-    Object? birthDate = null,
+    Object? phoneNumber = freezed,
+    Object? address = freezed,
+    Object? birthDate = freezed,
     Object? role = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -98,18 +98,18 @@ class _$EmployeeCopyWithImpl<$Res, $Val extends Employee>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: null == phoneNumber
+      phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      birthDate: null == birthDate
+              as String?,
+      birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as Timestamp,
+              as Timestamp?,
       role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -138,9 +138,9 @@ abstract class _$$EmployeeImplCopyWith<$Res>
       {String employeeId,
       String employeeName,
       String email,
-      String phoneNumber,
-      String address,
-      @TimestampConverter() Timestamp birthDate,
+      String? phoneNumber,
+      String? address,
+      @TimestampConverter() Timestamp? birthDate,
       int role,
       @TimestampConverter() Timestamp createdAt,
       @TimestampConverter() Timestamp updatedAt});
@@ -162,9 +162,9 @@ class __$$EmployeeImplCopyWithImpl<$Res>
     Object? employeeId = null,
     Object? employeeName = null,
     Object? email = null,
-    Object? phoneNumber = null,
-    Object? address = null,
-    Object? birthDate = null,
+    Object? phoneNumber = freezed,
+    Object? address = freezed,
+    Object? birthDate = freezed,
     Object? role = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -182,18 +182,18 @@ class __$$EmployeeImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: null == phoneNumber
+      phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      birthDate: null == birthDate
+              as String?,
+      birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as Timestamp,
+              as Timestamp?,
       role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -234,12 +234,12 @@ class _$EmployeeImpl implements _Employee {
   @override
   final String email;
   @override
-  final String phoneNumber;
+  final String? phoneNumber;
   @override
-  final String address;
+  final String? address;
   @override
   @TimestampConverter()
-  final Timestamp birthDate;
+  final Timestamp? birthDate;
   @override
   final int role;
   @override
@@ -302,9 +302,9 @@ abstract class _Employee implements Employee {
           {required final String employeeId,
           required final String employeeName,
           required final String email,
-          required final String phoneNumber,
-          required final String address,
-          @TimestampConverter() required final Timestamp birthDate,
+          required final String? phoneNumber,
+          required final String? address,
+          @TimestampConverter() required final Timestamp? birthDate,
           required final int role,
           @TimestampConverter() required final Timestamp createdAt,
           @TimestampConverter() required final Timestamp updatedAt}) =
@@ -320,12 +320,12 @@ abstract class _Employee implements Employee {
   @override
   String get email;
   @override
-  String get phoneNumber;
+  String? get phoneNumber;
   @override
-  String get address;
+  String? get address;
   @override
   @TimestampConverter()
-  Timestamp get birthDate;
+  Timestamp? get birthDate;
   @override
   int get role;
   @override

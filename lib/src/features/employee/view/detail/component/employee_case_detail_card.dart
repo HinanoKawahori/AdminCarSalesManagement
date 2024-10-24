@@ -47,8 +47,6 @@ class EmployeeCaseDetailCard extends StatelessWidget {
                           onPressed: () {
                             context.goNamed(
                               AppRoute.editEmployee.name,
-                              //TODO 従業員IDが取れていない
-
                               queryParameters: {
                                 FirebaseEmployeesKey.employeeId: employeeId,
                               },

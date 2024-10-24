@@ -19,7 +19,7 @@ class CaseTabView extends HookConsumerWidget {
   final CaseStatus caseStatus;
   final ValueNotifier<String> searchWord;
 
-  //TODO searchWordがあれば、searchWordProviderでsearchListを返す。
+  //searchWordがあれば、searchWordProviderでsearchListを返す。
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

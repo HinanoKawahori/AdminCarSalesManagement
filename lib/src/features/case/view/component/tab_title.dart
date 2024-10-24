@@ -19,7 +19,7 @@ class TabTitle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //TODO⭐️ ここの条件分岐で、個人と全体どちらか分ける
+    //条件分岐で、個人と全体どちらか分ける
     final caseProvider = (caseStatus != 1)
         ? ref.watch(
             watchCaseListOfThisStatusControllerProvider(caseStatus: caseStatus))

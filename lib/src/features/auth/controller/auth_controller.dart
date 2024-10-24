@@ -11,6 +11,20 @@ class AuthController extends _$AuthController {
     return const AsyncData(null);
   }
 
+  //サインアップ処理
+  Future<String> signUp({
+    required String email,
+    required String password,
+  }) async {
+    state = const AsyncLoading();
+    final String result = await ref.read(authRepoProvider.notifier).signUp(
+          email: email,
+          password: password,
+        );
+    state = const AsyncData(null);
+    return result;
+  }
+
   //サインイン処理
   Future<String> signIn({
     required String email,

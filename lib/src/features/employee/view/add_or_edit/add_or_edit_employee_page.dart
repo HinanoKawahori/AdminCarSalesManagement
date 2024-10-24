@@ -1,9 +1,13 @@
 import 'package:admin_car_sales_management/src/common_widgets/blue_button.dart';
+import 'package:admin_car_sales_management/src/common_widgets/error_dialog.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form_divider.dart';
+import 'package:admin_car_sales_management/src/common_widgets/ok_dialog.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
+import 'package:admin_car_sales_management/src/features/auth/controller/auth_controller.dart';
 import 'package:admin_car_sales_management/src/features/employee/controller/employee_controller.dart';
 import 'package:admin_car_sales_management/src/features/employee/data_model/employee.dart';
+import 'package:admin_car_sales_management/src/function/switch_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
@@ -29,9 +33,8 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final ValueNotifier<bool> isLoading = useState(false);
 
-    // 1初めにUSEFUTUREで初期値を取得
-    // 2初期値がある場合は、表示
-    // 3useStateまたはuseTextEditingControllerを変化させる
+    //従業員データ
+    final ValueNotifier<Employee?> employeeData = useState(null);
     //名前
     final TextEditingController nameController = useTextEditingController();
     //電話番号
@@ -41,23 +44,28 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
     //住所
     final TextEditingController addressController = useTextEditingController();
     //役割
-    final ValueNotifier<int?> role = useState(null);
+    final ValueNotifier<String?> role = useState(null);
     //生年月日
     final ValueNotifier<Timestamp?> birthDate = useState(null);
+
+    //初期値をゲットする
     useEffect(
       () {
         Future(() async {
           isLoading.value = true;
           if (employeeId != null && employeeId!.isNotEmpty) {
-            final Employee employeeData = await ref
+            employeeData.value = await ref
                 .read(employeeControllerProvider.notifier)
                 .getEmployeeData(employeeId: employeeId!);
-            nameController.text = employeeData.employeeName;
-            phoneController.text = employeeData.phoneNumber;
-            emailController.text = employeeData.email;
-            addressController.text = employeeData.address;
-            role.value = employeeData.role;
-            birthDate.value = employeeData.birthDate;
+            if (employeeData.value == null) {
+              return;
+            }
+            nameController.text = employeeData.value!.employeeName;
+            phoneController.text = employeeData.value!.phoneNumber ?? '';
+            emailController.text = employeeData.value!.email;
+            addressController.text = employeeData.value!.address ?? '';
+            role.value = switchRoleToString(employeeData.value!.role);
+            birthDate.value = employeeData.value!.birthDate;
           }
 
           isLoading.value = false;
@@ -84,9 +92,32 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                   title: employeeId == null ? '従業員新規追加' : '従業員編集',
                 ),
                 BlueButton(
-                  onPressed: () {
-                    //TODO新規登録 or 編集処理
-                    context.pop();
+                  onPressed: () async {
+                    if (employeeId == null) {
+                      await createEmployee(
+                        name: nameController.text,
+                        email: emailController.text,
+                        phoneNumber: phoneController.text,
+                        address: addressController.text,
+                        role: role.value!,
+                        birthDate: birthDate.value,
+                        ref: ref,
+                        context: context,
+                        isLoading: isLoading,
+                      );
+                    } else {
+                      await updateEmployee(
+                        ref: ref,
+                        context: context,
+                        name: nameController.text,
+                        email: emailController.text,
+                        phoneNumber: phoneController.text,
+                        address: addressController.text,
+                        role: role.value!,
+                        birthDate: birthDate.value,
+                        employeeData: employeeData.value,
+                      );
+                    }
                   },
                   title: employeeId == null ? '登録' : '編集',
                 ),
@@ -101,7 +132,7 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                   //名前
                   FormInputField(
                     title: '名前',
-                    labelText: (nameController.text.isNotEmpty)
+                    hintText: (nameController.text.isNotEmpty)
                         ? nameController.text
                         : '名前',
                     isRequired: true,
@@ -146,21 +177,28 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                         )
                       : FormInputField(
                           title: 'メールアドレス',
-                          labelText: 'メールアドレス',
+                          hintText: 'メールアドレス',
                           isRequired: true,
                           controller: emailController,
                           isCaseForm: false,
                         ),
                   const FormDivider(),
+                  //役割
                   FormDropdownField(
-                    //TODO
-                    label: (role.value != null) ? role.value.toString() : '役割',
+                    label: (role.value != null) ? role.value : '',
                     items: const ['スタッフ', '責任者'],
                     isRequired: true,
+                    title: '役割',
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        role.value = newValue;
+                      }
+                    },
                   ),
                   const FormDivider(),
+                  //電話番号
                   FormInputField(
-                    labelText: (phoneController.text.isNotEmpty)
+                    hintText: (phoneController.text.isNotEmpty)
                         ? phoneController.text
                         : '電話番号',
                     title: '電話番号',
@@ -169,13 +207,26 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
                     isCaseForm: false,
                   ),
                   const FormDivider(),
-                  const FormDateField(
-                    label: '生年月日',
-                    // birthDate: birthDate,
+                  //生年月日
+
+                  FormDateField(
+                    hintText: '生年月日',
+                    onTap: () async {
+                      final DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                      );
+                      if (pickedDate != null) {
+                        birthDate.value = Timestamp.fromDate(pickedDate);
+                      }
+                    },
+                    birthDate: birthDate,
                   ),
                   const FormDivider(),
+                  //住所
                   FormInputField(
-                    labelText: (addressController.text.isNotEmpty)
+                    hintText: (addressController.text.isNotEmpty)
                         ? addressController.text
                         : '住所',
                     title: '住所',
@@ -192,4 +243,105 @@ class AddOrEditEmployeePage extends HookConsumerWidget {
       ),
     );
   }
+
+//従業員更新処理
+  Future<void> updateEmployee({
+    required WidgetRef ref,
+    required BuildContext context,
+    required Employee? employeeData,
+    required String name,
+    required String role,
+    required String? email,
+    required String? phoneNumber,
+    required String? address,
+    required Timestamp? birthDate,
+  }) async {
+    //従業員データ更新
+    await ref.read(employeeControllerProvider.notifier).updateEmployee(
+          phoneNumber: phoneNumber,
+          address: address,
+          role: switchRoleToInt(role),
+          birthDate: birthDate,
+          employee: employeeData!,
+          name: name,
+        );
+    if (context.mounted) {
+      context.pop();
+    }
+  }
+}
+
+//従業員作成処理
+
+//TODO
+Future<void> createEmployee({
+  required WidgetRef ref,
+  required BuildContext context,
+  required String name,
+  required String role,
+  required String? email,
+  required String? phoneNumber,
+  required String? address,
+  required Timestamp? birthDate,
+  required isLoading,
+}) async {
+  isLoading.value = true;
+  //TODO⭐️「以下を、emuを参考にFunctionで作る」
+  //０PWランダム生成
+  //１auth登録
+  //２firestore登録
+  //３メール送信
+  //auth登録
+  final String result = await ref.read(authControllerProvider.notifier).signUp(
+        email: email!,
+        password: '仮決めのパスワード',
+      );
+  if (result == 'success') {
+    //auth登録成功したら、firestoreに登録
+    await ref.read(employeeControllerProvider.notifier).createEmployee(
+          phoneNumber: phoneNumber,
+          address: address,
+          role: switchRoleToInt(role),
+          birthDate: birthDate,
+          name: name,
+          email: email,
+        );
+    //登録したemailの従業員に、パスワードリセットメールを送信
+    await ref
+        .read(authControllerProvider.notifier)
+        .sendPasswordResetEmail(email: email);
+
+    isLoading.value = false;
+    if (context.mounted) {
+      okDialog(
+        context: context,
+        title: '従業員登録成功',
+        desc: '従業員登録が完了しました！',
+        dismissOnTouchOutside: false,
+        btnOkOnPress: () {
+          context.pop();
+        },
+      );
+    }
+  } else if (result == 'error') {
+    isLoading.value = false;
+    if (context.mounted) {
+      errorDialog(
+        context: context,
+        title: '従業員登録失敗',
+        desc: '従業員登録に失敗しました。\n時間を置いてからまたお試しください。',
+      );
+    }
+  } else {
+    isLoading.value = false;
+    if (context.mounted) {
+      errorDialog(
+        context: context,
+        title: '従業員登録失敗',
+        desc: result,
+      );
+    }
+  }
+
+  return;
 }

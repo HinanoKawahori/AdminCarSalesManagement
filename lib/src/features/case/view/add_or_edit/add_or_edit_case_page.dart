@@ -11,7 +11,6 @@ import 'package:admin_car_sales_management/src/common_widgets/blue_button.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form_divider.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/color_style.dart';
 import 'package:admin_car_sales_management/src/config/utils/style/padding_style.dart';
-import 'package:admin_car_sales_management/src/common_widgets/form/form_date_field.dart';
 import 'package:admin_car_sales_management/src/common_widgets/form/form_dropdown_field.dart';
 
 import '../../../../common_widgets/form/form_input_field.dart';
@@ -26,20 +25,37 @@ class AddOrEditCasePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //////////////////////////////案件情報/////////////////////////////////////
+    //案件ID
     final TextEditingController caseIdController = useTextEditingController();
+    //顧客名
     final TextEditingController customerNameController =
         useTextEditingController();
+    //担当者
+    //ステータス
+
+    //メールアドレス
     final TextEditingController emailController = useTextEditingController();
+    //電話番号
     final TextEditingController phoneController = useTextEditingController();
+    //走行距離
     final TextEditingController mileageController = useTextEditingController();
+    //住所
     final TextEditingController addressController = useTextEditingController();
+    //////////////////////////////査定情報/////////////////////////////////////
+    //メーカー
     final TextEditingController manufacturerController =
         useTextEditingController();
+    //車種
     final TextEditingController modelController = useTextEditingController();
+    //年
     final TextEditingController yearController = useTextEditingController();
+    //ランク
     final TextEditingController mileageAssessmentController =
         useTextEditingController();
+    //査定価格
     final TextEditingController priceController = useTextEditingController();
+    //メモ
     final TextEditingController memoController = useTextEditingController();
 
     return Scaffold(
@@ -188,7 +204,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
         //顧客名
         FormInputField(
           title: '顧客名',
-          labelText: (customerNameController.text.isNotEmpty)
+          hintText: (customerNameController.text.isNotEmpty)
               ? customerNameController.text
               : '顧客名',
           controller: customerNameController,
@@ -199,7 +215,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
         //メールアドレス
         FormInputField(
           title: 'メールアドレス',
-          labelText: (emailController.text.isNotEmpty)
+          hintText: (emailController.text.isNotEmpty)
               ? emailController.text
               : 'メールアドレス',
           controller: emailController,
@@ -213,7 +229,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
         //電話番号
         FormInputField(
           title: '電話番号',
-          labelText:
+          hintText:
               (phoneController.text.isNotEmpty) ? phoneController.text : '電話番号',
           controller: phoneController,
           isRequired: false,
@@ -222,15 +238,16 @@ class AddOrEditCasePage extends HookConsumerWidget {
 
         const FormDivider(),
         //生年月日
-        const FormDateField(
-          label: '生年月日',
-          // birthDate: '',
-        ),
+        //TODO
+        // const FormDateField(
+        //   label: '生年月日', birthDate: , onTap: () {},
+        //   // birthDate: '',
+        // ),
         const FormDivider(),
         //住所
         FormInputField(
           title: '住所',
-          labelText: (addressController.text.isNotEmpty)
+          hintText: (addressController.text.isNotEmpty)
               ? addressController.text
               : '住所',
           controller: addressController,
@@ -327,14 +344,22 @@ class AddOrEditCasePage extends HookConsumerWidget {
         const Divider(color: ColorStyle.mainBlack),
         HeightMargin.normal,
         //営業ステータス
-        const FormDropdownField(
+        FormDropdownField(
           label: '営業ステータス',
           items: ['商談中', '成約', '失注'],
           isRequired: true,
+          title: '営業ステータス',
+          onChanged: (String? value) {
+            //TODO
+          },
         ),
         const FormDivider(),
         //メーカー
-        const FormDropdownField(
+        FormDropdownField(
+          title: 'メーカー',
+          onChanged: (String? value) {
+            //TODO
+          },
           label: 'メーカー',
           items: [
             'ホンダ',
@@ -345,7 +370,11 @@ class AddOrEditCasePage extends HookConsumerWidget {
         ),
         const FormDivider(),
         //車種
-        const FormDropdownField(
+        FormDropdownField(
+          title: '車種',
+          onChanged: (String? value) {
+            //TODO
+          },
           label: '車種',
           items: [
             'ワゴン',
@@ -356,7 +385,11 @@ class AddOrEditCasePage extends HookConsumerWidget {
         ),
         const FormDivider(),
         //年式
-        const FormDropdownField(
+        FormDropdownField(
+          title: '年式',
+          onChanged: (String? value) {
+            //TODO
+          },
           label: '年式',
           items: [
             '1920',
@@ -369,16 +402,24 @@ class AddOrEditCasePage extends HookConsumerWidget {
         ),
         const FormDivider(),
         //ランク
-        const FormDropdownField(
+        FormDropdownField(
+          title: 'ランク',
+          onChanged: (String? value) {
+            //TODO
+          },
           label: 'ランク',
           items: ['S', 'A', 'B', 'C'],
           isRequired: false,
         ),
         const FormDivider(),
         //走行距離
-        const FormDropdownField(
+        FormDropdownField(
+          title: '走行距離',
+          onChanged: (String? value) {
+            //TODO
+          },
           label: '走行距離',
-          items: [
+          items: const [
             '19000km-20000km',
             '20000km-21000km',
             '22000km-23000km',
@@ -389,7 +430,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
         //査定金額
         FormInputField(
           title: '査定金額',
-          labelText:
+          hintText:
               (priceController.text.isNotEmpty) ? priceController.text : '名前',
           controller: priceController,
           isRequired: false,
@@ -402,7 +443,7 @@ class AddOrEditCasePage extends HookConsumerWidget {
         //メモ
         FormInputField(
           title: 'メモ',
-          labelText:
+          hintText:
               (memoController.text.isNotEmpty) ? memoController.text : 'メモ',
           controller: memoController,
           isRequired: false,

@@ -25,6 +25,25 @@ class AuthRepo extends _$AuthRepo {
     });
   }
 
+  //サインアップ処理
+  Future<String> signUp({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await ref.read(firebaseAuthProvider).createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+      state = ref.read(firebaseAuthProvider).currentUser;
+      return 'success';
+    } on FirebaseAuthException catch (e) {
+      return FirebaseAuthErrorExt.fromCode(e.code).message;
+    } catch (e) {
+      return 'error';
+    }
+  }
+
   //サインイン処理
   Future<String> signIn({
     required String email,

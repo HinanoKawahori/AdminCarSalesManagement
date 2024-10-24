@@ -7,7 +7,6 @@ class ActiveCaseCountWidget extends HookConsumerWidget {
   const ActiveCaseCountWidget({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //TODO データをここから渡すようにする
     return Scaffold(
       body: Column(
         children: [

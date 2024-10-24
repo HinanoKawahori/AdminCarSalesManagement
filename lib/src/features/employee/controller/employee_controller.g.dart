@@ -180,7 +180,7 @@ final watchAllEmployeeDataControllerProvider =
 typedef WatchAllEmployeeDataControllerRef
     = AutoDisposeStreamProviderRef<List<Employee>>;
 String _$employeeControllerHash() =>
-    r'35ad579bc3ad1d1fc528534ffc675fc624d095e6';
+    r'f057a7198bf590c4979fe6353f5231513d3f88f4';
 
 /// See also [EmployeeController].
 @ProviderFor(EmployeeController)

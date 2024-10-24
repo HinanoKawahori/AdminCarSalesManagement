@@ -8,13 +8,17 @@ import '../form_must_mark.dart';
 class FormDropdownField extends ConsumerWidget {
   const FormDropdownField({
     super.key,
+    required this.title,
     required this.label,
     required this.items,
     required this.isRequired,
+    required this.onChanged,
   });
-  final String label;
+  final String title;
+  final String? label;
   final List<String> items;
   final bool isRequired;
+  final ValueChanged<String?>? onChanged;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,7 +30,7 @@ class FormDropdownField extends ConsumerWidget {
           Row(
             children: [
               Text(
-                label,
+                title,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: ColorStyle.mainBlack,
@@ -53,9 +57,7 @@ class FormDropdownField extends ConsumerWidget {
                   child: Text(value),
                 );
               }).toList(),
-              onChanged: (String? newValue) {
-                // TODO: 値を変更
-              },
+              onChanged: onChanged,
             ),
           ),
         ],

@@ -8,7 +8,7 @@ class FormInputField extends StatelessWidget {
   const FormInputField({
     super.key,
     required this.title,
-    required this.labelText,
+    required this.hintText,
     required this.isRequired,
     required this.controller,
     required this.isCaseForm,
@@ -16,7 +16,7 @@ class FormInputField extends StatelessWidget {
   });
 
   final String title;
-  final String labelText;
+  final String hintText;
   final bool isRequired;
   final TextEditingController controller;
   final bool isCaseForm;
@@ -46,10 +46,16 @@ class FormInputField extends StatelessWidget {
             width: isCaseForm ? 300 : 300,
             color: ColorStyle.white,
             child: TextField(
+              onChanged: (value) {
+                controller.text = value;
+              },
               style: const TextStyle(color: ColorStyle.mainBlack),
               maxLines: maxLine,
               decoration: InputDecoration(
-                labelText: labelText,
+                hintText: hintText,
+                hintStyle: const TextStyle(
+                  color: ColorStyle.mainBlack,
+                ),
                 labelStyle: const TextStyle(
                   color: ColorStyle.secondGrey,
                 ),

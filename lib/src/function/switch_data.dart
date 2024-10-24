@@ -7,6 +7,7 @@ String formatNumber(double value) {
 
 int switchGenderToInt(String gender) {
   return switch (gender) {
+    '設定しない' => 0,
     '男性' => 1,
     '女性' => 2,
     _ => 1,
@@ -15,26 +16,26 @@ int switchGenderToInt(String gender) {
 
 String switchGenderToString(int gender) {
   return switch (gender) {
+    0 => '設定しない',
     1 => '男性',
     2 => '女性',
     _ => '男性',
   };
 }
 
-//TODO 役割変える
 int switchRoleToInt(String role) {
   return switch (role) {
-    'システム管理者' => 1,
-    '一般ユーザー' => 2,
+    '責任者' => 1,
+    'スタッフ' => 100,
     _ => 2,
   };
 }
 
 String switchRoleToString(int role) {
   return switch (role) {
-    1 => 'システム管理者',
-    2 => '一般ユーザー',
-    _ => '一般ユーザー',
+    1 => '責任者',
+    100 => 'スタッフ',
+    _ => 'スタッフ',
   };
 }
 
